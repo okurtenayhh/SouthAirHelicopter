@@ -41,16 +41,17 @@ Since this is plain static HTML/CSS/JS, it can be hosted almost anywhere for fre
 
 This site is fully built out structurally, but a lot of the actual copy is placeholder text (marked with `[PLACEHOLDER: ...]` and a dashed amber box in the rendered page, so it's obvious what's real vs. not). Before launch, replace:
 
-- [ ] Real company overview, mission statement, and team bios (`about.html`)
+- [ ] Real company overview, mission statement, and team bios (`about.html`) — Mike Pike (President) is in as the first leadership card, two more team slots still open
 - [ ] Confirmed list of services and real pricing (`services.html`) — the current list/table is a generic starting point, not confirmed offerings
 - [ ] Verified founding year and real history timeline entries (`history.html`) — "1997 or so" needs to be confirmed
 - [ ] NASA partnership details — **read the notice on `nasa-partnership.html` before publishing.** Get exact wording about the relationship confirmed in writing, and don't use NASA's logo/branding without permission (NASA has strict guidelines about contractors implying endorsement)
-- [ ] Bell Helicopter Service Center status — confirmed on `about.html` and `services.html` as a `[PLACEHOLDER]`. Need: exact certification/authorization level, and the Bell logo file + permission to use it (Bell, like NASA, has brand guidelines for authorized service centers — confirm usage rules before publishing the logo)
+- [ ] Bell Helicopter Service Center logo — `about.html` and `services.html` now list the real facts (Bell Helicopter Customer Service Facility, Certified Repair Station #XRIR622K) from Mike's business card, but still need the actual Bell logo file + permission to use it (Bell, like NASA, has brand guidelines for authorized service centers — confirm usage rules before publishing the logo)
 - [ ] Real news/story posts (`news.html`)
-- [ ] Address, phone, email, hours (`contact.html` and site footer)
+- [x] Address, phone, email — filled in from Mike Pike's business card (17402 C.R. 127, Pearland, TX 77581 / 281.648.5187 / sahinc@sbcglobal.net). Still need: business hours, and confirmation of which email should be the public "general inquiries" one (the card also lists mpikesahinc@att.net as Mike's direct address) — see the note on `contact.html`
 - [ ] Real photos throughout (currently placeholder boxes in `images/`)
 - [ ] Wire up the contact form to an actual email/form handler (it currently doesn't send anywhere — see the note on `contact.html`)
 - [ ] Domain name — once purchased, note it here and point it at wherever the site ends up hosted
+- [ ] **Company name check:** Mike's business card says the legal name is "South Air Helicopters, Inc." (plural). The site currently uses "South Air Helicopter" (singular) as the on-page brand/wordmark, and "South Air Helicopters, Inc." only in the legal copyright line. Confirm whether the singular nickname is fine for the public-facing brand or if the nav/title should switch to match the legal name exactly.
 
 ## Design
 
