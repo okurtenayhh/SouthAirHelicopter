@@ -1,6 +1,6 @@
-# South Air Helicopter — Website
+# South Air Helicopters, Inc. — Website
 
-A static marketing website for South Air Helicopter (est. 1997). Plain HTML/CSS/JS — no build step, no framework, no dependencies.
+A static marketing website for South Air Helicopters, Inc. (est. 1997). Plain HTML/CSS/JS — no build step, no framework, no dependencies.
 
 ## Structure
 
@@ -68,7 +68,7 @@ This site is fully built out structurally, but a lot of the actual copy is place
 - [ ] Real photos throughout (currently placeholder boxes in `images/`)
 - [ ] Wire up the contact form to an actual email/form handler (it currently doesn't send anywhere — see the note on `contact.html`)
 - [ ] Domain name + Google Workspace email — company is purchasing a Google domain and will get matching email addresses; once set up, swap the temporary sbcglobal/att.net emails everywhere and point the domain at wherever the site ends up hosted
-- [ ] **Company name check:** Mike's business card says the legal name is "South Air Helicopters, Inc." (plural). The site currently uses "South Air Helicopter" (singular) as the on-page brand/wordmark, and "South Air Helicopters, Inc." only in the legal copyright line. Confirm whether the singular nickname is fine for the public-facing brand or if the nav/title should switch to match the legal name exactly.
+- [x] **Company name** — resolved. The site had used the singular "South Air Helicopter" (a guess from the repo name); the business card confirms the real name is plural. All page copy, titles, and headings now read "South Air Helicopters", with the full legal "South Air Helicopters, Inc." in the logo wordmark, the footer copyright, and the Bell/repair-station line.
 
 ## Design
 
