@@ -14,10 +14,27 @@ news.html                  News & stories
 contact.html                Contact form + info
 css/style.css              Shared styles (design tokens at the top)
 js/main.js                Mobile nav toggle, contact form UX, active-nav highlighting
-images/                   Put real photos here
+images/                   Logo files (below) — put real photos here too
+tools/generate-logos.py       Regenerates the logo SVGs; not needed to use them
 ```
 
 Every page shares the same header/nav and footer markup (copy-pasted, since there's no templating layer). If you change the nav or footer, update it in all 7 HTML files.
+
+## Logo files
+
+All type is converted to outlines, so these render identically everywhere with no font dependency. `-light` variants are for dark backgrounds.
+
+| File | Use |
+| --- | --- |
+| `logo-horizontal.svg` / `-light` | **Site header, letterhead, email signature.** The default lockup — currently in the nav bar. |
+| `logo-primary.svg` / `-light` | Full stacked signature. Best where there's vertical room: print, signage, a title slide. |
+| `logo-badge.svg` | Badge with no wordmark. For when the company name already appears nearby. |
+| `logo-icon.svg` / `-light` | Rotor mark alone. Social avatars, patches, decals — anywhere too small for type. |
+| `favicon.svg` | The icon on a navy ground, for browser tabs. |
+
+The badge and the rotor icon are built from one shared blade profile so they read as a family. To regenerate (new colour, new lockup), see the header comment in `tools/generate-logos.py`.
+
+**Status:** approved by you, not yet by Mike. Not final until he signs off.
 
 ## Running locally
 
