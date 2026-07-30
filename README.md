@@ -34,7 +34,7 @@ All type is converted to outlines, so these render identically everywhere with n
 
 The badge and the rotor icon are built from one shared blade profile so they read as a family. To regenerate (new colour, new lockup), see the header comment in `tools/generate-logos.py`.
 
-**Status:** approved by you, not yet by Mike. Not final until he signs off.
+**Status:** approved by you, not yet by Mike. Not final until he signs off. The wordmark uses the legal name — "SOUTH AIR / HELICOPTERS, INC." — with the second line tracked to sit flush under the first.
 
 ## Running locally
 

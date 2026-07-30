@@ -4,13 +4,14 @@ The committed SVGs in images/ are self-contained — all type is converted to
 outlines, so nothing here is needed just to *use* the logos. Keep this script
 for when a mark needs regenerating (new colour, new lockup, tweaked geometry).
 
-To run it you need the two source faces as .woff2 in a sibling fonts/ folder:
+To run it you need the source faces as .woff2 in tools/fonts/ (or point
+SAH_FONTDIR somewhere else):
 
-    fonts/Big_Shoulders_Display_800.woff2   (variable; pinned to wght=800 below)
-    fonts/Titillium_Web_700.woff2
-    fonts/Titillium_Web_600.woff2
+    Big_Shoulders_Display_800.woff2   (variable; pinned to wght=800 below)
+    Titillium_Web_700.woff2
+    Titillium_Web_600.woff2
 
-Both are SIL Open Font License faces from Google Fonts. Then:
+Both families are SIL Open Font License faces from Google Fonts. Then:
 
     pip install fonttools brotli
     python3 tools/generate-logos.py images
@@ -26,7 +27,9 @@ from fontTools.misc.transform import Transform
 from fontTools.varLib import instancer
 import os
 
-FONTDIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fonts")
+FONTDIR = os.environ.get(
+    "SAH_FONTDIR", os.path.join(os.path.dirname(os.path.abspath(__file__)), "fonts")
+)
 
 # Big Shoulders ships as a variable font whose default instance is Thin (wght=100).
 # Pin the axes we actually want before pulling outlines, or the monogram draws hairline.
@@ -75,6 +78,18 @@ def text_paths(fname, text, em_size, tracking_em=0.0):
     if ymin > 1e8:
         ymin, ymax = 0, 0
     return ds, x, ymin, ymax
+
+
+def fit_tracking(fname, text, em_size, target_width):
+    """Letter-spacing that makes `text` span exactly `target_width`.
+
+    Used to set the sub-line flush to the width of SOUTH AIR above it.
+    """
+    _, base, _, _ = text_paths(fname, text, em_size, 0.0)
+    gaps = len(text) - 1
+    if gaps <= 0:
+        return 0.0
+    return (target_width - base) / (em_size * gaps)
 
 
 def text_group(fname, text, em_size, cx, baseline_y, fill, tracking_em=0.0, anchor="middle"):
@@ -176,6 +191,9 @@ BSD = "Big_Shoulders_Display_800.woff2"
 TW7 = "Titillium_Web_700.woff2"
 TW6 = "Titillium_Web_600.woff2"
 
+# Legal name, per the owner. Tracked to sit flush under SOUTH AIR.
+SUBLINE = "HELICOPTERS, INC."
+
 
 # ---------------------------------------------------------------- marks
 def mark_icon(ink, accent, rivet, disc=None, size=200):
@@ -198,13 +216,14 @@ def mark_badge(ink, accent, rivet, with_wordmark=True):
     p.append(mono)
     top, height = 30, 148
     if with_wordmark:
-        w1, _ = text_group(TW7, "SOUTH AIR", 27, 100, 212, ink, tracking_em=0.20)
-        w2, _ = text_group(TW6, "HELICOPTERS", 14, 100, 233, accent, tracking_em=0.34)
+        w1, w1w = text_group(TW7, "SOUTH AIR", 27, 100, 212, ink, tracking_em=0.20)
+        sub = fit_tracking(TW6, SUBLINE, 12.5, w1w)
+        w2, _ = text_group(TW6, SUBLINE, 12.5, 100, 233, accent, tracking_em=sub)
         p.extend([w1, w2])
         height = 209
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 {top} 200 {height}" '
-        f'role="img" aria-label="South Air Helicopters">{"".join(p)}</svg>'
+        f'role="img" aria-label="South Air Helicopters, Inc.">{"".join(p)}</svg>'
     )
 
 
@@ -217,14 +236,15 @@ def mark_horizontal(ink, accent, rivet):
     mono, _ = text_group(BSD, "SA", MONO, CX, CY + cap_height(BSD, MONO) / 2, ink, tracking_em=0.04)
     p.append(mono)
     w1, w1w = text_group(TW7, "SOUTH AIR", 25, 88, 48, ink, tracking_em=0.13, anchor="start")
-    w2, w2w = text_group(TW6, "HELICOPTERS", 12.4, 88, 67, accent, tracking_em=0.235, anchor="start")
+    sub = fit_tracking(TW6, SUBLINE, 11.4, w1w)
+    w2, w2w = text_group(TW6, SUBLINE, 11.4, 88, 67, accent, tracking_em=sub, anchor="start")
     p.extend([w1, w2])
     total = 88 + max(w1w, w2w) + 6
     # crop to the artwork so a CSS height maps to real visual size, not padding
     top, height = 11, 74
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 {top} {total:.0f} {height}" '
-        f'role="img" aria-label="South Air Helicopters">{"".join(p)}</svg>'
+        f'role="img" aria-label="South Air Helicopters, Inc.">{"".join(p)}</svg>'
     )
 
 
@@ -233,7 +253,7 @@ def mark_favicon(bg, ink, accent, rivet):
     body = rotor_topdown(50, 50, 33, ink, accent, rivet)
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" '
-        f'role="img" aria-label="South Air Helicopters">'
+        f'role="img" aria-label="South Air Helicopters, Inc.">'
         f'<rect width="100" height="100" rx="18" fill="{bg}"/>{body}</svg>'
     )
 
