@@ -1,6 +1,6 @@
 # Project Status
 
-*Last updated: 2026-07-30 · Branch `claude/south-air-helicopter-site-1fyg5b` · Commit `4008dad` · [PR #1](https://github.com/okurtenayhh/SouthAirHelicopter/pull/1) (draft, open)*
+*Last updated: 2026-07-30 · Branch `claude/south-air-helicopter-site-1fyg5b` · Commit `b50cc26` · [PR #1](https://github.com/okurtenayhh/SouthAirHelicopter/pull/1) (draft, open)*
 
 > Maintained by the `/sa-wrap-up` skill. If this file and the repo disagree, the repo is right — fix this file.
 
