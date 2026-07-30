@@ -45,10 +45,12 @@ This site is fully built out structurally, but a lot of the actual copy is place
 - [ ] Confirmed list of services and real pricing (`services.html`) — the current list/table is a generic starting point, not confirmed offerings
 - [ ] Verified founding year and real history timeline entries (`history.html`) — "1997 or so" needs to be confirmed
 - [ ] NASA partnership details — **read the notice on `nasa-partnership.html` before publishing.** Get exact wording about the relationship confirmed in writing, and don't use NASA's logo/branding without permission (NASA has strict guidelines about contractors implying endorsement)
+- [ ] Bell Helicopter Service Center status — confirmed on `about.html` and `services.html` as a `[PLACEHOLDER]`. Need: exact certification/authorization level, and the Bell logo file + permission to use it (Bell, like NASA, has brand guidelines for authorized service centers — confirm usage rules before publishing the logo)
 - [ ] Real news/story posts (`news.html`)
 - [ ] Address, phone, email, hours (`contact.html` and site footer)
 - [ ] Real photos throughout (currently placeholder boxes in `images/`)
 - [ ] Wire up the contact form to an actual email/form handler (it currently doesn't send anywhere — see the note on `contact.html`)
+- [ ] Domain name — once purchased, note it here and point it at wherever the site ends up hosted
 
 ## Design
 
