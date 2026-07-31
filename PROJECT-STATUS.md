@@ -1,6 +1,6 @@
 # Project Status
 
-*Last updated: 2026-07-31 · Branch `claude/new-session-cymw5g` · Commit `0de7416` · [PR #2](https://github.com/okurtenayhh/SouthAirHelicopter/pull/2) (draft, open) · PR #1 merged 2026-07-30*
+*Last updated: 2026-07-31 · Everything merged to `main` · Site work landed at `f053768` · PRs #1, #2, #3 all merged · No open PRs*
 
 > Maintained by the `/sa-wrap-up` skill. If this file and the repo disagree, the repo is right — fix this file.
 
@@ -93,4 +93,6 @@ There's no build step or test suite, so correctness lives in one script. Run it 
 
 ## In Flight
 
-Nothing half-finished. Working tree clean, all work pushed to the branch.
+Nothing half-finished, nothing open. Everything is merged to `main`, working tree clean, `tools/verify.py` green across all 10 pages.
+
+Screenshots of all 10 pages at 1280px were reviewed on 2026-07-31 and are current as of `f053768`. Mobile (390px) has been spot-checked but not reviewed page by page.
