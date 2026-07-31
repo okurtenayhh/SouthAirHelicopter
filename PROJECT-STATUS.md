@@ -1,6 +1,6 @@
 # Project Status
 
-*Last updated: 2026-07-31 · Branch `claude/new-session-cymw5g` · Commit (pending push) · PR #1 merged 2026-07-30, no new PR opened yet*
+*Last updated: 2026-07-31 · Branch `claude/new-session-cymw5g` · Commit `0de7416` · [PR #2](https://github.com/okurtenayhh/SouthAirHelicopter/pull/2) (draft, open) · PR #1 merged 2026-07-30*
 
 > Maintained by the `/sa-wrap-up` skill. If this file and the repo disagree, the repo is right — fix this file.
 
