@@ -1,0 +1,46 @@
+# South Air Helicopters — preview deploy configuration.
+#
+# This site is a work in progress for a real business. Most page copy is still
+# flagged placeholder text and nothing has been approved by the owner, so the
+# preview must stay out of search results until launch.
+#
+# No build step by design (static HTML/CSS/JS) — publish the repo root as-is.
+
+[build]
+  publish = "."
+
+# Keep the whole preview out of search engines. Belt and braces with robots.txt:
+# robots.txt asks crawlers not to fetch, X-Robots-Tag tells them not to index
+# anything they fetch anyway. Remove both at launch.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive, nosnippet"
+
+# Internal working documents live in this repo and would otherwise be served
+# at the preview URL — which is a link we hand to the client. 404 them.
+# (Deliberately no 404.html file: tools/verify.py requires every *.html page to
+# carry the shared header/footer and 8 nav items. Netlify's default 404 is fine.)
+[[redirects]]
+  from = "/PROJECT-STATUS.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/README.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/docs/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/tools/*"
+  to = "/404.html"
+  status = 404
+  force = true

@@ -1,0 +1,6 @@
+# Netlify CLI writes the linked site ID here — local state, not shared config.
+.netlify/
+
+# Recall's local session transcript. This repo is public and these logs contain
+# working notes about a real client — keep them on the machine.
+.recall/
