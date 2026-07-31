@@ -65,6 +65,12 @@ with no memory of this conversation could resume from cleanly.
    If something is half-finished and shouldn't be committed as-is, commit it anyway
    on the branch and write the caveat into the tracker's In Flight section — losing
    it is strictly worse than a messy commit on a draft branch.
+
+   **If any page changed this session, redeploy:** `netlify deploy --prod --dir=.`
+   from the repo root. The preview at https://south-air-helicopters.netlify.app is a
+   link the client has been given, and deploys are manual — a session that edits a
+   page and skips this leaves Mike refreshing stale content and believing it's
+   current. If you deliberately don't redeploy, say so in In Flight.
 2. **Update `PROJECT-STATUS.md`.** Keep the section order stable (see Structure
    below) so diffs between sessions are readable. Specifically:
    - Move anything that became real out of Placeholder into Real.
@@ -77,7 +83,23 @@ with no memory of this conversation could resume from cleanly.
 3. **Verify before claiming.** If you say a page is done or a link works, you should
    have actually loaded it this session. Prefer "built, not yet viewed in a browser"
    over an unverified "done."
-4. **Give the user a short spoken summary** — what moved, what's now waiting on the
+4. **Run `/recall:save`.** Regenerates `.recall/context.md` from the local session
+   transcript. Run it *last*, after the commit and the tracker update, so those
+   actions are in the transcript it reads.
+
+   Two things to know about the output, so you don't oversell it:
+   - **It is a supplement, never the source of truth.** `PROJECT-STATUS.md` is the
+     handoff. Recall is a raw session record — commands run, files touched, git
+     ground-truth. That part is genuinely useful and always accurate.
+   - **Read the generated file back before saying it's good.** The summarizer is
+     extractive TextRank, so it quotes the densest prose in the transcript. When a
+     session loaded large skill or tool documents, the *Summary* and *Next steps*
+     sections fill with that boilerplate instead of the actual work. Say so plainly
+     when it happens rather than implying the summary is a real handoff.
+
+   `.recall/` is gitignored — this repo is public and those transcripts contain
+   working notes about a real client. Never commit it.
+5. **Give the user a short spoken summary** — what moved, what's now waiting on the
    client, and the single most useful next step. Then stop. Don't start new work.
 
 ---
@@ -127,7 +149,9 @@ These recur every session and are easy to get wrong from a cold start:
   Service Facility and does NASA-adjacent work, but neither logo may appear on the
   site without written permission, and the copy must not imply endorsement. Both
   pages carry standing warnings — don't quietly remove them to make a page look
-  finished.
+  finished. **Read `docs/trademark-research.md` before touching either page**; it
+  settles what's actually allowed (the NASA logo is a permanent no; the Bell badge is
+  artwork Bell issues on request) so those questions don't get reopened each session.
 - **Placeholders are load-bearing.** The dashed amber `[PLACEHOLDER: ...]` blocks are
   the mechanism that stops invented content reaching a real customer. Filling one in
   with a plausible-sounding guess is the worst available outcome. If content isn't
@@ -137,9 +161,16 @@ These recur every session and are easy to get wrong from a cold start:
   site and shouldn't slide down the list.
 - **Contact details are temporary.** The sbcglobal/att.net addresses get replaced
   once the Google domain and Workspace email exist. When that happens they change in
-  the footer of all 7 pages plus `contact.html`.
-- **The nav and footer are copy-pasted across all 7 pages.** There's no templating
-  layer, so a header or footer change is a 7-file change. Verify all seven.
+  the shared footer on all 10 pages, plus the contact block on `contact.html`.
+- **The nav and footer are copy-pasted across all 10 pages.** There's no templating
+  layer, so a header or footer change is a 10-file change. **Don't eyeball it — run
+  `python tools/verify.py`**, which checks the header and footer are byte-identical
+  across every page, that each has 8 nav items, that internal links resolve, and that
+  no aircraft model name has crept in. It's the only test this project has; run it
+  before every commit. (On Windows the interpreter is `python`, not `python3`.)
+- **Adding an `.html` file means satisfying `verify.py`.** Every page must carry the
+  shared header and footer, 8 nav items, and 3+ placeholders. This is why there's no
+  `404.html` — Netlify's default 404 is used instead.
 - **Nothing is client-approved yet.** The user has signed off on the logo; Mike has
   not. Keep "approved by the user" and "approved by the owner" distinct in the
   tracker — conflating them could put unapproved work in front of a paying client.
