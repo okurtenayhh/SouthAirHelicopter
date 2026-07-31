@@ -1,6 +1,6 @@
 # Project Status
 
-*Last updated: 2026-07-30 (local) · Everything merged to `main` at `ba86c59` · PRs #1, #2, #3, #5 merged · No open PRs*
+*Last updated: 2026-07-30 (local) · `main` at `b853e0a` · PRs #1, #2, #3, #5, #6 merged · **PR #4 is open as a draft** — a finished client questionnaire nobody has merged: https://github.com/okurtenayhh/SouthAirHelicopter/pull/4*
 
 **Live preview: https://south-air-helicopters.netlify.app** — noindexed, not client-approved, safe to send to Mike.
 
@@ -22,12 +22,13 @@ desk research to compare against what Bell and NASA actually say when asked.
 
 Things that can move without waiting on anyone:
 
-1. **Wire the contact form to a real handler.** Still the highest-severity item — a customer who fills it in today reaches nobody. Now much cheaper than it was: the site is on Netlify, so **Netlify Forms** is a `data-netlify="true"` attribute plus a notification address, no third-party service and no backend. Blocked only on knowing which inbox submissions should go to.
-2. **Ask Bell for the CSF seal artwork.** `docs/trademark-research.md` establishes that Bell *issues* badge artwork to authorized facilities (a competitor serves `bell_seal_csf_rgb_web2.png`). Request the asset and the co-branding rules rather than asking permission to use the corporate logo — and confirm whether the authorized wording still contains "Helicopter".
-3. **Draft the questionnaire for Mike and the office manager** — one page covering everything in *Waiting On The Client*, so it's answered in a single sitting rather than in fragments. The live preview makes this much easier: people answer better against a page they can see.
-4. **Send Mike the preview link and the logo board** for sign-off: https://claude.ai/code/artifact/55ef4406-1569-4a12-9bd7-e744d1ad8683
-5. **Decide whether Careers ships.** It's built, but a careers page with no listed openings can read as a dead site. Either get openings (or an explicit "nothing right now") from the office manager, or hold the page back until launch.
-6. **Lean into the personal/small-shop angle** in About and the homepage hero — named-owner warmth is the one thing neither Arrow Aviation nor Summit Aviation has. Needs Mike's story, so it's half-blocked, but the *structure* for it is there now.
+1. **Remove or flag the "NASA / Partnership" stat tile on the homepage** (`index.html:75-78`). Its three sibling tiles all carry `[verify]` flags; this one doesn't, so it renders as confirmed fact — while the entire NASA relationship is unconfirmed and `nasa-partnership.html` carries a pre-publication warning about exactly this. It is a credential tile in a stat strip, which is the "trusted by" framing NASA names verbatim as prohibited. **This is live on the public preview.** Highest-liability item on the site; it outranks the contact form now that the URL is shareable.
+2. **Review and merge PR #4 — the client questionnaire is already written.** A prior session extracted 93 placeholders into 50 plain-language questions plus a printable `.docx`, then left it in draft and never told the tracker. It will likely need a rebase, since PR #5 rewrote much of this file. Read it before writing any questionnaire from scratch.
+3. **Wire the contact form to a real handler.** Still the highest-severity *functional* item — a customer who fills it in today reaches nobody. Now much cheaper than it was: the site is on Netlify, so **Netlify Forms** is a `data-netlify="true"` attribute plus a notification address, no third-party service and no backend. Blocked only on knowing which inbox submissions should go to.
+4. **Ask Bell for the CSF seal artwork.** `docs/trademark-research.md` establishes that Bell *issues* badge artwork to authorized facilities (a competitor serves `bell_seal_csf_rgb_web2.png`). Request the asset and the co-branding rules rather than asking permission to use the corporate logo — and confirm whether the authorized wording still contains "Helicopter".
+5. **Send Mike the preview link, the questionnaire, and the logo board** for sign-off: https://claude.ai/code/artifact/55ef4406-1569-4a12-9bd7-e744d1ad8683 — but do item 1 first. People answer far better against a page they can see, so the preview and the questionnaire travel well together.
+6. **Decide whether Careers ships.** It's built, but a careers page with no listed openings can read as a dead site. Either get openings (or an explicit "nothing right now") from the office manager, or hold the page back until launch.
+7. **Lean into the personal/small-shop angle** in About and the homepage hero — named-owner warmth is the one thing neither Arrow Aviation nor Summit Aviation has. Needs Mike's story, so it's half-blocked, but the *structure* for it is there now.
 
 ## Waiting On The Client
 
@@ -106,8 +107,16 @@ There's no build step or test suite, so correctness lives in one script. Run it 
 
 ## In Flight
 
-Nothing half-finished. **No page copy changed this session** — the Real vs Placeholder
-table above is unchanged and still accurate.
+**PR #4 — the client questionnaire — is open as a draft and is the main loose end.**
+It's finished work (50 questions from 93 placeholders, plus a printable `.docx`) that a
+prior session never surfaced here. It touches `PROJECT-STATUS.md`, which PR #5 has since
+rewritten, so **expect a conflict and rebase it before merging**. Two site issues it
+raises are deliberately not fixed in it: the homepage NASA tile (now Next Up item 1) and
+`contact.html` publishing a personal `att.net` address with a name and title — the latter
+mattered less when nothing was deployed, and matters more now that the URL is public.
+
+**No page copy changed this session** — the Real vs Placeholder table above is unchanged
+and still accurate.
 
 `tools/verify.py` green across all 10 pages. The deploy was verified live on
 2026-07-30: all 10 pages return 200, `PROJECT-STATUS.md` / `README.md` / `docs/*` /
