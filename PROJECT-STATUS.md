@@ -1,14 +1,16 @@
 # Project Status
 
-*Last updated: 2026-07-30 · Branch `claude/south-air-helicopter-site-1fyg5b` · Commit `b50cc26` · [PR #1](https://github.com/okurtenayhh/SouthAirHelicopter/pull/1) (draft, open)*
+*Last updated: 2026-07-31 · Branch `claude/new-session-cymw5g` · Commit (pending push) · PR #1 merged 2026-07-30, no new PR opened yet*
 
 > Maintained by the `/sa-wrap-up` skill. If this file and the repo disagree, the repo is right — fix this file.
 
 ## Where This Stands
 
-All seven pages are built and styled, the logo family is done and wired in, and the real contact details are in. Structurally the site is close to finished. What it does **not** have is real content: services, pricing, company history, the NASA and Bell specifics, and every photo are still placeholder text, clearly flagged in amber on the page.
+PR #1 merged — the seven-page prototype is on `main`. All seven pages are built and styled, the logo family is done and wired in, and the real contact details are in. What the site does **not** have is real content: services, pricing, company history, the NASA and Bell specifics, and every photo are still placeholder text, clearly flagged in amber on the page.
 
-Nothing has been shown to Mike yet. The site isn't deployed anywhere — there's no live URL, so the only way to view it is locally or via the PR.
+The user also handed over a market research summary (competitor analysis of Arrow Aviation and Summit Aviation, plus category standards and differentiation angles) — now saved at `docs/market-research.md`. It's reference material for copywriting and structure, not yet worked into any page.
+
+Nothing has been shown to Mike yet. The site isn't deployed anywhere — there's no live URL, so the only way to view it is locally or via the repo.
 
 ## Next Up
 
@@ -18,6 +20,10 @@ Things that can move without waiting on anyone:
 2. **Turn on GitHub Pages** so there's a shareable preview link — Settings → Pages → deploy from the working branch. This is a repo-owner action; Claude can't do it. Once live, everyone can watch progress by refreshing one URL.
 3. **Draft the questionnaire for Mike and the office manager** — one page covering everything in *Waiting On The Client* below, so it can be answered in a single sitting rather than in fragments.
 4. **Send Mike the logo board** for sign-off: https://claude.ai/code/artifact/55ef4406-1569-4a12-9bd7-e744d1ad8683
+5. **Work the market research (`docs/market-research.md`) into the site**, once there's real copy to write against:
+   - Add a repeated "Request a Quote" CTA — both competitors treat this as the norm instead of published pricing.
+   - Consider a short Bell-authorization page/section separate from the general Services list — competitors give manufacturer certification its own page because it's the biggest trust signal in this industry. Mind the Bell trademark constraint below.
+   - Lean into the personal/small-shop angle in About and the homepage hero — named-owner warmth is the one thing neither Arrow Aviation nor Summit Aviation has.
 
 ## Waiting On The Client
 
