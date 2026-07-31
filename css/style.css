@@ -123,7 +123,7 @@ h1, h2, h3, h4 {
   display: block;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 940px) {
   .brand-logo {
     height: 44px;
   }
@@ -175,7 +175,10 @@ h1, h2, h3, h4 {
   background: var(--color-amber);
 }
 
-@media (max-width: 860px) {
+/* Collapse to the hamburger at 940px, not 860px: the 8-item nav needs the extra
+   headroom, and between 940 and 860 it would otherwise wrap to two rows. If nav
+   items are added or renamed, re-check where the wrap actually starts. */
+@media (max-width: 940px) {
   .nav-toggle {
     display: block;
   }
@@ -442,44 +445,6 @@ h1, h2, h3, h4 {
   padding: 48px 24px;
 }
 
-/* ---------- Pricing table ---------- */
-.pricing-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-
-.pricing-table caption {
-  caption-side: bottom;
-  text-align: left;
-  padding-top: 12px;
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-}
-
-.pricing-table th, .pricing-table td {
-  text-align: left;
-  padding: 16px 18px;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.pricing-table thead th {
-  background: var(--color-navy);
-  color: var(--color-white);
-  font-family: var(--font-heading);
-}
-
-.pricing-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-.pricing-table tbody tr:hover {
-  background: var(--color-cloud);
-}
-
 /* ---------- Timeline (History) ---------- */
 .timeline {
   position: relative;
@@ -587,6 +552,39 @@ h1, h2, h3, h4 {
   margin: 0;
   color: var(--color-text-muted);
   font-style: italic;
+}
+
+/* ---------- Quote strip (mid-page CTA) ----------
+   Slim counterpart to .cta-band, for repeating the quote CTA partway down a
+   long page without a second full navy gradient band.
+
+   IMPORTANT: only ever place this inside a plain white .section — never
+   .section-alt, whose background is the same --color-cloud as the strip's
+   fill, which makes it disappear. It carries its own max-width and centering,
+   so it does not need a .container wrapper. */
+.quote-strip {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 32px;
+  flex-wrap: wrap;
+  background: var(--color-cloud);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-amber);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+}
+
+.quote-strip h3 {
+  margin: 0 0 4px;
+  font-size: 1.15rem;
+}
+
+.quote-strip p {
+  margin: 0;
+  color: var(--color-text-muted);
 }
 
 /* ---------- Two column content ---------- */
@@ -768,11 +766,31 @@ form.contact-form {
   max-width: 320px;
 }
 
+/* Certifications band — sits between .footer-grid and .footer-bottom, full
+   width rather than a 5th grid column (a 5th column is ~180px at 1160px, which
+   wraps the Bell line to four lines and orphans at the 800px breakpoint). */
+.footer-certs {
+  max-width: var(--max-width);
+  margin: 36px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  align-items: center;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+}
+
+.footer-cert strong {
+  color: var(--color-white);
+  font-weight: 600;
+}
+
 .footer-bottom {
   max-width: var(--max-width);
-  margin: 40px auto 0;
+  margin: 24px auto 0;
   padding-top: 20px;
-  border-top: 1px solid rgba(255,255,255,0.12);
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
