@@ -18,33 +18,43 @@ Things that can move without waiting on anyone:
 
 1. **Wire the contact form to a real handler** (Formspree / Netlify Forms / similar). Right now a customer who fills it in reaches nobody. Highest-severity item on the site.
 2. **Turn on GitHub Pages** so there's a shareable preview link — Settings → Pages → deploy from the working branch. This is a repo-owner action; Claude can't do it. Once live, everyone can watch progress by refreshing one URL.
-3. **Draft the questionnaire for Mike and the office manager** — one page covering everything in *Waiting On The Client* below, so it can be answered in a single sitting rather than in fragments.
+3. ~~Draft the questionnaire~~ — **done.** `docs/client-questions.docx` (source: `docs/client-questions.md`), 50 questions by topic, tiered so the five highest-leverage ones come first. Send it and wait.
 4. **Send Mike the logo board** for sign-off: https://claude.ai/code/artifact/55ef4406-1569-4a12-9bd7-e744d1ad8683
 5. **Decide whether Careers ships.** It's built, but a careers page with no listed openings can read as a dead site. Either get openings (or an explicit "nothing right now") from the office manager, or hold the page back until launch.
 6. **Lean into the personal/small-shop angle** in About and the homepage hero — named-owner warmth is the one thing neither Arrow Aviation nor Summit Aviation has. Needs Mike's story, so it's half-blocked, but the *structure* for it is there now.
 
 ## Waiting On The Client
 
+> **The client-facing version of this list is `docs/client-questions.md`**, which generates `docs/client-questions.docx` for sending. It's organized by topic rather than by person and covers all 50 questions. **Update both together** — this list and the site's placeholders drifted apart once already, and 14 live questions were missing here until 2026-07-31.
+
 **Mike (owner / president)**
 - Sign-off on the logo. The user approved it; Mike has not seen it.
-- Exact scope of the NASA relationship, ideally in writing — which center or program, and what South Air actually does for them. See the standing warning on `nasa-partnership.html` before writing a word of this.
-- Confirmed founding year. "1997 or so" is what we have. Every reference to it is now flagged as a placeholder, so this blocks more of the site than it used to — the homepage hero eyebrow, the years stat, and the History page all wait on it.
-- **Which airframes the shop is rated on**, and what work is authorized per model. `platforms.html` is entirely empty until this lands, by design.
-- What the Bell Customer Service Facility certification actually covers, what ratings are on Repair Station certificate #XRIR622K, plus the Bell badge artwork and written permission to use it.
-- Confirmed service list. The current six services are generic helicopter-shop categories, not a confirmed offering.
-- How quoting actually works — what he needs from a customer to quote, how the quote comes back, and typical turnaround. Fills the three cards on `services.html`.
-- The airport identifier and heliport coordinates for Pearland Regional Airport.
+- Exact scope of the NASA relationship, ideally in writing — which center or program, and what South Air actually does for them. Plus **what year it started** and how much can be said publicly. See the standing warning on `nasa-partnership.html` before writing a word of this.
+- Confirmed founding year. "1997 or so" is what we have. Every reference to it is now flagged as a placeholder, so this blocks more of the site than it used to — the homepage hero eyebrow, the years stat, and the History page all wait on it. **Highest-leverage single answer: 9 slots.**
+- **Which airframes the shop is rated on**, and what work is authorized per model. `platforms.html` is entirely empty until this lands, by design. **16 slots.** Also: is the shop Bell-focused, or multi-manufacturer?
+- What the Bell Customer Service Facility certification actually covers, what ratings are on Repair Station certificate #XRIR622K, plus the Bell badge artwork and written permission to use it. Also **how long the designation has been held**, what maintaining it requires, and **whether "Bell Helicopter Customer Service Facility" is still Bell's current wording** (ours came off a business card).
+- Any **additional certifications or authorizations** beyond those two — there's a slot for them in the footer of all 10 pages.
+- Confirmed service list. The current six services are generic helicopter-shop categories, not a confirmed offering. Specifically: **does the shop do charter/flight support at all?** The homepage claims it.
+- How quoting actually works — what he needs from a customer to quote, how the quote comes back, and typical turnaround. Fills the three cards on `services.html`. Plus **whether quote requests should arrive by phone, by form, or both** — that decides whether wiring the contact form is even worth it.
+- The two **timeline milestones** and the **long-form founding story**, plus the homepage positioning line. The year alone doesn't fill the History page.
+- His own **bio and headshot**. He's the one named person on the site and there's no copy for him.
+- A **testimonial**, or a line from him about how the shop approaches its work.
+- The airport identifier and heliport coordinates for Pearland Regional Airport. (Anyone can pull these from the FAA airport record — not strictly blocked on Mike.)
 - How public the recent change of ownership should be.
+- The **`100%` safety-first and `24/7` support** stats on the homepage. Invented as design filler, still rendering live, and until now assigned to nobody.
 
 **Office manager (the user's mother)**
 - Business hours.
-- Company overview and mission statement for the About page.
-- Which inbox is the public "general inquiries" one, and whether other staff should appear on the team page.
+- Company overview and mission statement for the About page. (`about.html:50` says this needs the *owner and* office manager.)
+- Which inbox is the public "general inquiries" one, and whether other staff should appear on the team page. Note `contact.html` currently publishes a personal `att.net` address with a name and title attached, as finished content.
 - Whether there are any current job openings — and if not, that's fine, `careers.html` should just say so.
-- Whether resumes should go to a separate inbox rather than the general one, plus the EEO statement wording.
-- Photos: hangar, aircraft, team, anything historical.
+- Whether resumes should go to a separate inbox rather than the general one, plus the EEO statement wording. (The site says both come "from ownership" — either can answer.)
+- **Pay and benefits actually offered**, and headcount/shop culture for the careers page.
+- Photos: hangar, aircraft, team, anything historical. **A single hangar visit covers 8 of the 12 photo slots** — the highest-leverage thing on this list. Two caveats: NASA-related photos need usage rights cleared first, and nothing with Bell branding in frame until Bell gives permission.
 
 **Either**
+- A **company tagline** for the footer of all 10 pages. 10 slots, trivial answer, currently unasked.
+- Whether the three company values (**Safety First, Reliability, Precision**) are the real ones. The site picked them, not the client.
 - Domain name once purchased, and the Google Workspace email addresses that follow.
 - Any news or stories worth featuring.
 
