@@ -1,6 +1,6 @@
 # Project Status
 
-*Last updated: 2026-07-31 · All work merged to `main` · Commit `f053768` · PRs #1 and #2 both merged*
+*Last updated: 2026-07-31 · Site work merged to `main` at `f053768` · PRs #1 and #2 merged · [PR #3](https://github.com/okurtenayhh/SouthAirHelicopter/pull/3) open (this file's header only)*
 
 > Maintained by the `/sa-wrap-up` skill. If this file and the repo disagree, the repo is right — fix this file.
 
@@ -93,4 +93,8 @@ There's no build step or test suite, so correctness lives in one script. Run it 
 
 ## In Flight
 
-Nothing half-finished. Working tree clean, all work pushed to the branch.
+Nothing half-finished. Working tree clean, everything pushed, `tools/verify.py` green across all 10 pages.
+
+One loose end, safe to leave: **[PR #3](https://github.com/okurtenayhh/SouthAirHelicopter/pull/3) is open** and contains only the header line of this file. All the actual site work is already on `main`. Merge it whenever, or close it and fix the line directly — nothing depends on it.
+
+Screenshots of all 10 pages at 1280px were reviewed on 2026-07-31 and are current as of `f053768`. Mobile (390px) has been spot-checked but not reviewed page by page.
