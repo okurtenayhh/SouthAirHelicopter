@@ -1,0 +1,6 @@
+# The South Air Helicopters site is unfinished and not client-approved.
+# Most copy is placeholder text. Nothing here should reach search results.
+# Delete this file (and the X-Robots-Tag header in netlify.toml) at launch.
+
+User-agent: *
+Disallow: /
