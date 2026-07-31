@@ -1,6 +1,6 @@
 # Project Status
 
-*Last updated: 2026-07-30 (local) · Branch `claude/preview-deploy-and-trademark-research` · Previous work merged at `db84b2e` · PRs #1–#3 merged*
+*Last updated: 2026-07-30 (local) · Branch `claude/preview-deploy-and-trademark-research` · **PR #5 open, not yet merged** — https://github.com/okurtenayhh/SouthAirHelicopter/pull/5 · PRs #1–#3 merged at `db84b2e`*
 
 **Live preview: https://south-air-helicopters.netlify.app** — noindexed, not client-approved, safe to send to Mike.
 
