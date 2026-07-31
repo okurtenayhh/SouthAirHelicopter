@@ -30,7 +30,7 @@ Things that can move without waiting on anyone:
 2. **Review and merge PR #4 — the client questionnaire is already written.** A prior session extracted 93 placeholders into 50 plain-language questions plus a printable `.docx`, then left it in draft and never told the tracker. It will likely need a rebase, since PR #5 rewrote much of this file. Read it before writing any questionnaire from scratch.
 3. **Wire the contact form to a real handler.** Still the highest-severity *functional* item — a customer who fills it in today reaches nobody. Now much cheaper than it was: the site is on Netlify, so **Netlify Forms** is a `data-netlify="true"` attribute plus a notification address, no third-party service and no backend. Blocked only on knowing which inbox submissions should go to.
 4. **Correct the "Bell Helicopter" wording on `bell-service-center.html:41`.** Bell dropped "Helicopter" from the brand in 2018; the page echoes Mike's business card, which predates that. The homepage now says "Bell Customer Service Facility" (current form) while the Bell page says "Bell Helicopter Customer Service Facility" (retired form) — so the two pages currently disagree. Cheap to fix, but confirm against Bell's answer to item 1 rather than guessing.
-5. **Send Mike the preview link, the questionnaire, and the logo board** for sign-off: https://claude.ai/code/artifact/55ef4406-1569-4a12-9bd7-e744d1ad8683 — the homepage NASA tile that previously blocked this is fixed, so the preview is now safe to send. People answer far better against a page they can see, so the preview and the questionnaire travel well together.
+5. **Send Mike the preview link, the questionnaire, and the logo board** for sign-off: https://claude.ai/code/artifact/55ef4406-1569-4a12-9bd7-e744d1ad8683 — the homepage NASA tile that previously blocked this is fixed **in the repo but not yet deployed** — redeploy first (see In Flight), because the live URL still shows the old tile. People answer far better against a page they can see, so the preview and the questionnaire travel well together.
 6. **Decide whether Careers ships.** It's built, but a careers page with no listed openings can read as a dead site. Either get openings (or an explicit "nothing right now") from the office manager, or hold the page back until launch.
 7. **Lean into the personal/small-shop angle** in About and the homepage hero — named-owner warmth is the one thing neither Arrow Aviation nor Summit Aviation has. Needs Mike's story, so it's half-blocked, but the *structure* for it is there now.
 
@@ -121,6 +121,14 @@ rewritten, so **expect a conflict and rebase it before merging**. Two site issue
 raises are deliberately not fixed in it: the homepage NASA tile (now Next Up item 1) and
 `contact.html` publishing a personal `att.net` address with a name and title — the latter
 mattered less when nothing was deployed, and matters more now that the URL is public.
+
+> **⚠ THE LIVE PREVIEW IS STALE.** `netlify deploy --prod --dir=.` was attempted at the
+> end of the session and **blocked by the local permission classifier** — it did not run.
+> So https://south-air-helicopters.netlify.app still serves the old homepage, **including
+> the unflagged "NASA / Partnership" tile.** The fix is committed and in PR #8 but is not
+> live. **Do not send Mike the preview link until this deploys.** Re-run the deploy from
+> the repo root; if it's blocked again, the user can approve it or add a Bash permission
+> rule.
 
 **`index.html` changed this session** — the hero paragraph, the fourth stat tile, and the
 two content sections below the services grid. The Real vs Placeholder table has been
