@@ -1,6 +1,6 @@
 # Project Status
 
-*Last updated: 2026-07-30 (local) · `main` at `b853e0a` · PRs #1, #2, #3, #5, #6 merged · **PR #4 is open as a draft** — a finished client questionnaire nobody has merged: https://github.com/okurtenayhh/SouthAirHelicopter/pull/4*
+*Last updated: 2026-07-30 (local, second session) · `main` at `ceb8a01` · working branch `claude/bell-forward-homepage` · PRs #1, #2, #3, #5, #6, #7 merged · **PR #4 is open as a draft** — a finished client questionnaire nobody has merged: https://github.com/okurtenayhh/SouthAirHelicopter/pull/4*
 
 **Live preview: https://south-air-helicopters.netlify.app** — noindexed, not client-approved, safe to send to Mike.
 
@@ -18,15 +18,19 @@ lands. Nothing has been shown to Mike yet, but there is finally a link to show h
 Trademark research for Bell and NASA is written up in `docs/trademark-research.md` —
 desk research to compare against what Bell and NASA actually say when asked.
 
+**The homepage now leads with the Bell Customer Service Facility credential rather than
+NASA.** That was the user's call this session, and it resolved the highest-liability item
+on the site as a side effect: the unflagged "NASA / Partnership" stat tile is gone.
+
 ## Next Up
 
 Things that can move without waiting on anyone:
 
-1. **Remove or flag the "NASA / Partnership" stat tile on the homepage** (`index.html:75-78`). Its three sibling tiles all carry `[verify]` flags; this one doesn't, so it renders as confirmed fact — while the entire NASA relationship is unconfirmed and `nasa-partnership.html` carries a pre-publication warning about exactly this. It is a credential tile in a stat strip, which is the "trusted by" framing NASA names verbatim as prohibited. **This is live on the public preview.** Highest-liability item on the site; it outranks the contact form now that the URL is shareable.
+1. **Draft and send the Bell request email.** Now the top item, because the user wants a Bell mark on the site and the only legitimate route to one is Bell's own CSF seal artwork. One message to Mike's CSF account rep (not the ethics hotline) covers all four open Bell questions: the seal artwork and co-branding rules, the exact authorized wording for our status, whether we may name the models we're rated on, and whether Bell wants to review the site pre-launch. Questions are already drafted at `docs/trademark-research.md:166-174`. **This is the unblock for four separate items on this page.**
 2. **Review and merge PR #4 — the client questionnaire is already written.** A prior session extracted 93 placeholders into 50 plain-language questions plus a printable `.docx`, then left it in draft and never told the tracker. It will likely need a rebase, since PR #5 rewrote much of this file. Read it before writing any questionnaire from scratch.
 3. **Wire the contact form to a real handler.** Still the highest-severity *functional* item — a customer who fills it in today reaches nobody. Now much cheaper than it was: the site is on Netlify, so **Netlify Forms** is a `data-netlify="true"` attribute plus a notification address, no third-party service and no backend. Blocked only on knowing which inbox submissions should go to.
-4. **Ask Bell for the CSF seal artwork.** `docs/trademark-research.md` establishes that Bell *issues* badge artwork to authorized facilities (a competitor serves `bell_seal_csf_rgb_web2.png`). Request the asset and the co-branding rules rather than asking permission to use the corporate logo — and confirm whether the authorized wording still contains "Helicopter".
-5. **Send Mike the preview link, the questionnaire, and the logo board** for sign-off: https://claude.ai/code/artifact/55ef4406-1569-4a12-9bd7-e744d1ad8683 — but do item 1 first. People answer far better against a page they can see, so the preview and the questionnaire travel well together.
+4. **Correct the "Bell Helicopter" wording on `bell-service-center.html:41`.** Bell dropped "Helicopter" from the brand in 2018; the page echoes Mike's business card, which predates that. The homepage now says "Bell Customer Service Facility" (current form) while the Bell page says "Bell Helicopter Customer Service Facility" (retired form) — so the two pages currently disagree. Cheap to fix, but confirm against Bell's answer to item 1 rather than guessing.
+5. **Send Mike the preview link, the questionnaire, and the logo board** for sign-off: https://claude.ai/code/artifact/55ef4406-1569-4a12-9bd7-e744d1ad8683 — the homepage NASA tile that previously blocked this is fixed **in the repo but not yet deployed** — redeploy first (see In Flight), because the live URL still shows the old tile. People answer far better against a page they can see, so the preview and the questionnaire travel well together.
 6. **Decide whether Careers ships.** It's built, but a careers page with no listed openings can read as a dead site. Either get openings (or an explicit "nothing right now") from the office manager, or hold the page back until launch.
 7. **Lean into the personal/small-shop angle** in About and the homepage hero — named-owner warmth is the one thing neither Arrow Aviation nor Summit Aviation has. Needs Mike's story, so it's half-blocked, but the *structure* for it is there now.
 
@@ -61,7 +65,7 @@ Things that can move without waiting on anyone:
 
 | Page | Real | Still placeholder |
 | --- | --- | --- |
-| `index.html` | Logo, nav, footer contact block, quote CTAs | Hero positioning line, all three service blurbs, the stat strip (**"100%" and "24/7" still invented**; the years figure is now flagged), history and NASA teasers |
+| `index.html` | Logo, nav, footer contact block, quote CTAs, **Bell CSF + FAA Repair Station status** (business-card sourced, now the hero's lead claim) | Hero positioning line, all three service blurbs, the stat strip (**"100%" and "24/7" still invented**; the years figure and the Bell tile's exact wording are flagged), the Bell section body, history and NASA teasers |
 | `about.html` | Mike Pike as President; Bell Customer Service Facility + Repair Station #XRIR622K; Pearland Regional Airport | Company overview, mission, all three values, Mike's bio, two other team slots, every photo |
 | `services.html` | Bell certification line; quote-only framing | The entire six-service list, all three "How Pricing Works" steps, the testimonial |
 | `bell-service-center.html` | Repair Station #XRIR622K; Bell CSF status (business-card wording) | What the certification covers, how long it's been held, the ratings on the certificate. Page carries a standing trademark warning and an empty reserved badge slot |
@@ -89,13 +93,16 @@ Things that can move without waiting on anyone:
 - **The preview deploys to production, not draft URLs** — a stable link Mike can bookmark and refresh beats an unguessable one that changes every deploy. Search engines are blocked instead (`robots.txt` + `X-Robots-Tag`). Note the URL is public to anyone holding it; it is *not* access-controlled. Real restriction needs Netlify's paid password protection.
 - **Internal docs are 404'd on the deploy** — `PROJECT-STATUS.md`, `README.md`, `docs/`, and `tools/` are blocked in `netlify.toml`, because the preview URL is a link handed to the client and these are candid working notes.
 - **No `404.html` file** — `tools/verify.py` requires every `*.html` to carry the shared header/footer and 8 nav items, so adding one would fail the checks. Netlify's default 404 is fine.
+- **The homepage leads with Bell, not NASA** (user's call, 2026-07-30). Bell CSF is a credential South Air holds and can document; the NASA relationship is unconfirmed, and NASA's own guidelines forbid endorsement framing. So the stronger *and* safer claim were the same one. NASA is now a supporting block below the fold, described as work performed rather than a "partnership" — the word "partnership" is what implies endorsement.
+- **Bell's *corporate* logo is not the CSF seal, and only the seal goes on this site.** The corporate shield and 2018 wordmark say "we are Bell"; the CSF seal says "authorized by Bell." Summit Aviation, an actual CSF, displays the seal and not the corporate mark. This is why `tools/verify.py` fails the build on any Bell-named image in `images/` — the guard is deliberate, don't disable it to make a page look finished.
 
 ## Constraints That Bite
 
 - **Bell trademark.** South Air is an authorized Bell Customer Service Facility, but the Bell logo cannot appear without permission, and the copy must not imply Bell endorses the company. The badge sits *beside* the South Air logo, never merged into it. Researched 2026-07-30: **Bell publishes no third-party trademark policy at all** — the governing terms are in Mike's CSF agreement. The reserved badge slot on `bell-service-center.html` is the right design; Bell issues CSF seal artwork to authorized facilities.
 - **NASA: the logo is a settled no.** Not an open question anymore. The Insignia, worm, and Seal are protected under 14 CFR 1221 and NASA states they must not be used as branding on third-party websites. There is no permission path that changes this — stop re-litigating it. What *is* allowed is a **factual, specific** description of the work ("vendors are free to state that JPL is one of their customers, and to describe factually the services and products they provide"). What is prohibited: "NASA approved", "official NASA", and — verbatim on NASA's list — **"trusted by"**. So no trust/logo strip may ever include NASA. Also: no quotes attributable to NASA staff, which rules out a testimonial on that page. Full detail in `docs/trademark-research.md`.
 - **The founding year is unconfirmed and was asserted in ~14 places.** All in-page references are now wrapped in `[PLACEHOLDER Year]`, and the year was removed from `<title>`/`<meta>` tags entirely (placeholder styling can't reach those, and they leak into search results and link previews). Derived age claims — "27+ years", "nearly three decades" — went with it. **Don't put any age claim back until Mike confirms the year.**
-- **Unverified claims on the homepage.** The stat strip still asserts "100% safety-first culture" and "24/7 support availability." Both were design filler, both are marked for verification, and both should be confirmed or removed before launch.
+- **Unverified claims on the homepage.** The stat strip still asserts "100% safety-first culture" and "24/7 support availability." Both were design filler, both are marked for verification, and both should be confirmed or removed before launch. The fourth tile is now "Bell / Customer Service Facility", flagged pending Bell's confirmation of exact wording.
+- **Bell logo files are sitting in the user's Downloads and are the wrong asset.** `Bell_Outline_black.png` (corporate shield) and `Bell_logo_2018.svg` (corporate wordmark) were supplied this session; both look like logo-aggregator downloads, neither is Bell-issued, and neither is the CSF seal. They were deliberately **not** added. Bell publishes no third-party trademark policy, so the governing text is the CSF agreement Mike signed — which nobody here has read. If that agreement turns out to grant corporate-mark use, adding it is a five-minute change and the badge slot on `bell-service-center.html` already exists.
 - **The repo is public.** Anything committed here is world-readable, including the client's contact details (already public on a business card) and any draft copy. `.recall/` (local session transcripts) and `.netlify/` are gitignored for this reason — **don't commit either.**
 - **The no-model-names rule is self-imposed, not a Bell restriction.** Summit Aviation, a Bell CSF, names models freely. Once Mike confirms the shop's ratings, naming models is normal for the category — and `tools/verify.py`'s `MODEL_RE` check will need relaxing at that point. Until then it stays.
 
@@ -115,17 +122,31 @@ raises are deliberately not fixed in it: the homepage NASA tile (now Next Up ite
 `contact.html` publishing a personal `att.net` address with a name and title — the latter
 mattered less when nothing was deployed, and matters more now that the URL is public.
 
-**No page copy changed this session** — the Real vs Placeholder table above is unchanged
-and still accurate.
+> **⚠ THE LIVE PREVIEW IS STALE.** `netlify deploy --prod --dir=.` was attempted at the
+> end of the session and **blocked by the local permission classifier** — it did not run.
+> So https://south-air-helicopters.netlify.app still serves the old homepage, **including
+> the unflagged "NASA / Partnership" tile.** The fix is committed and in PR #8 but is not
+> live. **Do not send Mike the preview link until this deploys.** Re-run the deploy from
+> the repo root; if it's blocked again, the user can approve it or add a Bash permission
+> rule.
 
-`tools/verify.py` green across all 10 pages. The deploy was verified live on
-2026-07-30: all 10 pages return 200, `PROJECT-STATUS.md` / `README.md` / `docs/*` /
-`tools/*` return 404, and both `X-Robots-Tag: noindex` and `robots.txt Disallow: /`
-confirmed by request.
+**`index.html` changed this session** — the hero paragraph, the fourth stat tile, and the
+two content sections below the services grid. The Real vs Placeholder table has been
+updated to match. No other page was touched, so the Bell wording on
+`bell-service-center.html` now disagrees with the homepage (Next Up item 4).
 
-Screenshots of all 10 pages at 1280px were reviewed in the prior session and remain
-current as of `f053768` — no markup changed since. Mobile (390px) spot-checked only,
-never reviewed page by page. **The live URL now makes a real-device mobile check easy
-— worth doing.**
+`tools/verify.py` green across all 10 pages after the edits. The earlier deploy was
+verified live on 2026-07-30: all 10 pages return 200, `PROJECT-STATUS.md` / `README.md` /
+`docs/*` / `tools/*` return 404, and both `X-Robots-Tag: noindex` and
+`robots.txt Disallow: /` confirmed by request.
+
+**The rewritten homepage has not been viewed in a browser** — it's verified by script
+and by reading the markup, not by eye. The new `section-alt` NASA block is the one thing
+worth a look, since it's the first time that class is used on the homepage and the band
+backgrounds now alternate differently down the page.
+
+Screenshots of all 10 pages at 1280px were reviewed two sessions ago and are **now stale
+for `index.html`**. Mobile (390px) spot-checked only, never reviewed page by page. **The
+live URL makes a real-device mobile check easy — worth doing.**
 
 Redeploy after any change with `netlify deploy --prod --dir=.` from the repo root.
