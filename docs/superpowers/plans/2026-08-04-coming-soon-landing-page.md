@@ -112,7 +112,17 @@ This file is deleted as the go-live step, in a later session. Leave the trailing
 
 Write the file below verbatim, with one substitution: between the two `LOGO` comment markers, paste the entire contents of **`images/logo-icon-light.svg`** — the rotor icon alone, 836 bytes, *not* the 7KB stacked lockup. The plate sets the company name in type, so the lockup would repeat it.
 
-On the pasted `<svg>` opening tag, delete any `role="img"` and `aria-label` attributes and add `class="icon" aria-hidden="true"`. Keep `xmlns` and the `viewBox` exactly as they are. Change nothing inside the tag; the paths are generated output.
+On the pasted `<svg>` opening tag: delete `role="img"` and `aria-label="…"`, delete `width="200" height="200"` (the CSS sizes it), and add `class="icon" aria-hidden="true"`. Keep `xmlns` and `viewBox` exactly as they are.
+
+**Then recolour the fills — the shipped icon still carries the old palette and pasting it unchanged would put the rejected amber back on the page:**
+
+| Find | Replace | Why |
+| --- | --- | --- |
+| `#ffffff` | `#eef2f6` | blades and hub, matched to the page white |
+| `#7cc0ec` | `#3585cf` | the one contrasting blade, to the shirt royal |
+| `#f2a71b` | `#0b2545` | hub centre. **Not** orange — orange appears once, on the call button. Navy reads as a dark hub bolt, which suits the plate |
+
+Leave the path geometry alone; it is generated output.
 
 **Keep the two comment markers, one above the SVG and one below it**, exactly as written in the template. The owner has given a logo direction and this page is expected to be revisited with a new mark; those markers are what make that a single unambiguous replacement rather than a hunt through 7KB of inlined path data.
 
@@ -167,7 +177,7 @@ The `aria-hidden` matters: the `<h1>` directly below the icon names the company 
 
   .plate {
     position: relative;
-    padding: 2.1rem 1.6rem 1.9rem;
+    padding: 1.85rem 1.6rem 1.8rem;
     border-radius: 5px;
     background: linear-gradient(180deg, var(--plate-hi), var(--plate-lo));
     border: 1px solid var(--edge);
@@ -189,7 +199,7 @@ The `aria-hidden` matters: the `<h1>` directly below the icon names the company 
   .rivet.bl { bottom: 9px; left: 9px; }
   .rivet.br { bottom: 9px; right: 9px; }
 
-  .icon { display: block; width: 46px; height: auto; margin: 0 auto 1.15rem; }
+  .icon { display: block; width: 66px; height: auto; margin: 0 auto 1rem; }
 
   .name {
     margin: 0;
@@ -249,13 +259,16 @@ The `aria-hidden` matters: the `<h1>` directly below the icon names the company 
   }
 
   .status {
-    display: inline-flex; align-items: center; gap: 0.5rem;
+    /* block-level flex, not inline-flex: the call button below is an
+       inline-block, and two inline-level siblings share a line at wide
+       viewports and overlap. Caught at 1280px, invisible at 390px. */
+    display: flex; justify-content: center; align-items: center; gap: 0.5rem;
     margin: 1.5rem 0 0;
     font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--royal);
+    color: rgba(238, 242, 246, 0.82);
   }
   .dot {
     width: 6px; height: 6px;
@@ -265,19 +278,19 @@ The `aria-hidden` matters: the `<h1>` directly below the icon names the company 
   }
 
   .call {
-    display: block;
-    margin: 0.85rem auto 0;
-    padding: 0.9rem 1.4rem;
-    border-radius: 5px;
+    display: inline-block;
+    margin: 0.9rem 0 0;
+    padding: 0.8rem 2.4rem;
+    border-radius: 4px;
     background: var(--orange);
-    color: #1a0c03;
+    color: #231004;
     text-decoration: none;
-    box-shadow: 0 12px 30px rgba(242, 103, 34, 0.26);
+    box-shadow: 0 8px 20px rgba(242, 103, 34, 0.16);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
   .call:hover, .call:focus-visible {
     transform: translateY(-2px);
-    box-shadow: 0 16px 36px rgba(242, 103, 34, 0.34);
+    box-shadow: 0 12px 26px rgba(242, 103, 34, 0.24);
   }
   .call:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
 
@@ -291,7 +304,7 @@ The `aria-hidden` matters: the `<h1>` directly below the icon names the company 
   .call-number {
     display: block;
     margin-top: 0.15rem;
-    font-size: clamp(1.55rem, 6.8vw, 1.85rem);
+    font-size: clamp(1.42rem, 6vw, 1.62rem);
     font-weight: 700;
     font-variant-numeric: tabular-nums;
   }
