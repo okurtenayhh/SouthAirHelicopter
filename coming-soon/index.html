@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>South Air Helicopters, Inc. — Helicopter Maintenance at Pearland Regional Airport</title>
-<meta name="description" content="South Air Helicopters, Inc. is an FAA Certified Repair Station at Pearland Regional Airport in Pearland, Texas. Open and taking work — call 281.648.5187.">
+<meta name="description" content="South Air Helicopters, Inc. is an FAA Certified Repair Station at Pearland Regional Airport in Pearland, Texas. Call 281.648.5187.">
 <meta name="theme-color" content="#0b2545">
 <style>
   :root {
@@ -105,6 +105,7 @@
     text-transform: uppercase;
     color: var(--steel);
   }
+  .stamp-label + .stamp-label { margin-top: 0.6rem; }
   .stamp-serial {
     display: block;
     margin-top: 0.4rem;
@@ -125,25 +126,6 @@
     font-size: 0.97rem;
     color: rgba(238, 242, 246, 0.74);
     text-wrap: balance;
-  }
-
-  .status {
-    /* block-level flex, not inline-flex: the call button below is an
-       inline-block, and two inline-level siblings share a line at wide
-       viewports and overlap. Caught at 1280px, invisible at 390px. */
-    display: flex; justify-content: center; align-items: center; gap: 0.5rem;
-    margin: 1.5rem 0 0;
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgba(238, 242, 246, 0.82);
-  }
-  .dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--royal);
-    box-shadow: 0 0 0 3px rgba(53, 133, 207, 0.20);
   }
 
   .call {
@@ -225,17 +207,16 @@
 
       <h1 class="name">South Air Helicopters, Inc.</h1>
       <hr class="rule">
-      <p class="loc">Pearland Regional Airport · Texas</p>
+      <p class="loc">Pearland Regional Airport · Texas<br>Established 1979</p>
 
       <p class="stamp">
+        <span class="stamp-label">Certified Bell Helicopter Customer Service Facility</span>
         <span class="stamp-label">Certified Repair Station</span>
         <span class="stamp-serial">XRIR622K</span>
       </p>
     </div>
 
     <p class="lede">Helicopter maintenance, services, and support.</p>
-
-    <p class="status"><span class="dot" aria-hidden="true"></span>Open and taking work</p>
 
     <a class="call" href="tel:+12816485187">
       <span class="call-label">Call us</span>

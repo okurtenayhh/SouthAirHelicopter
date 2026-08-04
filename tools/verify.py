@@ -131,11 +131,23 @@ else:
         ", ".join(m.group(0) for m in MODEL_RE.finditer(cs)),
     )
 
-    # Bell status is true but the authorized wording is unconfirmed, and unlike
-    # the preview this page is destined to be indexed.
-    check("coming-soon page claims no Bell status", "bell" not in cs.lower())
+    # The Bell wording is the office manager's explicit choice (2026-08-04),
+    # kept verbatim over the objection that "Bell Helicopter" is a name Bell
+    # retired in 2018. Pin the exact approved string: any other Bell phrasing
+    # on this page is unapproved use of someone else's trademark.
+    APPROVED_BELL = "Certified Bell Helicopter Customer Service Facility"
+    check(
+        "coming-soon page uses only the approved Bell wording",
+        cs.count(APPROVED_BELL) == 1 and cs.lower().count("bell") == 1,
+    )
 
     check("coming-soon page uses the plural legal name", "South Air Helicopters, Inc." in cs)
+
+    check("coming-soon page states the confirmed founding year", "Established 1979" in cs)
+
+    # "46 years", "27+ yrs" — anything derived from the year goes stale silently.
+    age_claims = re.findall(r"\b\d{1,3}\+?\s*(?:years|yrs)\b", cs, re.IGNORECASE)
+    check("coming-soon page makes no age claim that will go stale", not age_claims, ", ".join(age_claims))
 
 print()
 if failures:
