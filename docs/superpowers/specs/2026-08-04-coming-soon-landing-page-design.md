@@ -124,7 +124,9 @@ logo, no external requests. One file is the whole deliverable.
 ```
 coming-soon/
   index.html     the page — inline everything
-  _headers       X-Robots-Tag: noindex while staged
+  netlify.toml   X-Robots-Tag: noindex while staged (read only when the CLI's
+                 working directory is this subdirectory — see the file for the
+                 exact deploy command)
 ```
 
 ### Why a subdirectory and a second Netlify site
