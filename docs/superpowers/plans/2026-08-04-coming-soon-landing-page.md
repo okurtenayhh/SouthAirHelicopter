@@ -22,7 +22,8 @@ Spec: `docs/superpowers/specs/2026-08-04-coming-soon-landing-page-design.md` (`a
 - **No founding year and no derived age claim** ("since 1997", "27 years", "nearly three decades"). The year is unconfirmed.
 - **No business hours** — not yet supplied.
 - **No external requests.** No `<link href="http…">`, no `<script src>`, no `<img src>` to a file. Data URIs are permitted.
-- **Palette:** navy `#0b2545`, steel blue `#2f7fb8`, light steel `#7cc0ec`, amber `#f2a71b`. Amber is an accent used once, on the primary action.
+- **Palette (revised 2026-08-04 against the company's own shirts):** navy `#0b2545`, navy deep `#061529`, plate `#3d4854`/`#2b333d`, edge `#4a5563`, steel `#7d8b99`, royal `#3585cf`, white `#eef2f6`, safety orange `#f26722`. **Safety orange appears exactly once, on the call button.** The old amber `#f2a71b` is gone — the user rejected it and asked for a masculine, mechanical direction. Do not reintroduce it.
+- **The identity block is a riveted data plate.** Mark, company name, location, and certificate number sit on a machined gunmetal panel; the actions sit below it, off the plate. This is where the mechanical feel comes from — materials and typography, not the accent colour.
 - **Deploy the second Netlify site with an explicit `--site` flag.** `.netlify/state.json` is gitignored and pins the repo to the existing preview site `b2e4b62c-aa66-40cd-a818-e568464a67e6`. Running `netlify link` or an unqualified `netlify deploy` against the new site would repoint it and break the preview deploy workflow.
 - **DNS is out of scope.** This plan ends with a staged, noindexed URL. Pointing the domain is a separate, deliberate decision.
 
@@ -109,11 +110,13 @@ This file is deleted as the go-live step, in a later session. Leave the trailing
 
 - [ ] **Step 5: Create `coming-soon/index.html`**
 
-Write the file below verbatim, with one substitution: replace the line marked `<!-- LOGO: … -->` with the entire contents of `images/logo-primary-light.svg`, modified as follows — on its opening `<svg` tag, delete `role="img"` and `aria-label="South Air Helicopters, Inc."`, and add `class="logo" aria-hidden="true"`. Keep `xmlns` and `viewBox="0 30 200 209"` exactly as they are. Change nothing inside the tag; the paths are generated output.
+Write the file below verbatim, with one substitution: between the two `LOGO` comment markers, paste the entire contents of **`images/logo-icon-light.svg`** — the rotor icon alone, 836 bytes, *not* the 7KB stacked lockup. The plate sets the company name in type, so the lockup would repeat it.
+
+On the pasted `<svg>` opening tag, delete any `role="img"` and `aria-label` attributes and add `class="icon" aria-hidden="true"`. Keep `xmlns` and the `viewBox` exactly as they are. Change nothing inside the tag; the paths are generated output.
 
 **Keep the two comment markers, one above the SVG and one below it**, exactly as written in the template. The owner has given a logo direction and this page is expected to be revisited with a new mark; those markers are what make that a single unambiguous replacement rather than a hunt through 7KB of inlined path data.
 
-The `aria-hidden` matters: the visually-hidden `<h1>` text below it already announces the company name, and without it a screen reader says the name twice.
+The `aria-hidden` matters: the `<h1>` directly below the icon names the company in visible text, so the icon is decorative. Without `aria-hidden` a screen reader announces the company name twice.
 
 ```html
 <!DOCTYPE html>
@@ -126,15 +129,23 @@ The `aria-hidden` matters: the visually-hidden `<h1>` text below it already anno
 <meta name="theme-color" content="#0b2545">
 <style>
   :root {
-    --navy: #0b2545;
+    --navy:      #0b2545;
     --navy-deep: #061529;
-    --steel-light: #7cc0ec;
-    --amber: #f2a71b;
-    --paper: #f4f7fa;
+    --plate-hi:  #3d4854;
+    --plate-lo:  #2b333d;
+    --edge:      #4a5563;
+    --steel:     #7d8b99;
+    --royal:     #3585cf;
+    --white:     #eef2f6;
+    --orange:    #f26722;
+
+    --mono: ui-monospace, "Cascadia Mono", "Segoe UI Mono", Consolas, "SF Mono", Menlo, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Helvetica, Arial, sans-serif;
   }
 
   *, *::before, *::after { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
+
   body {
     margin: 0;
     min-height: 100vh;
@@ -142,100 +153,173 @@ The `aria-hidden` matters: the visually-hidden `<h1>` text below it already anno
     display: grid;
     place-items: center;
     padding: 2.5rem 1.25rem;
-    background: radial-gradient(125% 85% at 50% 0%, #143a63 0%, var(--navy) 46%, var(--navy-deep) 100%);
-    color: var(--paper);
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: radial-gradient(115% 75% at 50% 0%, #14345c 0%, var(--navy) 48%, var(--navy-deep) 100%);
+    color: var(--white);
+    font-family: var(--sans);
     line-height: 1.55;
     text-align: center;
     -webkit-font-smoothing: antialiased;
   }
 
-  .card { width: 100%; max-width: 30rem; }
+  .wrap { width: 100%; max-width: 27rem; }
 
-  .mark { margin: 0; font-size: 1rem; font-weight: 400; }
-  .logo { display: block; width: min(56vw, 178px); height: auto; margin: 0 auto; }
+  /* ---------- the data plate ---------- */
 
-  .sr-only {
-    position: absolute; width: 1px; height: 1px;
-    margin: -1px; padding: 0; overflow: hidden;
-    clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+  .plate {
+    position: relative;
+    padding: 2.1rem 1.6rem 1.9rem;
+    border-radius: 5px;
+    background: linear-gradient(180deg, var(--plate-hi), var(--plate-lo));
+    border: 1px solid var(--edge);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.10),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.40),
+      0 20px 45px rgba(0, 0, 0, 0.45);
   }
 
+  .rivet {
+    position: absolute;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 33% 30%, #c2ccd6, #6d7986 55%, #454f5a);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.55);
+  }
+  .rivet.tl { top: 9px; left: 9px; }
+  .rivet.tr { top: 9px; right: 9px; }
+  .rivet.bl { bottom: 9px; left: 9px; }
+  .rivet.br { bottom: 9px; right: 9px; }
+
+  .icon { display: block; width: 46px; height: auto; margin: 0 auto 1.15rem; }
+
+  .name {
+    margin: 0;
+    font-size: clamp(1.02rem, 4.4vw, 1.22rem);
+    font-weight: 700;
+    letter-spacing: 0.085em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .rule {
+    width: 46px; height: 1px;
+    margin: 1rem auto;
+    border: 0;
+    background: var(--steel);
+    opacity: 0.55;
+  }
+
+  .loc {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: rgba(238, 242, 246, 0.62);
+  }
+
+  .stamp { margin: 1.5rem 0 0; }
+  .stamp-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.61rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--steel);
+  }
+  .stamp-serial {
+    display: block;
+    margin-top: 0.4rem;
+    font-family: var(--mono);
+    font-size: clamp(1.1rem, 5.2vw, 1.3rem);
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    /* matches letter-spacing: cancels the trailing space so the serial
+       sits on true optical centre rather than 0.15em left of it */
+    padding-left: 0.3em;
+    color: var(--white);
+  }
+
+  /* ---------- below the plate ---------- */
+
   .lede {
-    margin: 1.6rem 0 0;
-    font-size: 1.0625rem;
-    color: rgba(244, 247, 250, 0.76);
+    margin: 1.9rem 0 0;
+    font-size: 0.97rem;
+    color: rgba(238, 242, 246, 0.74);
     text-wrap: balance;
   }
 
   .status {
-    display: inline-flex; align-items: center; gap: 0.55rem;
+    display: inline-flex; align-items: center; gap: 0.5rem;
     margin: 1.5rem 0 0;
-    padding: 0.4rem 0.95rem;
-    border: 1px solid rgba(124, 192, 236, 0.32);
-    border-radius: 999px;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    letter-spacing: 0.055em;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--steel-light);
+    color: var(--royal);
   }
   .dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--steel-light);
-    box-shadow: 0 0 0 4px rgba(124, 192, 236, 0.16);
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--royal);
+    box-shadow: 0 0 0 3px rgba(53, 133, 207, 0.20);
   }
 
   .call {
     display: block;
-    margin: 1.75rem auto 0;
-    padding: 0.95rem 1.5rem;
-    border-radius: 14px;
-    background: var(--amber);
-    color: #0b2545;
+    margin: 0.85rem auto 0;
+    padding: 0.9rem 1.4rem;
+    border-radius: 5px;
+    background: var(--orange);
+    color: #1a0c03;
     text-decoration: none;
-    box-shadow: 0 12px 32px rgba(242, 167, 27, 0.2);
+    box-shadow: 0 12px 30px rgba(242, 103, 34, 0.26);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
   .call:hover, .call:focus-visible {
     transform: translateY(-2px);
-    box-shadow: 0 16px 38px rgba(242, 167, 27, 0.28);
+    box-shadow: 0 16px 36px rgba(242, 103, 34, 0.34);
   }
-  .call:focus-visible { outline: 3px solid var(--paper); outline-offset: 3px; }
+  .call:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
+
   .call-label {
     display: block;
-    font-size: 0.6875rem; font-weight: 700;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    opacity: 0.66;
+    font-family: var(--mono);
+    font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    opacity: 0.72;
   }
   .call-number {
     display: block;
     margin-top: 0.15rem;
-    font-size: clamp(1.6rem, 7vw, 1.95rem);
+    font-size: clamp(1.55rem, 6.8vw, 1.85rem);
     font-weight: 700;
-    letter-spacing: 0.005em;
     font-variant-numeric: tabular-nums;
   }
 
-  .details { margin: 1.4rem 0 0; padding: 0; list-style: none; }
-  .details li { margin-top: 0.55rem; font-size: 0.95rem; color: rgba(244, 247, 250, 0.82); }
-  .details a { color: var(--steel-light); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-  .details a:hover { color: var(--paper); }
-
-  .cert {
-    margin: 1.75rem 0 0;
-    padding-top: 1.35rem;
-    border-top: 1px solid rgba(244, 247, 250, 0.13);
-    font-size: 0.8125rem;
-    letter-spacing: 0.04em;
-    color: rgba(244, 247, 250, 0.62);
+  .contact { margin: 1.4rem 0 0; padding: 0; list-style: none; }
+  .contact li {
+    margin-top: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.045em;
+    color: rgba(238, 242, 246, 0.72);
   }
-  .cert strong { color: rgba(244, 247, 250, 0.9); font-weight: 600; }
+  .contact a {
+    color: var(--royal);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .contact a:hover, .contact a:focus-visible { color: var(--white); }
 
   .soon {
-    margin: 1.5rem 0 0;
-    font-size: 0.875rem;
-    color: rgba(244, 247, 250, 0.5);
+    margin: 1.9rem 0 0;
+    padding-top: 1.3rem;
+    border-top: 1px solid rgba(125, 139, 153, 0.22);
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: rgba(238, 242, 246, 0.42);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -245,15 +329,28 @@ The `aria-hidden` matters: the visually-hidden `<h1>` text below it already anno
 </style>
 </head>
 <body>
-  <main class="card">
-    <h1 class="mark">
-      <!-- LOGO: inlined from images/logo-primary-light.svg — replace everything
+  <main class="wrap">
+    <div class="plate">
+      <span class="rivet tl" aria-hidden="true"></span>
+      <span class="rivet tr" aria-hidden="true"></span>
+      <span class="rivet bl" aria-hidden="true"></span>
+      <span class="rivet br" aria-hidden="true"></span>
+
+      <!-- LOGO: inlined from images/logo-icon-light.svg — replace everything
            between this comment and the closing marker to swap the mark -->
       <!-- /LOGO -->
-      <span class="sr-only">South Air Helicopters, Inc.</span>
-    </h1>
 
-    <p class="lede">Helicopter maintenance, services, and support at Pearland Regional Airport.</p>
+      <h1 class="name">South Air Helicopters, Inc.</h1>
+      <hr class="rule">
+      <p class="loc">Pearland Regional Airport · Texas</p>
+
+      <p class="stamp">
+        <span class="stamp-label">Certified Repair Station</span>
+        <span class="stamp-serial">XRIR622K</span>
+      </p>
+    </div>
+
+    <p class="lede">Helicopter maintenance, services, and support.</p>
 
     <p class="status"><span class="dot" aria-hidden="true"></span>Open and taking work</p>
 
@@ -262,14 +359,12 @@ The `aria-hidden` matters: the visually-hidden `<h1>` text below it already anno
       <span class="call-number">281.648.5187</span>
     </a>
 
-    <ul class="details">
+    <ul class="contact">
       <li><a href="mailto:sahinc@sbcglobal.net">sahinc@sbcglobal.net</a></li>
-      <li>17402 C.R. 127<br>Pearland, TX 77581</li>
+      <li>17402 C.R. 127 · Pearland, TX 77581</li>
     </ul>
 
-    <p class="cert">FAA Certified Repair Station <strong>#XRIR622K</strong></p>
-
-    <p class="soon">A new website is on the way.</p>
+    <p class="soon">A new website is on the way</p>
   </main>
 </body>
 </html>
