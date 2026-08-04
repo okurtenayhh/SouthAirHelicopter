@@ -1,0 +1,8 @@
+# This file is the ONLY thing controlling indexing for the sah-coming-soon site; going live means removing the [[headers]] block below.
+
+publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
