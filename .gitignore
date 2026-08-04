@@ -1,6 +1,10 @@
 # Netlify CLI writes the linked site ID here — local state, not shared config.
 .netlify/
 
+# Subagent-driven-development scratch: ledgers, task briefs, review packages.
+# Working notes about a real client, and this repo is public.
+.superpowers/
+
 # Playwright MCP drops snapshots and console logs here when the page is
 # screenshotted during a design pass. Local scratch, not shared config.
 .playwright-mcp/
