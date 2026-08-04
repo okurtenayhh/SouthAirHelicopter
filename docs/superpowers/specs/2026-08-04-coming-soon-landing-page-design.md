@@ -16,17 +16,17 @@ It is temporary by design. It is deleted when the real site launches.
 
 ## Framing decision
 
-**The page leads with "open for business," not "coming soon."**
+**The page leads with identity and the founding year, not "coming soon."**
 
-South Air is a long-established operating business, not a launch. (No figure is given
-here on purpose — the founding year is still unconfirmed and age claims are barred
-sitewide until Mike supplies it.) Someone who finds this page may be a customer who
-needs a helicopter serviced this week. A
-coming-soon teaser implies the *business* is new and buries the phone number under an
-announcement nobody arrived for.
+South Air is a long-established operating business, not a launch. An earlier draft led
+with "we're open and taking work" — dropped, because the shop is at capacity and that
+line was simply false. Someone who finds this page may be a customer who needs a
+helicopter serviced this week; telling them the shop is taking work when it isn't is
+worse than saying nothing. A coming-soon teaser also implies the *business* is new and
+buries the phone number under an announcement nobody arrived for.
 
-So: company identity and contact details are the page. The new-website line is a
-footnote at the bottom.
+So: company identity, the founding year, and contact details are the page. The
+new-website line is a footnote at the bottom.
 
 ## Content
 
@@ -39,23 +39,24 @@ first page in the project that legitimately doesn't need them.
 | Mark | rotor icon, `logo-icon-light.svg` | ships on all 10 site pages today |
 | Company | South Air Helicopters, Inc. | business card (legal name, plural) |
 | Descriptor | Helicopter maintenance, services, and support at Pearland Regional Airport | already unflagged in the site footer |
-| Status line | We're open and taking work | framing decision above |
+| Founding year | Established 1979 | office manager, 2026-08-04 — *"1979. Or 78, whatever Jeff said"* |
 | Phone | 281.648.5187 | **business card, re-confirmed 2026-08-04** |
 | Email | sahinc@sbcglobal.net | business card |
 | Address | 17402 C.R. 127, Pearland, TX 77581 | business card |
-| Certification | FAA Certified Repair Station #XRIR622K | business card; FAA public record |
+| Certification | FAA Repair Station #XRIR622K | business card; FAA public record |
 | Closing | A new website is on the way. | — |
+
+### Bell Customer Service Facility
+
+The page carries `Certified Bell Helicopter Customer Service Facility` verbatim, at the
+client's explicit direction — `tools/verify.py` pins the exact string. Two objections
+were raised and overruled: "Bell **Helicopter**" is a name Bell retired in 2018, and
+"**Certified**" appears nowhere on the business card. The client's instruction stands
+regardless of either objection. See `docs/trademark-research.md`.
 
 ### Deliberately absent
 
-- **Bell Customer Service Facility.** True, and the strongest credential the company
-  has, but the business card wording ("Bell **Helicopter** Customer Service Facility")
-  is a name Bell retired in 2018. Publishing a guess at the current wording on an
-  indexed page means correcting it publicly later. Holding until the Bell rep answers
-  — days away, not months. See `docs/trademark-research.md`.
 - **Business hours** — not yet supplied by the office manager.
-- **Founding year** and any derived age claim — unconfirmed; see the standing
-  constraint in `PROJECT-STATUS.md`.
 - **Service list** — the site's six services are generic category guesses.
 - **Aircraft ratings (206 / 407 / 429)** — reported by the office manager
   2026-08-04, not yet confirmed by the owner against the certificate.
@@ -172,7 +173,9 @@ which is worse than the guard being trivial:
 - the confirmed phone number `281.648.5187` appears, and the transposed `281.684.5187`
   appears nowhere
 - no aircraft model name (reuses the existing `MODEL_RE`)
-- no Bell-branded wording pending the rep's answer
+- only the approved Bell wording appears, pinned to the exact client-directed string
+- the confirmed founding year appears, and no derived age claim ("46 years," "27+ yrs")
+  that would go stale silently
 
 Root-page checks are untouched.
 
