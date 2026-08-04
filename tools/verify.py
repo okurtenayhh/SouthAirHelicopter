@@ -100,6 +100,43 @@ for name in PAGES:
             misplaced.append(name)
 check("no .quote-strip inside .section-alt", not misplaced, ", ".join(misplaced))
 
+# 9. The coming-soon landing page. Deployed separately from its own directory,
+# so it is deliberately outside PAGES: no shared header, no shared footer, no
+# placeholders. It is the one page a member of the public will actually see
+# before launch, so what it claims is checked tightly instead of loosely.
+CS = ROOT / "coming-soon" / "index.html"
+if not CS.exists():
+    check("coming-soon page exists", False, "coming-soon/index.html missing")
+else:
+    cs = CS.read_text(encoding="utf-8")
+
+    external = re.findall(r'<link\s[^>]*href="(?!data:)[^"]+"', cs)
+    external += re.findall(r'<script\s[^>]*src=', cs)
+    external += re.findall(r'<img\s[^>]*src="(?!data:)[^"]+"', cs)
+    check("coming-soon page is self-contained", not external, ", ".join(external))
+
+    check(
+        "coming-soon page carries the confirmed phone number",
+        "281.648.5187" in cs and "+12816485187" in cs,
+    )
+
+    # The digits 648 and 684 were transposed in a screenshot taken during the
+    # domain signup. Caught by eye once; not relying on eyes again.
+    transposed = [n for n in ("281.684.5187", "281-684-5187", "+12816845187") if n in cs]
+    check("no transposed phone number", not transposed, ", ".join(transposed))
+
+    check(
+        "coming-soon page names no aircraft model",
+        not MODEL_RE.search(cs),
+        ", ".join(m.group(0) for m in MODEL_RE.finditer(cs)),
+    )
+
+    # Bell status is true but the authorized wording is unconfirmed, and unlike
+    # the preview this page is destined to be indexed.
+    check("coming-soon page claims no Bell status", "bell" not in cs.lower())
+
+    check("coming-soon page uses the plural legal name", "South Air Helicopters, Inc." in cs)
+
 print()
 if failures:
     print(f"{len(failures)} FAILED")
