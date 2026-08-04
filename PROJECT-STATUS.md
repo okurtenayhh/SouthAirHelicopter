@@ -162,6 +162,15 @@ in this list is still open.*
 
 ## Verification
 
+**Three known gaps in these guards, deliberately left** (adjudicated 2026-08-04 after the
+final review; recorded so nobody rediscovers them as new): the transposed-phone check
+misses HTML-entity separators (`281&nbsp;684&nbsp;5187`), the age-claim check misses
+numeric-decade and century phrasings (`over 4 decades`, `a quarter century`), and the
+self-contained check misses single-quoted attributes (`<img src='...'>`). All three are
+fail-open — a bad string could pass — but each needs an authoring style the page doesn't
+use, and the page is one screen that gets read on every change. Close them if the copy
+ever grows; don't treat them as regressions.
+
 There's no build step or test suite, so correctness lives in one script. Run it after any change touching the shared header/footer — copy-paste drift across 10 hand-edited files is this architecture's main failure mode.
 
 `python tools/verify.py` is now **17 checks** (up from 9 — the header/footer loop emits
