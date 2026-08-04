@@ -4,7 +4,7 @@
 
 **Goal:** Ship a single self-contained landing page that South Air's new domain can point at, carrying real contact details, while the full site stays on its noindexed preview URL.
 
-**Architecture:** One file — `coming-soon/index.html` — with inline CSS and an inline SVG logo, so it has zero external requests and can be deployed from its own directory as a separate Netlify site. A `_headers` file beside it carries `noindex` while staged. `tools/verify.py` gains a guard block for the new page; the existing root-page checks are untouched because they glob the repo root only.
+**Architecture:** One file — `coming-soon/index.html` — with inline CSS and an inline SVG logo, so it has zero external requests and can be deployed from its own directory as a separate Netlify site. `coming-soon/netlify.toml` beside it carries `noindex` while staged, and is read only when the deploy's working directory is `coming-soon` itself — see Task 2 Step 4. `tools/verify.py` gains a guard block for the new page; the existing root-page checks are untouched because they glob the repo root only.
 
 **Tech Stack:** Hand-written HTML5 + CSS. No framework, no build step, no dependencies. Netlify CLI 26.0.2 for deploys. Python 3.14 for `tools/verify.py`.
 
@@ -34,11 +34,11 @@ Spec: `docs/superpowers/specs/2026-08-04-coming-soon-landing-page-design.md` (`a
 **Files:**
 - Modify: `tools/verify.py` (append a new numbered block after check 8, before the `print()` / exit block at lines 103-107)
 - Create: `coming-soon/index.html`
-- Create: `coming-soon/_headers`
+- Create: `coming-soon/netlify.toml`
 
 **Interfaces:**
 - Consumes: `ROOT` and `MODEL_RE` and `check()`, already defined at `tools/verify.py:14`, `:23`, `:30`.
-- Produces: `coming-soon/index.html` — the deploy artifact Task 2 publishes with `--dir=coming-soon`.
+- Produces: `coming-soon/index.html` — the deploy artifact Task 2 publishes with `--cwd=coming-soon --dir=.` (not `--dir=coming-soon` run from the repo root — that reads the repo-root `netlify.toml` instead of `coming-soon/netlify.toml` and silently serves the wrong noindex value).
 
 - [ ] **Step 1: Confirm the baseline is green before touching anything**
 
@@ -97,16 +97,31 @@ else:
 Run: `python tools/verify.py`
 Expected: `FAIL  coming-soon page exists  — coming-soon/index.html missing`, followed by `1 FAILED`, exit code 1. The ten root-page checks must all still PASS — if any of them flipped, the block was inserted in the wrong place.
 
-- [ ] **Step 4: Create `coming-soon/_headers`**
+- [ ] **Step 4: Create `coming-soon/netlify.toml`**
 
+```toml
+# This file is the ONLY thing controlling indexing for the sah-coming-soon site; going live means removing the [[headers]] block below.
+# It is read ONLY when the CLI's working directory is this directory. Deploy with:
+#   netlify deploy --prod --cwd=coming-soon --dir=. --site=<sah-coming-soon-site-id>
+# `--dir=coming-soon` run from the repo root does NOT set the working directory to
+# here, so it reads the repo-root netlify.toml instead of this file and silently
+# serves that file's noindex value (or its absence) instead of this one.
+#
+# No top-level `publish` key here on purpose: Netlify only recognises `publish`
+# nested under [build], so a bare `publish = "."` at the top level is silently
+# ignored — it looks load-bearing and isn't. The deploy command above always
+# passes --dir explicitly anyway, so nothing needs to declare it here. Don't add
+# it back thinking its absence is an oversight.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
 ```
-/*
-  X-Robots-Tag: noindex, nofollow
-```
 
-Netlify reads `_headers` from the root of the published directory. Because Task 2 publishes with `--dir=coming-soon`, this file governs the staged site and nothing else.
+`coming-soon/netlify.toml` is the indexing control for this site, and it is only read when the CLI's working directory is `coming-soon` — see Task 2 Step 4 for the exact deploy invocation. An earlier revision of this plan used a `_headers` file instead; that was replaced after confirming by real HTTP response that the repo-root `netlify.toml` silently overrode it (its `[[headers]]` block applies to any `--dir` subdirectory deploy run from the repo root regardless of `_headers`' presence). Do not reintroduce `_headers` — it would be dead code again.
 
-This file is deleted as the go-live step, in a later session. Leave the trailing newline.
+The `[[headers]]` block above is deleted as the go-live step, in a later session — see the comment in the file itself.
 
 - [ ] **Step 5: Create `coming-soon/index.html`**
 
@@ -393,7 +408,7 @@ If `coming-soon page is self-contained` fails, the logo was linked rather than i
 - [ ] **Step 7: Commit**
 
 ```bash
-git add coming-soon/index.html coming-soon/_headers tools/verify.py
+git add coming-soon/index.html coming-soon/netlify.toml tools/verify.py
 git commit -m "Add the coming-soon landing page
 
 One self-contained file with inline CSS and an inline SVG logo, so the
@@ -448,10 +463,12 @@ If `sites:create` repointed it, restore that value before going further. The pre
 Run, substituting the new site ID:
 
 ```bash
-netlify deploy --prod --dir=coming-soon --site=<new-site-id>
+netlify deploy --prod --cwd=coming-soon --dir=. --site=<new-site-id>
 ```
 
-`--dir` is what keeps the repo's ten root pages out of this deploy. The explicit `--site` is what keeps the link file pointing at the preview.
+`--cwd=coming-soon` is what makes the CLI resolve `netlify.toml` from `coming-soon/` instead of the repo root — Netlify CLI picks up `netlify.toml` from its working directory, not from `--site` or `--dir`, so this flag is the one that actually determines which noindex config gets served. `--dir=.` (relative to that new working directory, i.e. still exactly `coming-soon/`) is what keeps the repo's ten root pages out of this deploy. The explicit `--site` is what keeps the link file pointing at the preview.
+
+**`netlify deploy --prod --dir=coming-soon --site=<new-site-id>` (no `--cwd`) is the wrong shape.** Run from the repo root, it leaves the working directory at the repo root, so the CLI reads the repo-root `netlify.toml` — not `coming-soon/netlify.toml` — and silently serves whatever indexing config the root file happens to declare, which may not be noindex at all once the preview site's own config changes. This is not a hypothetical: an earlier deploy in this project's history did exactly this and served the root file's header without error or warning.
 
 Expected: a `Website URL` in the output. Record it.
 
@@ -468,7 +485,7 @@ curl.exe -sS https://<url>/ | Select-String -Pattern "281\.648\.5187" -AllMatche
 
 Expected: `HTTP/2 200`; an `x-robots-tag` header containing `noindex`; at least one phone-number match.
 
-The header check is the one that matters. The repo root `netlify.toml` also declares an `X-Robots-Tag` for `/*`, and whether the CLI applies it to a `--dir` deploy of a subdirectory is exactly the kind of thing worth confirming instead of reasoning about. If `x-robots-tag` is absent, the `_headers` file did not take effect — stop and resolve that before anyone is given the URL, because the page must not be indexed while staged.
+The header check is the one that matters, and check its exact value, not just its presence. The repo root `netlify.toml` also declares an `X-Robots-Tag` for `/*` — its value is `noindex, nofollow, noarchive, nosnippet` (four tokens), while `coming-soon/netlify.toml`'s value is `noindex, nofollow` (two tokens). If the served header is absent, or reads the four-token root value instead of the two-token `coming-soon/netlify.toml` value, the `--cwd` flag in Step 4 did not take effect and the deploy silently read the repo-root config — stop and resolve that before anyone is given the URL, because the page must not be indexed while staged.
 
 - [ ] **Step 6: Confirm the ten-page preview is untouched**
 
@@ -505,7 +522,7 @@ Run `read_page` and confirm the `tel:` link resolves to `tel:+12816485187`. A wr
 
 - [ ] **Step 5: Fix and redeploy if needed**
 
-If anything above fails, edit `coming-soon/index.html`, re-run `python tools/verify.py`, redeploy with the Task 2 Step 4 command, and re-screenshot. Commit any fix separately with a message naming what the screenshot showed.
+If anything above fails, edit `coming-soon/index.html`, re-run `python tools/verify.py`, redeploy with the Task 2 Step 4 command (`netlify deploy --prod --cwd=coming-soon --dir=. --site=<site-id>` — not `--dir=coming-soon` from the repo root, which reads the wrong `netlify.toml`), and re-screenshot. Commit any fix separately with a message naming what the screenshot showed.
 
 ---
 

@@ -1,6 +1,15 @@
 # This file is the ONLY thing controlling indexing for the sah-coming-soon site; going live means removing the [[headers]] block below.
-
-publish = "."
+# It is read ONLY when the CLI's working directory is this directory. Deploy with:
+#   netlify deploy --prod --cwd=coming-soon --dir=. --site=<sah-coming-soon-site-id>
+# `--dir=coming-soon` run from the repo root does NOT set the working directory to
+# here, so it reads the repo-root netlify.toml instead of this file and silently
+# serves that file's noindex value (or its absence) instead of this one.
+#
+# No top-level `publish` key here on purpose: Netlify only recognises `publish`
+# nested under [build], so a bare `publish = "."` at the top level is silently
+# ignored — it looks load-bearing and isn't. The deploy command above always
+# passes --dir explicitly anyway, so nothing needs to declare it here. Don't add
+# it back thinking its absence is an oversight.
 
 [[headers]]
   for = "/*"
