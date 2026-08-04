@@ -16,10 +16,10 @@ Spec: `docs/superpowers/specs/2026-08-04-coming-soon-landing-page-design.md` (`a
 - **Phone is `281.648.5187`** (tel URI `+12816485187`). Confirmed against a photograph of the owner's business card on 2026-08-04. The string `281.684.5187` and any transposed variant must appear nowhere.
 - **Email is `sahinc@sbcglobal.net`.** Do not use `mpikesahinc@att.net` — it is on the card but its public status is unconfirmed.
 - **Address is `17402 C.R. 127`, `Pearland, TX 77581`.**
-- **Certification text is exactly `FAA Certified Repair Station #XRIR622K`.**
-- **The word "Bell" must not appear on this page in any form**, pending the account rep's confirmation of current authorized wording. Not in copy, not in comments, not in meta tags.
+- **Certification text is `FAA Repair Station` as one line, `XRIR622K` as the serial below it** — not concatenated into a single string, and not the word "Certified" (that word is on the Bell line, not this one; Mike's card does not say "Certified" for the FAA line).
+- **UPDATED 2026-08-04, after the page was staged and reviewed — do not relitigate this.** The page now carries `Certified Bell Helicopter Customer Service Facility` verbatim, as the only Bell mention on the page (`tools/verify.py` pins the exact string and rejects any other Bell wording). This reverses the original constraint below, which forbade the word "Bell" entirely. **This was the client's explicit choice, made over two raised objections, not an oversight to be "fixed":** the office manager reviewed the staged page and asked for the Bell CSF credential to be added; before shipping it, she and the user were shown that (a) "Helicopter" is a name Bell retired from its brand in 2018, and (b) "Certified" appears nowhere on Mike's business card for this line. Both objections were heard and the client chose this wording anyway. See `PROJECT-STATUS.md` → Decisions Locked for the full record. ~~The word "Bell" must not appear on this page in any form, pending the account rep's confirmation of current authorized wording. Not in copy, not in comments, not in meta tags.~~ (superseded)
 - **No aircraft model designation anywhere** — `206`, `407`, `412`, `429`, `505`, `JetRanger`, `LongRanger`, `Huey`, `UH-1`. The office manager reported 206/407/429 on 2026-08-04; that is unconfirmed by the owner.
-- **No founding year and no derived age claim** ("since 1997", "27 years", "nearly three decades"). The year is unconfirmed.
+- **No derived age claim** ("since 1997", "27 years", "nearly three decades") — this half still holds and is guarded by `tools/verify.py`. **The founding-year half no longer applies**: the office manager supplied `Established 1979` (with a caveat, "Or 78, whatever Jeff said") and the user ruled 1979 for this page specifically; it now ships in the `.loc` line. That ruling covers this one page, not the main site's ~14 still-placeholder year references — see `PROJECT-STATUS.md`.
 - **No business hours** — not yet supplied.
 - **No external requests.** No `<link href="http…">`, no `<script src>`, no `<img src>` to a file. Data URIs are permitted.
 - **Palette (revised 2026-08-04 against the company's own shirts):** navy `#0b2545`, navy deep `#061529`, plate `#3d4854`/`#2b333d`, edge `#4a5563`, steel `#7d8b99`, royal `#3585cf`, white `#eef2f6`, safety orange `#f26722`. **Safety orange appears exactly once, on the call button.** The old amber `#f2a71b` is gone — the user rejected it and asked for a masculine, mechanical direction. Do not reintroduce it.
@@ -143,6 +143,8 @@ Leave the path geometry alone; it is generated output.
 
 The `aria-hidden` matters: the `<h1>` directly below the icon names the company in visible text, so the icon is decorative. Without `aria-hidden` a screen reader announces the company name twice.
 
+**UPDATED 2026-08-04 — this block was rewritten to match the shipped `coming-soon/index.html` after two client-requested changes landed post-review: the Bell CSF credential was added (see Global Constraints above), the false "Open and taking work" status line was removed (the office manager flagged the shop is at capacity) along with its duplicate in the meta description, and `Established 1979` replaced it in the `.loc` line. It also carries the WCAG-AA contrast fixes made in the final review pass — a `--label` token for `.stamp-label`, and raised opacity on `.soon` and `.call-label`. This is no longer a build template; it is a record of what actually shipped.** Two things below are abbreviated for readability, not because they differ from the live file: the favicon `<link>`'s base64 payload (`…`, ~1KB, generated from `images/logo-icon-light.svg`), and the inline SVG between the `<!-- LOGO -->` markers (the same rotor-icon SVG described in the recolour table above, present verbatim in the live file).
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -150,8 +152,9 @@ The `aria-hidden` matters: the `<h1>` directly below the icon names the company 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>South Air Helicopters, Inc. — Helicopter Maintenance at Pearland Regional Airport</title>
-<meta name="description" content="South Air Helicopters, Inc. is an FAA Certified Repair Station at Pearland Regional Airport in Pearland, Texas. Open and taking work — call 281.648.5187.">
+<meta name="description" content="South Air Helicopters, Inc. is an FAA Repair Station at Pearland Regional Airport in Pearland, Texas. Call 281.648.5187.">
 <meta name="theme-color" content="#0b2545">
+<link rel="icon" href="data:image/svg+xml;base64,…"> <!-- inlined, generated from images/logo-icon-light.svg; abbreviated here, see note above -->
 <style>
   :root {
     --navy:      #0b2545;
@@ -160,6 +163,7 @@ The `aria-hidden` matters: the `<h1>` directly below the icon names the company 
     --plate-lo:  #2b333d;
     --edge:      #4a5563;
     --steel:     #7d8b99;
+    --label:     #9aa7b4; /* lightened steel, used only for small stamp-label text so it clears 4.5:1 against the plate gradient — --steel stays as-is for the rule hairline */
     --royal:     #3585cf;
     --white:     #eef2f6;
     --orange:    #f26722;
@@ -249,8 +253,10 @@ The `aria-hidden` matters: the `<h1>` directly below the icon names the company 
     font-size: 0.61rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--steel);
+    color: var(--label);
+    text-wrap: balance;
   }
+  .stamp-label + .stamp-label { margin-top: 0.6rem; }
   .stamp-serial {
     display: block;
     margin-top: 0.4rem;
@@ -271,25 +277,6 @@ The `aria-hidden` matters: the `<h1>` directly below the icon names the company 
     font-size: 0.97rem;
     color: rgba(238, 242, 246, 0.74);
     text-wrap: balance;
-  }
-
-  .status {
-    /* block-level flex, not inline-flex: the call button below is an
-       inline-block, and two inline-level siblings share a line at wide
-       viewports and overlap. Caught at 1280px, invisible at 390px. */
-    display: flex; justify-content: center; align-items: center; gap: 0.5rem;
-    margin: 1.5rem 0 0;
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgba(238, 242, 246, 0.82);
-  }
-  .dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--royal);
-    box-shadow: 0 0 0 3px rgba(53, 133, 207, 0.20);
   }
 
   .call {
@@ -314,7 +301,7 @@ The `aria-hidden` matters: the `<h1>` directly below the icon names the company 
     font-family: var(--mono);
     font-size: 0.62rem; font-weight: 700;
     letter-spacing: 0.2em; text-transform: uppercase;
-    opacity: 0.72;
+    opacity: 0.90;
   }
   .call-number {
     display: block;
@@ -347,7 +334,7 @@ The `aria-hidden` matters: the `<h1>` directly below the icon names the company 
     font-size: 0.66rem;
     letter-spacing: 0.13em;
     text-transform: uppercase;
-    color: rgba(238, 242, 246, 0.42);
+    color: rgba(238, 242, 246, 0.55);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -370,17 +357,16 @@ The `aria-hidden` matters: the `<h1>` directly below the icon names the company 
 
       <h1 class="name">South Air Helicopters, Inc.</h1>
       <hr class="rule">
-      <p class="loc">Pearland Regional Airport · Texas</p>
+      <p class="loc">Pearland Regional Airport · Texas<br>Established 1979</p>
 
       <p class="stamp">
-        <span class="stamp-label">Certified Repair Station</span>
+        <span class="stamp-label">Certified Bell Helicopter Customer Service Facility</span>
+        <span class="stamp-label">FAA Repair Station</span>
         <span class="stamp-serial">XRIR622K</span>
       </p>
     </div>
 
     <p class="lede">Helicopter maintenance, services, and support.</p>
-
-    <p class="status"><span class="dot" aria-hidden="true"></span>Open and taking work</p>
 
     <a class="call" href="tel:+12816485187">
       <span class="call-label">Call us</span>

@@ -5,6 +5,17 @@
 # here, so it reads the repo-root netlify.toml instead of this file and silently
 # serves that file's noindex value (or its absence) instead of this one.
 #
+# GO-LIVE IS NOT DONE UNTIL YOU VERIFY THE DEPLOY, NOT JUST RUN IT. After deleting
+# the [[headers]] block and redeploying, confirm by a REAL HTTP request that NO
+# X-Robots-Tag header comes back at all — not present, in either direction:
+#   curl.exe -sS -D - -o NUL https://<url>/
+# If the response carries the four-token value "noindex, nofollow, noarchive,
+# nosnippet", that is the REPO-ROOT netlify.toml's value — it means this file
+# was not the one read, the deploy used the wrong command shape (missing
+# --cwd=coming-soon, or --dir=coming-soon run from the repo root), and the
+# client's domain is still noindexed even though the deploy reported success.
+# A response with no X-Robots-Tag header at all is the only correct outcome.
+#
 # No top-level `publish` key here on purpose: Netlify only recognises `publish`
 # nested under [build], so a bare `publish = "."` at the top level is silently
 # ignored — it looks load-bearing and isn't. The deploy command above always

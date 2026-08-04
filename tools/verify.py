@@ -113,6 +113,13 @@ else:
     external = re.findall(r'<link\s[^>]*href="(?!data:)[^"]+"', cs)
     external += re.findall(r'<script\s[^>]*src=', cs)
     external += re.findall(r'<img\s[^>]*src="(?!data:)[^"]+"', cs)
+    external += re.findall(r'<iframe\s[^>]*src="(?!data:)[^"]+"', cs, re.IGNORECASE)
+    # SVG <image href="…"> / xlink:href="…" — a second way to pull in a raster asset.
+    external += re.findall(r'<image\s[^>]*(?:xlink:href|href)="(?!data:)[^"]+"', cs, re.IGNORECASE)
+    external += re.findall(r'@import\s+[^;]+;', cs, re.IGNORECASE)
+    # Any CSS url(...) that isn't a data: URI — covers background:, @font-face src:,
+    # list-style-image, cursor, etc. in one net rather than one property at a time.
+    external += re.findall(r'url\(\s*(?!["\']?data:)[^)]+\)', cs, re.IGNORECASE)
     check("coming-soon page is self-contained", not external, ", ".join(external))
 
     check(
@@ -121,8 +128,11 @@ else:
     )
 
     # The digits 648 and 684 were transposed in a screenshot taken during the
-    # domain signup. Caught by eye once; not relying on eyes again.
-    transposed = [n for n in ("281.684.5187", "281-684-5187", "+12816845187") if n in cs]
+    # domain signup. Caught by eye once; not relying on eyes again. Matched on
+    # the bare digit sequence with any (or no) separator between groups, so
+    # "(281) 684-5187", "281 684 5187", and "2816845187" are all caught too —
+    # not just the two literal forms seen so far.
+    transposed = re.findall(r"281\D{0,3}684\D{0,3}5187", cs)
     check("no transposed phone number", not transposed, ", ".join(transposed))
 
     check(
@@ -141,12 +151,31 @@ else:
         cs.count(APPROVED_BELL) == 1 and cs.lower().count("bell") == 1,
     )
 
-    check("coming-soon page uses the plural legal name", "South Air Helicopters, Inc." in cs)
+    # Presence of the plural alone isn't enough — the repo directory is named
+    # "SouthAirHelicopter" (singular), which invites exactly that typo creeping
+    # into the markup while the plural still appears elsewhere (e.g. <title>).
+    # Assert the singular form is absent too, matched as a whole word so it
+    # doesn't fire on the substring inside "Helicopters".
+    singular_hit = re.search(r"South Air Helicopter(?!s)\b", cs)
+    check(
+        "coming-soon page uses the plural legal name",
+        "South Air Helicopters, Inc." in cs and not singular_hit,
+        singular_hit.group(0) if singular_hit else "",
+    )
 
     check("coming-soon page states the confirmed founding year", "Established 1979" in cs)
 
-    # "46 years", "27+ yrs" — anything derived from the year goes stale silently.
-    age_claims = re.findall(r"\b\d{1,3}\+?\s*(?:years|yrs)\b", cs, re.IGNORECASE)
+    # "46 years", "27+ yrs", "46-year history", "over four decades" — anything
+    # derived from the founding year goes stale silently. Catches numeric forms
+    # (with or without a hyphen to the following word) and spelled-out decade
+    # claims, optionally qualified ("nearly", "over", "more than", ...).
+    AGE_CLAIM_RE = re.compile(
+        r"\b\d{1,3}\+?[\s-]?(?:years?|yrs?)\b"
+        r"|\b(?:(?:almost|nearly|over|more than|well over|about|roughly)\s+)?"
+        r"(?:one|two|three|four|five|six|seven|eight|nine|ten)\s+decades?\b",
+        re.IGNORECASE,
+    )
+    age_claims = AGE_CLAIM_RE.findall(cs)
     check("coming-soon page makes no age claim that will go stale", not age_claims, ", ".join(age_claims))
 
 print()

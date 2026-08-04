@@ -148,7 +148,7 @@ in this list is still open.*
 
 ## Constraints That Bite
 
-- **The coming-soon site's deploy command is `netlify deploy --prod --cwd=coming-soon --dir=. --site=de01967d-071f-433e-a5af-6e87b7870b22`. This is the single most important operational fact from this session — get it wrong at go-live and the page stays unindexed while everyone believes it was published.** `--dir=coming-soon` run from the repo root does **not** change the CLI's working directory: the CLI stays rooted at the repo, so it reads the repo-root `netlify.toml` instead of `coming-soon/netlify.toml` and silently serves the wrong indexing header (or none). netlify-cli 26.0.2 has no `--config` flag to point at an alternate config file; `--cwd` is an undocumented global flag, found only by reading the CLI's source. `coming-soon/netlify.toml` carries this same warning in its own header comment — read it before running the command by hand.
+- **The coming-soon site's deploy command is `netlify deploy --prod --cwd=coming-soon --dir=. --site=de01967d-071f-433e-a5af-6e87b7870b22`. This is the single most important operational fact from this session — get it wrong at go-live and the page stays unindexed while everyone believes it was published.** `--dir=coming-soon` run from the repo root does **not** change the CLI's working directory: the CLI stays rooted at the repo, so it reads the repo-root `netlify.toml` instead of `coming-soon/netlify.toml` and silently serves the wrong indexing header (or none). netlify-cli 26.0.2 has no `--config` flag to point at an alternate config file; `--cwd` is an undocumented global flag, found only by reading the CLI's source. `coming-soon/netlify.toml` carries this same warning in its own header comment — read it before running the command by hand. **Go-live means deleting the `[[headers]]` block in `coming-soon/netlify.toml` and redeploying with that same command — and it is not done until you verify it with a real HTTP request, not just a clean CLI exit.** Run `curl.exe -sS -D - -o NUL https://<url>/` against the live domain afterward and confirm **no `X-Robots-Tag` header comes back at all.** If the response instead carries the four-token value `noindex, nofollow, noarchive, nosnippet`, that is the *repo-root* `netlify.toml` answering — the deploy used the wrong command shape (missing `--cwd=coming-soon`, or `--dir=coming-soon` run from the repo root) and the domain is still noindexed even though the deploy reported success.
 - **Bell trademark.** South Air is an authorized Bell Customer Service Facility, but the Bell logo cannot appear without permission, and the copy must not imply Bell endorses the company. The badge sits *beside* the South Air logo, never merged into it. Researched 2026-07-30: **Bell publishes no third-party trademark policy at all** — the governing terms are in Mike's CSF agreement. The reserved badge slot on `bell-service-center.html` is the right design; Bell issues CSF seal artwork to authorized facilities.
 - **Bell already issued South Air the CSF seal — it is printed on Mike's business card.** Confirmed 2026-08-04 from a photograph: a red shield with the dragonfly device, ringed with "Customer Service Facility". So authorization is not in doubt and the ask to the account rep is only for current artwork. Two cautions. **Do not scan it off the card** — it is a blurry photo of a small print, and the card reads "Bell *Helicopter* Customer Service Facility", a name retired in 2018, so that seal is probably the old version too. And this confirms the *seal* specifically; it does not widen what else may be used.
 - **The logo has to embroider.** The company bought a Brother embroidery machine and intends to make its own shirts once a mark is settled (2026-08-04) — so the mark is not a screen-only artefact. Embroidery cannot render gradients or hairlines, every colour is a thread change, and text below roughly 5mm cap height collapses into mush. This rules out fine detail in the mark, and it is **the most persuasive argument against Mike's detailed line-art helicopter**: at chest-pocket size it will not stitch legibly. That lands with a shop owner in a way a trademark argument does not, and it points at the same simpler mark. Note the shirts' current serif wordmark is *not* settled identity — it predates any of this and will be replaced.
@@ -164,7 +164,8 @@ in this list is still open.*
 
 There's no build step or test suite, so correctness lives in one script. Run it after any change touching the shared header/footer — copy-paste drift across 10 hand-edited files is this architecture's main failure mode.
 
-`python tools/verify.py` is now **17 checks** (up from 8). Nine cover the 10-page site:
+`python tools/verify.py` is now **17 checks** (up from 9 — the header/footer loop emits
+two checks, one per shared block, not one). Nine cover the 10-page site:
 header and footer byte-identical across all 10 pages, 8 nav items each, every internal
 link resolves, **no aircraft model names anywhere**, no dead `.pricing-table` CSS, no
 Bell-branded image assets, every page carries placeholders, and no `.quote-strip` inside
@@ -226,7 +227,13 @@ to. The ten-page site is still verified only by script and by reading markup; sc
 at 1280px are several sessions stale for `index.html`, and mobile at 390px was only ever
 spot-checked.
 
-Redeploy the ten-page preview after any page change with `netlify deploy --prod --dir=.`
-from the repo root. Redeploy the coming-soon page with the `--cwd` command under
-Constraints That Bite — the two sites use different deploy commands and mixing them up
-serves the wrong content or the wrong indexing header.
+Redeploy the ten-page preview after any page change with
+`netlify deploy --prod --dir=. --site=b2e4b62c-aa66-40cd-a818-e568464a67e6` from the repo
+root. **The `--site` flag is not optional now that a second Netlify site exists.**
+`.netlify/` is gitignored, so on a fresh clone there is no linked site to fall back on —
+an unqualified `netlify deploy` prompts interactively for one, and answering
+`sah-coming-soon` would push the unfinished ten-page site onto the URL the client's domain
+will eventually point at. Pin the preview site id explicitly, the same way the coming-soon
+command is pinned to its own site id. Redeploy the coming-soon page with the `--cwd`
+command under Constraints That Bite — the two sites use different deploy commands and
+mixing them up serves the wrong content or the wrong indexing header.
