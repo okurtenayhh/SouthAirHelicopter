@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>South Air Helicopters, Inc. — Helicopter Maintenance at Pearland Regional Airport</title>
+<meta name="description" content="South Air Helicopters, Inc. is an FAA Repair Station at Pearland Regional Airport in Pearland, Texas. Call 281.648.5187.">
+<meta name="theme-color" content="#0b2545">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IlNvdXRoIEFpciBIZWxpY29wdGVycywgSW5jLiI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIHJ4PSIxOCIgZmlsbD0iIzBiMjU0NSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUwLDUwKSByb3RhdGUoMCkiPjxwYXRoIGQ9Ik0gMCAtMS43MiBRIDEyLjg3IC00LjkyIDMzLjAwIC0xLjc4IFEgMzMuMDAgLTEuMTUgMzMuMDAgLTAuNjMgUSAxOS4xNCAzLjE2IDAgMy4xNCBaIiBmaWxsPSIjZWVmMmY2Ii8+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUwLDUwKSByb3RhdGUoMTIwKSI+PHBhdGggZD0iTSAwIC0xLjcyIFEgMTIuODcgLTQuOTIgMzMuMDAgLTEuNzggUSAzMy4wMCAtMS4xNSAzMy4wMCAtMC42MyBRIDE5LjE0IDMuMTYgMCAzLjE0IFoiIGZpbGw9IiMzNTg1Y2YiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTAsNTApIHJvdGF0ZSgyNDApIj48cGF0aCBkPSJNIDAgLTEuNzIgUSAxMi44NyAtNC45MiAzMy4wMCAtMS43OCBRIDMzLjAwIC0xLjE1IDMzLjAwIC0wLjYzIFEgMTkuMTQgMy4xNiAwIDMuMTQgWiIgZmlsbD0iI2VlZjJmNiIvPjwvZz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI2LjYwIiBmaWxsPSJub25lIiBzdHJva2U9IiNlZWYyZjYiIHN0cm9rZS13aWR0aD0iMC43OSIgb3BhY2l0eT0iMC41NSIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjQuMjkiIGZpbGw9IiNlZWYyZjYiLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxLjUyIiBmaWxsPSIjMGIyNTQ1Ii8+PC9zdmc+Cg==">
+<style>
+  :root {
+    --navy:      #0b2545;
+    --navy-deep: #061529;
+    --plate-hi:  #3d4854;
+    --plate-lo:  #2b333d;
+    --edge:      #4a5563;
+    --steel:     #7d8b99;
+    --label:     #9aa7b4; /* lightened steel, used only for small stamp-label text so it clears 4.5:1 against the plate gradient — --steel stays as-is for the rule hairline */
+    --royal:     #3585cf;
+    --white:     #eef2f6;
+    --orange:    #f26722;
+
+    --mono: ui-monospace, "Cascadia Mono", "Segoe UI Mono", Consolas, "SF Mono", Menlo, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Helvetica, Arial, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    padding: 2.5rem 1.25rem;
+    background: radial-gradient(115% 75% at 50% 0%, #14345c 0%, var(--navy) 48%, var(--navy-deep) 100%);
+    color: var(--white);
+    font-family: var(--sans);
+    line-height: 1.55;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { width: 100%; max-width: 27rem; }
+
+  /* ---------- the data plate ---------- */
+
+  .plate {
+    position: relative;
+    padding: 1.85rem 1.6rem 1.8rem;
+    border-radius: 5px;
+    background: linear-gradient(180deg, var(--plate-hi), var(--plate-lo));
+    border: 1px solid var(--edge);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.10),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.40),
+      0 20px 45px rgba(0, 0, 0, 0.45);
+  }
+
+  .rivet {
+    position: absolute;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 33% 30%, #c2ccd6, #6d7986 55%, #454f5a);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.55);
+  }
+  .rivet.tl { top: 9px; left: 9px; }
+  .rivet.tr { top: 9px; right: 9px; }
+  .rivet.bl { bottom: 9px; left: 9px; }
+  .rivet.br { bottom: 9px; right: 9px; }
+
+  .icon { display: block; width: 66px; height: auto; margin: 0 auto 1rem; }
+
+  .name {
+    margin: 0;
+    font-size: clamp(1.02rem, 4.4vw, 1.22rem);
+    font-weight: 700;
+    letter-spacing: 0.085em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .rule {
+    width: 46px; height: 1px;
+    margin: 1rem auto;
+    border: 0;
+    background: var(--steel);
+    opacity: 0.55;
+  }
+
+  .loc {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: rgba(238, 242, 246, 0.62);
+  }
+
+  .stamp { margin: 1.5rem 0 0; }
+  .stamp-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.61rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--label);
+    text-wrap: balance;
+  }
+  .stamp-label + .stamp-label { margin-top: 0.6rem; }
+  .stamp-serial {
+    display: block;
+    margin-top: 0.4rem;
+    font-family: var(--mono);
+    font-size: clamp(1.1rem, 5.2vw, 1.3rem);
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    /* matches letter-spacing: cancels the trailing space so the serial
+       sits on true optical centre rather than 0.15em left of it */
+    padding-left: 0.3em;
+    color: var(--white);
+  }
+
+  /* ---------- below the plate ---------- */
+
+  .lede {
+    margin: 1.9rem 0 0;
+    font-size: 0.97rem;
+    color: rgba(238, 242, 246, 0.74);
+    text-wrap: balance;
+  }
+
+  .call {
+    display: inline-block;
+    margin: 0.9rem 0 0;
+    padding: 0.8rem 2.4rem;
+    border-radius: 4px;
+    background: var(--orange);
+    color: #231004;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(242, 103, 34, 0.16);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .call:hover, .call:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(242, 103, 34, 0.24);
+  }
+  .call:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
+
+  .call-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    opacity: 0.90;
+  }
+  .call-number {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: clamp(1.42rem, 6vw, 1.62rem);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .contact { margin: 1.4rem 0 0; padding: 0; list-style: none; }
+  .contact li {
+    margin-top: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.045em;
+    color: rgba(238, 242, 246, 0.72);
+  }
+  .contact a {
+    color: var(--royal);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .contact a:hover, .contact a:focus-visible { color: var(--white); }
+
+  .soon {
+    margin: 1.9rem 0 0;
+    padding-top: 1.3rem;
+    border-top: 1px solid rgba(125, 139, 153, 0.22);
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: rgba(238, 242, 246, 0.55);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .call { transition: none; }
+    .call:hover, .call:focus-visible { transform: none; }
+  }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="plate">
+      <span class="rivet tl" aria-hidden="true"></span>
+      <span class="rivet tr" aria-hidden="true"></span>
+      <span class="rivet bl" aria-hidden="true"></span>
+      <span class="rivet br" aria-hidden="true"></span>
+
+      <!-- LOGO: inlined from images/logo-icon-light.svg — replace everything
+           between this comment and the closing marker to swap the mark -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="icon" aria-hidden="true"><g transform="translate(100,100) rotate(0)"><path d="M 0 -3.87 Q 28.86 -11.03 74.00 -4.00 Q 74.00 -2.57 74.00 -1.41 Q 42.92 4.59 0 7.03 Z" fill="#eef2f6"/></g><g transform="translate(100,100) rotate(120)"><path d="M 0 -3.87 Q 28.86 -11.03 74.00 -4.00 Q 74.00 -2.57 74.00 -1.41 Q 42.92 4.59 0 7.03 Z" fill="#3585cf"/></g><g transform="translate(100,100) rotate(240)"><path d="M 0 -3.87 Q 28.86 -11.03 74.00 -4.00 Q 74.00 -2.57 74.00 -1.41 Q 42.92 4.59 0 7.03 Z" fill="#eef2f6"/></g><circle cx="100" cy="100" r="14.80" fill="none" stroke="#eef2f6" stroke-width="1.78" opacity="0.55"/><circle cx="100" cy="100" r="9.62" fill="#eef2f6"/><circle cx="100" cy="100" r="3.40" fill="#0b2545"/></svg>
+      <!-- /LOGO -->
+
+      <h1 class="name">South Air Helicopters, Inc.</h1>
+      <hr class="rule">
+      <p class="loc">Pearland Regional Airport · Texas<br>Established 1979</p>
+
+      <p class="stamp">
+        <span class="stamp-label">Certified Bell Helicopter Customer Service Facility</span>
+        <span class="stamp-label">FAA Repair Station</span>
+        <span class="stamp-serial">XRIR622K</span>
+      </p>
+    </div>
+
+    <p class="lede">Helicopter maintenance, services, and support.</p>
+
+    <a class="call" href="tel:+12816485187">
+      <span class="call-label">Call us</span>
+      <span class="call-number">281.648.5187</span>
+    </a>
+
+    <ul class="contact">
+      <li><a href="mailto:sahinc@sbcglobal.net">sahinc@sbcglobal.net</a></li>
+      <li>17402 C.R. 127 · Pearland, TX 77581</li>
+    </ul>
+
+    <p class="soon">A new website is on the way</p>
+  </main>
+</body>
+</html>
