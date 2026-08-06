@@ -1,6 +1,6 @@
 # Project Status
 
-*Last updated: 2026-08-06 (local, sixth session) · `main` at `e98e73a` · working branch `claude/coming-soon-page` at `7df5cdf` · PRs #1–#3, #5–#8 merged · **PR #4 is open as a draft** — a finished client questionnaire nobody has merged: https://github.com/okurtenayhh/SouthAirHelicopter/pull/4*
+*Last updated: 2026-08-06 (local, sixth session) · `main` at `e98e73a` · working branch `claude/coming-soon-page`, Bell writeup landed at `0fb7375` · PRs #1–#3, #5–#8 merged · **PR #4 is open as a draft** — a finished client questionnaire nobody has merged: https://github.com/okurtenayhh/SouthAirHelicopter/pull/4*
 
 *Unmerged branches: `claude/coming-soon-page` (current — carries the built coming-soon landing page, now staged and live, plus last session's tracker commit) · `claude/client-content-brief` (brief documents, pushed, no PR) · `claude/sphere-logo` (a logo exploration, local only, parked — see Decisions Locked)*
 
