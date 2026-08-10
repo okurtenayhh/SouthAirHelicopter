@@ -177,7 +177,9 @@ in this list is still open.*
 - **Wordmark carries the legal name** — "SOUTH AIR / HELICOPTERS, INC.", second line letter-spaced flush to the first.
 - **Palette, confirmed against the company's own shirts 2026-08-04.** Navy `#0b2545`, royal blue `#3585cf`, white `#eef2f6`, with gunmetal `#3d4854`/steel `#7d8b99` as structural neutrals and safety orange `#f26722` as the single accent. The office manager: *"we use this blue and navy primarily"*; Mike, asked navy or lighter: *"navy is fine."* The royal was measured off a photo of a company shirt — hue 211°, saturation 0.73. **The old sketch palette was nearly right already**: its steel blue `#2f7fb8` is hue 205°, within six degrees of the real garment, so this is a nudge not a rewrite. **The amber `#f2a71b` is dropped** — it was the only invented colour in the project and the user rejected it, asking instead for complementary colours with a masculine, mechanical feel. Safety orange is hue 22° against the blue's 211°, so a true complement, and reads as equipment rather than gold. **Ask the office manager for the shirt's brand and colour name off the tag** — a garment spec beats sampling a photo taken under office lighting.
 - **The chosen logo does not use the locked palette, and the logo wins on the mark itself** (measured off `south-air-5a.jpg`, 2026-08-10). Its actual colours are navy **`#1e3a5f`** (the `HELICOPTERS` band), a near-black **`#14171c`** (the wordmark), and an off-white ground **`#f2f2f0`**. Three divergences, all real: that navy is materially lighter and softer than the locked `#0b2545`; the wordmark black is a new value that is in no palette; and **the royal blue `#3585cf` and safety orange `#f26722` appear nowhere in the mark.** Do not silently recolour the logo to match the site — a logo is a fixed asset and the site is the flexible one. **Reconcile in this direction: take `#1e3a5f` as the true brand navy** (it is the one the client actually approved and the one that will be stitched), keep royal and orange as *site* accents that the mark simply does not use, and treat `#0b2545` as retired. This is a real edit to `css/style.css` and rides with the logo task, not before it.
-- **Sitewide roll-out of the new palette rides with the logo task, not before it.** `css/style.css` and nine logo SVGs all carry the old values; recolouring them twice is wasted work when the logo is about to be redrawn anyway. The landing page uses the new palette from the start because it has not been built yet.
+- ~~Sitewide palette roll-out rides with the logo task~~ — **done 2026-08-10, both sites.** It was parked so the recolour happened once rather than twice, and the logo landing released it. **Navy is now `#1e3a5f`, the mark's own band colour**, not the older `#0b2545` — where the shirt reading and the logo disagreed the logo won, because a logo is a fixed asset and the site is the flexible one. The coming-soon page's `--navy` and `theme-color` moved with it, since a page background in a different navy from the logo sitting on it was the real inconsistency. **Amber `#f2a71b` is gone as brand**; safety orange `#f26722` is the single accent.
+- **The palette needed three extra tints for contrast, and they are not decoration** (2026-08-10). Neither brand colour clears 4.5:1 for small text — orange on navy is 3.8:1, orange on white 3.1:1, royal on white 3.8:1. So fills and large type use the brand values, and `--color-accent-on-dark` (5.1:1), `--color-accent-on-light` (5.3:1) and `--color-sky-on-light` (6.8:1) carry links, eyebrows and captions. **Don't collapse them back into the brand values to "simplify" the palette** — that silently fails accessibility on every link and eyebrow. Button and nav-pill text also moved from navy to the logo's black `--color-ink`, taking those from 3.8:1 to 5.9:1.
+- **Placeholder flags stay amber, under their own `--color-flag` names** (2026-08-10). They are a build-time warning, not brand. Now that the accent is orange they no longer read as a design choice, which is exactly what the flagging discipline wants — before this, amber placeholders sat in an amber-accented site and blended in.
 - **The landing page's identity block is an aircraft data plate** (2026-08-04). Every certified aircraft carries a riveted plate stamped with its serial; South Air's Repair Station number **is** that kind of number, so stamping it on a machined panel is true to the content rather than decoration applied to it. This is where the "masculine mechanical" feel comes from — materials and typography — which keeps the accent colour doing exactly one job.
 - **Email addresses copy to the clipboard rather than opening a mail client** (user's call, 2026-08-10). All 14 addresses — the shared footer on 10 pages, the two on `contact.html`, and the coming-soon page — carry a copy icon and flash a "Copied" chip. **The phone deliberately stays a real `tel:` link**, because tapping to dial is the most useful thing on the site for someone who needs work done that week. Built as progressive enhancement: they are still real `mailto:` links that JS upgrades, so they work with JS off, and a failed clipboard write falls back to opening the mail client rather than doing nothing. **The coming-soon page carries its own inline copy of the CSS and JS** — it has to stay self-contained, so that duplication is deliberate; change both if you change either.
 - **Placeholders stay visibly flagged** — dashed amber blocks, not plausible filler. Invented content reaching a real customer is the failure mode worth engineering against.
@@ -251,18 +253,22 @@ no derived age claim that would go stale.
 
 ## In Flight
 
-**Session of 2026-08-10 started documentary and ended shipping.** The user handed over the
-logo set, named 5a as official, confirmed both approvals, supplied the aircraft art
-isolated on white, and then said to proceed with this logo. So the mark was built into a
-full asset set and **both Netlify sites were redeployed and verified live.** The source
-JPEGs are still **deliberately not committed** — see Decisions Locked — but
-`tools/build_logo.py` is, so the assets are reproducible from them.
+**Session of 2026-08-10 started documentary and ended as the biggest build session yet.**
+The user handed over the logo set, named 5a as official, confirmed both approvals, supplied
+the aircraft art isolated on white, and said to proceed. **Five things shipped, all live on
+both sites:** the logo asset set, the confirmed founding year, copy-to-clipboard emails, the
+hero cartoon's removal, and the palette roll-out. The source JPEGs are still **deliberately
+not committed** — see Decisions Locked — but `tools/build_logo.py` is, so the assets are
+reproducible.
 
-**Verified, not assumed:** `verify.py` green at 17 checks; index, about and coming-soon
-loaded in a real browser at 1280px and 390px with a clean console; the deployed logo asset
-fetched over HTTP; and the coming-soon page's indexing header re-checked after deploy,
-returning the two-token `noindex, nofollow` that proves its own config answered rather
-than the repo root's.
+**Verified, not assumed:** `verify.py` green at 19 checks; index, about, contact and
+coming-soon loaded in a real browser at 1280px, 760px and 390px with a clean console; the
+clipboard read back after a click to confirm it genuinely held the address; computed styles
+measured rather than eyeballed; and every deploy re-checked over HTTP.
+
+**The one thing that is entirely unresolved is the Canva licence question** — Next Up item
+4. It is the only open item that could invalidate work already deployed, because the
+aircraft is live on both sites now. Everything else on the list is ordinary work.
 
 Last session's guess that more client material was coming was right — this was it.
 
@@ -324,15 +330,17 @@ been corrected to match reality.
 by `docs/client-questions-form.pdf` on the brief branch, which covers the same ground
 in a nicer form. Merging it is now optional; it needs a rebase either way.
 
-**Nothing is uncommitted.** 2026-08-10 touched the 7 logo assets, all 10 pages, the
-coming-soon page, `css/style.css`, `js/main.js`, `tools/build_logo.py`, `tools/verify.py`
-and this file. **Both sites were redeployed twice and verified live both times** — they
-are current, not stale. `python tools/verify.py`: all 19 checks green.
+**Nothing is uncommitted.** 2026-08-10 was a long build session: the 6 logo assets, all 10
+pages, the coming-soon page, `css/style.css`, `js/main.js`, `tools/build_logo.py`,
+`tools/verify.py`, `.gitignore` and this file. **Both sites were redeployed three times and
+verified live each time.** `python tools/verify.py`: all 19 checks green.
 
 **Live-verified after the final deploy**, by real HTTP request rather than a clean CLI
-exit: `Trusted Since 1979` present and no `1997` anywhere on the homepage; the copy handler
-present in both `js/main.js` and the coming-soon page's inline script; and the coming-soon
-page still returning the two-token `noindex, nofollow`.
+exit: navy `#1e3a5f` and accent `#f26722` serving in `css/style.css` with no `--color-amber`
+left; the coming-soon page on the same navy in both its variable and its `theme-color`;
+`Trusted Since 1979` present and no `1997` anywhere; the copy handler present in both
+`js/main.js` and the coming-soon inline script; the deleted `logo-badge.svg` returning 404;
+and the coming-soon page still returning the two-token `noindex, nofollow`.
 
 **The homepage hero is now single-column** (2026-08-10, user's call). The flat cartoon
 helicopter read as a different company from the detailed mark in the header, so it and the
@@ -341,10 +349,10 @@ full container width, so it reads as composed rather than as a two-column layout
 its second column. **The hero is a natural home for a real photo or the video loop the
 brief asks for** — that slot is now empty by choice, not by oversight.
 
-**Still not fixed: the site runs the old amber `#f2a71b`**, which the palette decision
-retired in favour of safety orange `#f26722`. Visible on every button, eyebrow and stat
-number. It rides with the palette roll-out, which was always scheduled to follow the logo —
-and the logo has now landed, so this is next in line rather than blocked.
+**The palette is rolled out** — see Decisions Locked. Both sites are on navy `#1e3a5f` and
+safety orange `#f26722`; the amber survives only as the placeholder flag colour.
+`images/logo-badge.svg` was deleted as part of it: the old two-mark badge, orphaned when
+the new logo landed and still carrying the retired navy.
 
 **One trap worth knowing, because it cost time twice this session and looked like broken
 code both times:** a browser holding a cached `css/style.css` or `js/main.js` shows the new
