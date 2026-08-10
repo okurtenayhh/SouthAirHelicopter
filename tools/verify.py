@@ -132,7 +132,17 @@ if not CS.exists():
 else:
     cs = CS.read_text(encoding="utf-8")
 
-    external = re.findall(r'<link\s[^>]*href="(?!data:)[^"]+"', cs)
+    # "Self-contained" means the browser fetches nothing to render this page.
+    # It does NOT mean the markup can't name an external URL at all: rel=canonical
+    # and the og:/twitter: image are pointers read by crawlers, never fetched
+    # during render, and the og:image has to be an absolute URL on a real file
+    # because a data: URI does not work in link previews. So exempt link rels
+    # that don't load anything, and keep catching stylesheets, icons and preloads.
+    NON_FETCHING_REL = ("canonical", "alternate", "author", "license", "me")
+    external = [
+        m for m in re.findall(r'<link\s[^>]*href="(?!data:)[^"]+"', cs)
+        if not any('rel="%s"' % r in m for r in NON_FETCHING_REL)
+    ]
     external += re.findall(r'<script\s[^>]*src=', cs)
     external += re.findall(r'<img\s[^>]*src="(?!data:)[^"]+"', cs)
     external += re.findall(r'<iframe\s[^>]*src="(?!data:)[^"]+"', cs, re.IGNORECASE)
