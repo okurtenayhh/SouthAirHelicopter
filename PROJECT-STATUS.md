@@ -149,7 +149,7 @@ in this list is still open.*
 
 | Page | Real | Still placeholder |
 | --- | --- | --- |
-| `index.html` | Nav, footer contact block, quote CTAs, **logo, founding year 1979 (eyebrow + stats tile)**, **Bell CSF + FAA Repair Station status** (business-card sourced, now the hero's lead claim) | Hero positioning line, all three service blurbs, the stat strip (**"100%" and "24/7" still invented**; the years figure and the Bell tile's exact wording are flagged), the Bell section body, history and NASA teasers. **The hero's cartoon helicopter illustration now clashes with the new mark** and should go |
+| `index.html` | Nav, footer contact block, quote CTAs, **logo, founding year 1979 (eyebrow + stats tile)**, **Bell CSF + FAA Repair Station status** (business-card sourced, now the hero's lead claim) | Hero positioning line, all three service blurbs, the stat strip (**"100%" and "24/7" still invented**; the years figure and the Bell tile's exact wording are flagged), the Bell section body, history and NASA teasers. **The hero is now single-column** — the cartoon helicopter that sat beside it was removed 2026-08-10 |
 | `about.html` | Mike Pike as President; Bell Customer Service Facility + Repair Station #XRIR622K; Pearland Regional Airport | Company overview, mission, all three values, Mike's bio, two other team slots, every photo |
 | `services.html` | Bell certification line; quote-only framing | The entire six-service list, all three "How Pricing Works" steps, the testimonial |
 | `bell-service-center.html` | Repair Station #XRIR622K; Bell CSF status (business-card wording) | What the certification covers, how long it's been held, the ratings on the certificate. Page carries a standing trademark warning and an empty reserved badge slot |
@@ -334,12 +334,24 @@ exit: `Trusted Since 1979` present and no `1997` anywhere on the homepage; the c
 present in both `js/main.js` and the coming-soon page's inline script; and the coming-soon
 page still returning the two-token `noindex, nofollow`.
 
-**Two things the new logo made visible on the live preview, neither fixed:** the homepage
-hero still carries a flat cartoon helicopter illustration that now clashes badly with the
-detailed mark, and the site is still on the **old amber `#f2a71b`**, which the palette
-decision retired in favour of safety orange. Both were out of scope; both are now more
-conspicuous than they were. **The hero illustration is the more urgent of the two** — it is
-the largest graphic on the homepage and it undercuts the mark directly beside it.
+**The homepage hero is now single-column** (2026-08-10, user's call). The flat cartoon
+helicopter read as a different company from the detailed mark in the header, so it and the
+`.hero-art` rules are gone. `.hero-copy` is capped at 760px rather than left to run the
+full container width, so it reads as composed rather than as a two-column layout missing
+its second column. **The hero is a natural home for a real photo or the video loop the
+brief asks for** — that slot is now empty by choice, not by oversight.
+
+**Still not fixed: the site runs the old amber `#f2a71b`**, which the palette decision
+retired in favour of safety orange `#f26722`. Visible on every button, eyebrow and stat
+number. It rides with the palette roll-out, which was always scheduled to follow the logo —
+and the logo has now landed, so this is next in line rather than blocked.
+
+**One trap worth knowing, because it cost time twice this session and looked like broken
+code both times:** a browser holding a cached `css/style.css` or `js/main.js` shows the new
+markup with the old rules. It presented first as a dead copy button and then as a copy icon
+rendering at 300×150. Both were caching, not bugs — local and live both measured correct.
+**Measure the computed style before believing a rendering bug**, and hard-refresh. The icons
+now carry explicit `width="14" height="14"` so that particular failure can't recur.
 
 **Still never done: a page-by-page look at the ten-page site in a real browser.** The
 coming-soon page got exactly that treatment this session — the first page in the project
