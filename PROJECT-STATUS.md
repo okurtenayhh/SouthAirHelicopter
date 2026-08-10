@@ -2,11 +2,11 @@
 
 *Last updated: 2026-08-10 (local, seventh session) · `main` at `e98e73a` · working branch `claude/coming-soon-page` · PRs #1–#3, #5–#8 merged · **PR #4 is open as a draft** — a finished client questionnaire nobody has merged: https://github.com/okurtenayhh/SouthAirHelicopter/pull/4*
 
-*Unmerged branches: `claude/coming-soon-page` (current — carries the built coming-soon landing page, now staged and live, plus last session's tracker commit) · `claude/client-content-brief` (brief documents, pushed, no PR) · `claude/sphere-logo` (a logo exploration, local only, **now dead** — the logo is settled, see Decisions Locked)*
+*Unmerged branches: `claude/coming-soon-page` (current — carries the landing page that is now **live on the client's domain**, the logo, the palette, and several sessions of tracker updates. **This branch is the live site; land it.**) · `claude/client-content-brief` (brief documents, pushed, no PR) · `claude/sphere-logo` (a logo exploration, local only, **now dead** — the logo is settled, see Decisions Locked)*
 
 **Live preview (ten-page work-in-progress site): https://south-air-helicopters.netlify.app** — noindexed, **redeployed 2026-08-10 with the new logo**, verified live. Safe to send to Mike.
 
-**🚀 LIVE: https://southairhelicopters.com** — the coming-soon landing page, on the real domain over HTTPS, as of **2026-08-10**. `www` redirects to the apex, `http` redirects to `https`, the Let's Encrypt certificate is issued, and the page is indexable (no `X-Robots-Tag`). Also still reachable at its Netlify subdomain, https://sah-coming-soon.netlify.app. **This is the first thing the public can find. Treat changes to it accordingly** — deploy command and its trap are under Constraints That Bite. **not attached to the client's domain — no DNS change has been made, and the page is not public and not indexed.** Its own Netlify site, separate from the preview above (which is untouched): site id `de01967d-071f-433e-a5af-6e87b7870b22`, site name `sah-coming-soon`.
+**🚀 LIVE: https://southairhelicopters.com** — the coming-soon landing page, on the real domain over HTTPS, as of **2026-08-10**. `www` redirects to the apex, `http` redirects to `https`, the Let's Encrypt certificate is issued, and the page is indexable (no `X-Robots-Tag`). Also still reachable at its Netlify subdomain, https://sah-coming-soon.netlify.app. **This is the first thing the public can find. Treat changes to it accordingly** — the deploy command and its trap are under Constraints That Bite. It is its own Netlify site, separate from the ten-page preview above: site id `de01967d-071f-433e-a5af-6e87b7870b22`, site name `sah-coming-soon`.
 
 > Maintained by the `/sa-wrap-up` skill. If this file and the repo disagree, the repo is right — fix this file.
 
@@ -40,29 +40,33 @@ company overview, the general-inquiries inbox, job openings, and photos. What di
 back was an aircraft-ratings answer belonging to Mike's section, a logo direction from
 Mike, and the discovery that **the Bell CSF seal is printed on Mike's business card**.
 
-**The domain has been purchased, through Squarespace.** That unblocked a real launch path
-and created a near-term need: something for it to point at, since the full site is still
-mostly flagged placeholder text and cannot go on a public, indexed domain.
+**The domain is `southairhelicopters.com`, bought through Squarespace and now pointed at
+the landing page** (2026-08-10). The ten-page site stays on its noindexed preview URL until
+the placeholder copy is replaced — it cannot go on a public, indexed domain as it stands.
 
 **Bell answered — with the seal artwork and written co-branding rules (2026-08-06).**
 Mike's CSF account rep, **Zachariah Langley**, emailed South Air unprompted with the CSF
 seal, Bell's *Seal Signage Program* deck, and a link to Bell's brand portal. This was
-Next Up item 3 and it resolved itself. Authorization was never in question and now the
+an open ask on this list at the time, and it resolved itself. Authorization was never in question and now the
 *rules* aren't either: the seal must be smaller than the company logo, never connected to
 it, never redrawn, recoloured, rotated, or shadowed, and **the bare Bell shield may not
 appear at all.** Full detail in `docs/trademark-research.md`, which is now primary source
 material rather than desk research. Two consequences: the reserved badge slot on
 `bell-service-center.html` is confirmed as the correct design, and the artwork we were
-sent is print-only CMYK — **web-format artwork still has to come from the brand portal,
-and redrawing it ourselves is explicitly forbidden.**
+sent is print-only CMYK — **the proper web artwork still has to come from the brand portal,
+and redrawing it ourselves is explicitly forbidden.** *(Since 2026-08-10 the seal is
+published on the live landing page, converted CMYK→RGB for display; see Constraints That
+Bite. The portal file replaces it when access lands.)*
 
-**The coming-soon landing page is now built, deployed, and staged** at
-https://sah-coming-soon.netlify.app — see the link above. **The office manager reviewed
-it and approved the design** ("Looks good, kiddo") — the project's first client sign-off,
-and a binding one: see Decisions Locked on who actually approves things. She also asked for two
-content changes, both made: the page now carries the Bell CSF credential verbatim, and
-the founding year `Established 1979` replaced a status line that turned out to be
-factually wrong. Both are explained under Decisions Locked. No DNS points at the page yet.
+**The landing page is live on the client's domain** — https://southairhelicopters.com, as
+of 2026-08-10. **The office manager reviewed and approved the design** ("Looks good,
+kiddo") — the project's first client sign-off, and a binding one: see Decisions Locked on
+who actually approves things. She asked for two content changes, both made: the Bell CSF
+credential verbatim, and `Established 1979` replacing a status line that turned out to be
+factually wrong. **Since then it has also gained the new logo, the confirmed palette,
+copy-to-clipboard email, a proper link-preview card, and a prominent Bell CSF block
+carrying the seal Bell issued.** It is the only page in the project with no placeholders,
+and now the only one the public can find.
 
 **The logo is chosen and approved (2026-08-10).** The user handed over a five-variant set at
 `C:\Users\kourt\Desktop\SAH LOGO\` and named **`south-air-5a.jpg` as the official mark** —
@@ -85,28 +89,28 @@ which matters for print, signage and embroidery but not for the web. And the **f
 reads as a helicopter at 32px and as a vague shape below that**, which is the detail level
 the source art allows.
 
-**What remains is not an approval.** Both the office manager and Mike approved the mark.
-Outstanding: the **Canva licence question** (Canva forbids stock content in a logo, so it
-matters whether the aircraft is a stock element or Canva AI — Next Up item 4), Bell's
-answer on whether an identifiable **429** may sit in South Air's own mark (item 3), and a
-vector/embroidery version. All three are under Constraints That Bite, including why one
-regeneration would fix the artwork *and* serve as the escape route if the licence answer
-goes badly, leaving the approved wordmark and layout untouched.
+**Nothing about the logo is blocked.** Both the office manager and Mike approved the mark,
+and **Mike was told how it was made and okayed that too** — it is a Canva AI sketch of a
+photograph the user was given. That closed the provenance question; don't reopen it. What
+is left is ordinary production work: a **vector** for print and signage and a **stitchable**
+version for the embroidery machine (Next Up item 3), plus Bell's answer on whether an
+identifiable **429** may sit in South Air's own mark (item 2). Both under Constraints That
+Bite, including why one regeneration from the existing text prompt would produce the
+stitchable version and leave the approved wordmark and layout untouched.
 
 ## Next Up
 
 Things that can move without waiting on anyone:
 
-1. ~~Point the domain at the coming-soon page.~~ **DONE 2026-08-10 — the site is live at https://southairhelicopters.com.** Recorded because the next person will need the shape of it: the domain is at **Squarespace** (active to 2029-07-31), the **"Squarespace Defaults" preset was deleted whole** — four apex `A` records at Squarespace's IPs, a `www` CNAME to `ext-sq.squarespace.com`, and an `HTTPS` record whose `ipv4hint` named the same IPs, all of which had to go together — and replaced with two custom records at 30-minute TTL: `A @ 75.2.60.5` and `CNAME www sah-coming-soon.netlify.app`. On Netlify the domain is the site's `custom_domain` with `www` as an alias. Verified live: HTTPS 200, `www` and `http` both redirecting to the apex, certificate issued, no `X-Robots-Tag`.
-2. **Send Mike the package — this is now fully unblocked and is a very high-value action.** Three things travel together: the preview link (deployed and current), `docs/client-checklist.pdf`, and `docs/client-questions-form.pdf`. Everything that previously blocked this is resolved. People answer far better against a page they can see, so the preview and the questions go in one message. Nothing else on this list moves the project as much, because almost every remaining item is waiting on answers only he has.
-3. **Reply to Zachariah Langley at Bell, and request brand-portal access.** Bell opened the door on 2026-08-06 and explicitly invited questions, so this is now a reply rather than a cold ask — the hard part is done. Seven things are still outstanding and one message covers them all: the **Bell Seal Guidelines** document (referenced twice in the deck, not attached — it's where web rules live), **web-format artwork** (RGB vector or transparent PNG; Summit Aviation serves exactly such a file, so it exists), the exact authorized body-copy wording, whether we may name the 206/407/429, whether a footer attribution line is required, whether Bell wants to review the site pre-launch, and whether a recognizable Bell airframe may appear in South Air's *own* logo (the do-not list forbids shield lockups but is silent on aircraft, so this needs asking, not inferring). **That last question got sharper on 2026-08-10 and should lead:** the chosen mark does not contain a generic stylized helicopter, it contains a detailed rendering that reads as a specific Bell airframe — so this is no longer hypothetical, it is a question about the logo the company has actually adopted. The live list is at `docs/trademark-research.md` under "What Bell still hasn't answered." **Separately, request access at <https://brand.bellflight.com/> — but from a South Air address, not the user's.** Bell is vetting its own vendor network; a request from the facility they already emailed moves faster than one from a stranger.
-4. **Get vector and stitchable versions of the logo.** The web assets are done and deployed; what is missing is a **vector** for print and signage, and a **reduced high-contrast version that can be stitched** — the current art is grayscale shading with hairline blades, which no needle will render. Regenerating the aircraft from the text prompt in `.recall/history.md` produces the stitchable version. **Not urgent, and not blocking anything.** ~~Identify the source image~~ — **closed 2026-08-10: Mike was told how the mark was made and okayed it.** See Constraints That Bite. **The web assets themselves are done and deployed** (`tools/build_logo.py` regenerates them); what is still missing is a **vector** for print, signage and embroidery, and a **reduced high-contrast version that can be stitched** — the current art is grayscale shading and hairline blades, which no needle will render. **Regenerating the aircraft to the 2026-08-06 prompt in `.recall/history.md` remains the move that pays off either way** — it produces the stitchable version *and* is the escape route if the licence answer is bad, since replacing the aircraft leaves the approved wordmark, band and layout untouched.
-5. **Finish propagating the founding year — mostly done 2026-08-10.** **1979 is confirmed** (user, 2026-08-04). The wrong `1997` is gone everywhere and the year now reads as real content on the homepage eyebrow, the homepage stats tile (`1979 / Established`, replacing a "Years in Operation" tile that was a derived age claim) and the first history timeline entry. **`tools/verify.py` now guards this sitewide** — no age claim, no near-miss year. **Six `[PLACEHOLDER Year]` spans remain**, in `about.html`, `history.html` and `index.html`; they are mostly *other* dates (timeline milestones, "Since —" on the homepage's history teaser) rather than the founding year, **so check each one before unwrapping — not all of them are 1979.** The `<title>`/`<meta>` tags also never carried the year, since placeholder styling never reached them; write it in by hand if it belongs there. **Do not bring back derived age claims** ("46 years") when this lands — a year is permanent, a computed age rots annually. `tools/verify.py` already guards the coming-soon page against exactly that pattern; extend the same guard to the main site once the year lands there too.
-6. **Wire the contact form to a real handler.** Still the highest-severity *functional* item — a customer who fills it in today reaches nobody. Cheap now: the site is on Netlify, so **Netlify Forms** is a `data-netlify="true"` attribute plus a notification address, no third-party service and no backend. Blocked only on knowing which inbox submissions should go to.
-7. **Land the open branches.** `claude/coming-soon-page` has a PR open now, carrying the built coming-soon landing page and last session's tracker commit. `claude/client-content-brief` is pushed with no PR — open one. **PR #4** (the older questionnaire, 50 questions plus a `.docx`) still needs a rebase; `PROJECT-STATUS.md` has now been rewritten several times since, so expect a conflict. Its content is superseded by the new PDFs, so merging it is optional — but decide deliberately rather than leaving it to rot.
-8. **Correct the "Bell Helicopter" wording on `bell-service-center.html:41`.** Bell dropped "Helicopter" from the brand in 2018; the page echoes Mike's business card, which predates that. The homepage says "Bell Customer Service Facility" (current form) while the Bell page says "Bell Helicopter Customer Service Facility" (retired form) — so the two pages disagree. Note the coming-soon page now deliberately uses the retired form too, but that was the client's explicit, overruled-objection choice for that one page (see Decisions Locked) — it doesn't settle what the main site should say. Confirm against Bell's answer to item 2 rather than guessing either way.
-9. **Decide whether Careers ships.** It's built, but a careers page with no listed openings can read as a dead site. Either get openings (or an explicit "nothing right now") from the office manager, or hold the page back until launch.
-10. **Lean into the personal/small-shop angle** in About and the homepage hero — named-owner warmth is the one thing neither Arrow Aviation nor Summit Aviation has. Needs Mike's story, so it's half-blocked, but the *structure* for it is there now.
+1. **Send Mike the package — this is now fully unblocked and is a very high-value action.** Three things travel together: the preview link (deployed and current), `docs/client-checklist.pdf`, and `docs/client-questions-form.pdf`. Everything that previously blocked this is resolved. People answer far better against a page they can see, so the preview and the questions go in one message. Nothing else on this list moves the project as much, because almost every remaining item is waiting on answers only he has.
+2. **Reply to Zachariah Langley at Bell, and request brand-portal access.** Bell opened the door on 2026-08-06 and explicitly invited questions, so this is now a reply rather than a cold ask — the hard part is done. Seven things are still outstanding and one message covers them all: the **Bell Seal Guidelines** document (referenced twice in the deck, not attached — it's where web rules live), **web-format artwork** (RGB vector or transparent PNG; Summit Aviation serves exactly such a file, so it exists), the exact authorized body-copy wording, whether we may name the 206/407/429, whether a footer attribution line is required, whether Bell wants to review the site pre-launch, and whether a recognizable Bell airframe may appear in South Air's *own* logo (the do-not list forbids shield lockups but is silent on aircraft, so this needs asking, not inferring). **That last question got sharper on 2026-08-10 and should lead:** the chosen mark does not contain a generic stylized helicopter, it contains a detailed rendering that reads as a specific Bell airframe — so this is no longer hypothetical, it is a question about the logo the company has actually adopted. The live list is at `docs/trademark-research.md` under "What Bell still hasn't answered." **Separately, request access at <https://brand.bellflight.com/> — but from a South Air address, not the user's.** Bell is vetting its own vendor network; a request from the facility they already emailed moves faster than one from a stranger.
+3. **Get vector and stitchable versions of the logo.** The web assets are done and deployed; what is missing is a **vector** for print and signage, and a **reduced high-contrast version that can be stitched** — the current art is grayscale shading with hairline blades, which no needle will render. Regenerating the aircraft from the text prompt in `.recall/history.md` produces the stitchable version. **Not urgent, and not blocking anything.** ~~Identify the source image~~ — **closed 2026-08-10: Mike was told how the mark was made and okayed it.** See Constraints That Bite. **The web assets themselves are done and deployed** (`tools/build_logo.py` regenerates them); what is still missing is a **vector** for print, signage and embroidery, and a **reduced high-contrast version that can be stitched** — the current art is grayscale shading and hairline blades, which no needle will render. **Regenerating the aircraft to the 2026-08-06 prompt in `.recall/history.md` remains the move that pays off either way** — it produces the stitchable version *and* is the escape route if the licence answer is bad, since replacing the aircraft leaves the approved wordmark, band and layout untouched.
+4. **Finish propagating the founding year — mostly done 2026-08-10.** **1979 is confirmed** (user, 2026-08-04). The wrong `1997` is gone everywhere and the year now reads as real content on the homepage eyebrow, the homepage stats tile (`1979 / Established`, replacing a "Years in Operation" tile that was a derived age claim) and the first history timeline entry. **`tools/verify.py` now guards this sitewide** — no age claim, no near-miss year. **Six `[PLACEHOLDER Year]` spans remain**, in `about.html`, `history.html` and `index.html`; they are mostly *other* dates (timeline milestones, "Since —" on the homepage's history teaser) rather than the founding year, **so check each one before unwrapping — not all of them are 1979.** The `<title>`/`<meta>` tags also never carried the year, since placeholder styling never reached them; write it in by hand if it belongs there. **Do not bring back derived age claims** ("46 years") when this lands — a year is permanent, a computed age rots annually. `tools/verify.py` already guards the coming-soon page against exactly that pattern; extend the same guard to the main site once the year lands there too.
+5. **Wire the contact form to a real handler.** Still the highest-severity *functional* item — a customer who fills it in today reaches nobody. Cheap now: the site is on Netlify, so **Netlify Forms** is a `data-netlify="true"` attribute plus a notification address, no third-party service and no backend. Blocked only on knowing which inbox submissions should go to.
+6. **Land the open branches.** `claude/coming-soon-page` has a PR open now, carrying the built coming-soon landing page and last session's tracker commit. `claude/client-content-brief` is pushed with no PR — open one. **PR #4** (the older questionnaire, 50 questions plus a `.docx`) still needs a rebase; `PROJECT-STATUS.md` has now been rewritten several times since, so expect a conflict. Its content is superseded by the new PDFs, so merging it is optional — but decide deliberately rather than leaving it to rot.
+7. **Correct the "Bell Helicopter" wording on `bell-service-center.html:41`.** Bell dropped "Helicopter" from the brand in 2018; the page echoes Mike's business card, which predates that. The homepage says "Bell Customer Service Facility" (current form) while the Bell page says "Bell Helicopter Customer Service Facility" (retired form) — so the two pages disagree. Note the coming-soon page now deliberately uses the retired form too, but that was the client's explicit, overruled-objection choice for that one page (see Decisions Locked) — it doesn't settle what the main site should say. Confirm against Bell's answer to item 2 rather than guessing either way.
+8. **Decide whether Careers ships.** It's built, but a careers page with no listed openings can read as a dead site. Either get openings (or an explicit "nothing right now") from the office manager, or hold the page back until launch.
+9. **Lean into the personal/small-shop angle** in About and the homepage hero — named-owner warmth is the one thing neither Arrow Aviation nor Summit Aviation has. Needs Mike's story, so it's half-blocked, but the *structure* for it is there now.
 
 ## Waiting On The Client
 
@@ -159,7 +163,7 @@ in this list is still open.*
 | `news.html` | — | All three article cards are format demos, not stories |
 | `careers.html` | Phone and general email as the apply-to contact | Why-work-here cards, all openings (incl. whether there are any), resume inbox, EEO statement |
 | `contact.html` | Address, phone, both emails, Google map embed | Airport identifier/coordinates; business hours; **the form doesn't submit anywhere** |
-| `coming-soon/index.html` (staged, separate site — not part of the 10-page site above) | **Everything. The only page in the project with no placeholders** — legal name, address, confirmed phone number, FAA Repair Station #XRIR622K, the client-approved Bell CSF wording, founding year 1979 | None |
+| `coming-soon/index.html` — **LIVE at southairhelicopters.com**, separate site, not part of the 10-page site above | **Everything. The only page in the project with no placeholders** — legal name, address, confirmed phone number, FAA Repair Station #XRIR622K, the client-approved Bell CSF wording and Bell's own CSF seal, founding year 1979, the approved logo | None |
 
 ## Decisions Locked
 
@@ -201,7 +205,9 @@ in this list is still open.*
 - **The coming-soon site's deploy command is `netlify deploy --prod --cwd=coming-soon --dir=. --site=de01967d-071f-433e-a5af-6e87b7870b22`. This is the single most important operational fact from this session — get it wrong at go-live and the page stays unindexed while everyone believes it was published.** `--dir=coming-soon` run from the repo root does **not** change the CLI's working directory: the CLI stays rooted at the repo, so it reads the repo-root `netlify.toml` instead of `coming-soon/netlify.toml` and silently serves the wrong indexing header (or none). netlify-cli 26.0.2 has no `--config` flag to point at an alternate config file; `--cwd` is an undocumented global flag, found only by reading the CLI's source. `coming-soon/netlify.toml` carries this same warning in its own header comment — read it before running the command by hand. **Go-live means deleting the `[[headers]]` block in `coming-soon/netlify.toml` and redeploying with that same command — and it is not done until you verify it with a real HTTP request, not just a clean CLI exit.** Run `curl.exe -sS -D - -o NUL https://<url>/` against the live domain afterward and confirm **no `X-Robots-Tag` header comes back at all.** If the response instead carries the four-token value `noindex, nofollow, noarchive, nosnippet`, that is the *repo-root* `netlify.toml` answering — the deploy used the wrong command shape (missing `--cwd=coming-soon`, or `--dir=coming-soon` run from the repo root) and the domain is still noindexed even though the deploy reported success.
 - **Bell trademark.** South Air is an authorized Bell Customer Service Facility, but the Bell logo cannot appear without permission, and the copy must not imply Bell endorses the company. The badge sits *beside* the South Air logo, never merged into it. Researched 2026-07-30: **Bell publishes no third-party trademark policy at all** — the governing terms are in Mike's CSF agreement. The reserved badge slot on `bell-service-center.html` is the right design; Bell issues CSF seal artwork to authorized facilities.
 - **Bell's own rules are now in hand, and they are specific.** Superseding the business-card inference of 2026-08-04: Bell sent the seal and its *Seal Signage Program* deck on 2026-08-06. Binding constraints, verbatim from Bell — the company logo must be **the most prominent visual brand**; the seal must be **smaller than the company logo** with **ample clear space**; **never physically connect** your logo to the seal; and do not rotate, redraw, substitute fonts in, recolour, or add effects (drop shadows) to it. **The bare Bell shield may never be used as a standalone element or in a lockup** — that closes the Downloads-files question permanently. Two operational consequences: **the seal cannot be hand-built as an SVG** (redrawing is explicitly forbidden, so the badge slot waits on Bell's own vector file from the brand portal), and **the artwork we have is CMYK print JPEG on white** — unusable on the web as-is. Full text in `docs/trademark-research.md`.
-- **The Bell artwork is deliberately NOT in this repo.** The source folder is `C:\Users\kourt\Desktop\fwbellcsfbrandingmaterial (1)`. The repo is public, this is Bell's trademark artwork, and `tools/verify.py` fails the build on any Bell-named image in `images/` — that guard stays. **Move the folder somewhere durable before the Desktop gets tidied**; it is currently the only copy, and Bell's brand portal is the only other source.
+- **The CSF seal is now published on the live landing page** (2026-08-10, at the user's direction). Inlined as a base64 PNG in `coming-soon/index.html`, converted from Bell's print CMYK to RGB for display — a medium conversion, not a recolour, which is what Bell's rule targets. Laid out to Bell's spec: smaller than the South Air mark, own white ground, ample clear space, physically separate, unaltered. **Replace it with the RGB/vector file when brand-portal access lands** (Next Up item 3) — better fidelity, and it removes the CMYK caveat entirely. The `images/` guard still blocks Bell-named files there, and the corporate shield remains forbidden outright.
+- **The domain's DNS shape, recorded 2026-08-10 at go-live.** `southairhelicopters.com` is registered at **Squarespace** (active to 2029-07-31), and Squarespace is DNS host as well as registrar. Going live meant **deleting the "Squarespace Defaults" preset whole** — it carried four apex `A` records pointing at Squarespace's own IPs, a `www` CNAME to `ext-sq.squarespace.com`, and an `HTTPS` record whose `ipv4hint` named those same IPs. **All three had to go together**; leaving the `HTTPS` record alone is the easy mistake, since deleting the A records looks sufficient. Replaced with two custom records at 30-minute TTL: `A` `@` → **`75.2.60.5`** (Netlify's apex load balancer, resolvable from `apex-loadbalancer.netlify.com`) and `CNAME` `www` → `sah-coming-soon.netlify.app`. On the Netlify side the domain is the site's `custom_domain` with `www.southairhelicopters.com` as an alias. **The `_domainconnect` CNAME and the Email Security TXT records were left alone** — not website routing.
+- **The Bell source folder is still not in the repo.** `C:\Users\kourt\Desktop\fwbellcsfbrandingmaterial (1)` — the two seal JPEGs and the *Seal Signage Program* deck. **Move it somewhere durable before the Desktop gets tidied**; it is currently the only copy, and Bell's brand portal is the only other source.
 - **Bell is actively retiring the name "Bell Helicopter" from its network.** The issued seal reads "Customer Service Facility" / "CSF" — no "Helicopter", no "Certified". The deck instructs facilities to **remove existing Bell Helicopter signs at their own cost** and replace them. This does not change the coming-soon page's wording, which is a twice-affirmed client decision (see Decisions Locked) — but it upgrades the objection from an inference about Bell's 2018 rebrand to Bell's own current document. **Put it to the office manager once, factually, then drop it either way.**
 - **The logo has to embroider.** The company bought a Brother embroidery machine and intends to make its own shirts once a mark is settled (2026-08-04) — so the mark is not a screen-only artefact. Embroidery cannot render gradients or hairlines, every colour is a thread change, and text below roughly 5mm cap height collapses into mush. This rules out fine detail in the mark. **The chosen logo has exactly this problem and it is now a production constraint rather than a design argument** (2026-08-10): the helicopter is rendered in continuous grayscale shading with hairline rotor blades, and neither survives a needle — at chest-pocket size it will stitch as a grey smudge with the blades dropped entirely. The mark does not need to change, but **a separate reduced stitch version has to exist**: solid fills only, no shading, thickened blades, a minimum stroke weight, and few enough colours to be practical thread changes. Treat the full-detail mark as print/screen-only. This lands with a shop owner in a way a trademark argument does not. Note the shirts' current serif wordmark is *not* settled identity — it predates any of this and will be replaced.
 - **The delivered logo is a flat JPEG and nothing on the site can consume it** (2026-08-10). `south-air-5a.jpg` is 1160×822 RGB with an **opaque `#f2f2f0` ground baked in** — no transparency and no vector. Every logo slot on the site is light-on-navy, so dropping this in would put a pale grey rectangle in the header of all ten pages; and the favicon has to read at 32px, where a photorealistic helicopter is mud. **There is no way to ship the mark without going back to whatever produced it and getting the vector.** Do not work around this by tracing or upscaling the JPEG: an auto-trace of grayscale shading produces hundreds of junk paths, and hand-redrawing the aircraft is precisely the provenance question below.
@@ -252,22 +258,26 @@ no derived age claim that would go stale.
 
 ## In Flight
 
-**Session of 2026-08-10 started documentary and ended as the biggest build session yet.**
-The user handed over the logo set, named 5a as official, confirmed both approvals, supplied
-the aircraft art isolated on white, and said to proceed. **Five things shipped, all live on
-both sites:** the logo asset set, the confirmed founding year, copy-to-clipboard emails, the
-hero cartoon's removal, and the palette roll-out. The source JPEGs are still **deliberately
-not committed** — see Decisions Locked — but `tools/build_logo.py` is, so the assets are
-reproducible.
+**Session of 2026-08-10 started documentary and ended with the site live on its domain.**
+The user handed over the logo set, named 5a official, confirmed both approvals, supplied
+the aircraft art, and said to proceed. **Eight things shipped:** the logo asset set, the
+confirmed founding year, copy-to-clipboard emails, the hero cartoon's removal, the palette
+roll-out, the go-live and DNS cutover, the link-preview card, and the prominent Bell CSF
+block with Bell's own seal. The source JPEGs are still **deliberately not committed** —
+see Decisions Locked — but `tools/build_logo.py` is, so the assets are reproducible.
 
-**Verified, not assumed:** `verify.py` green at 19 checks; index, about, contact and
-coming-soon loaded in a real browser at 1280px, 760px and 390px with a clean console; the
-clipboard read back after a click to confirm it genuinely held the address; computed styles
-measured rather than eyeballed; and every deploy re-checked over HTTP.
+**Verified, not assumed:** `verify.py` green at 19 checks; pages loaded in a real browser
+at 1280px, 760px and 390px with a clean console; the clipboard read back after a click to
+confirm it genuinely held the address; computed styles measured rather than eyeballed; and
+every deploy re-checked over real HTTP, including the go-live header and the certificate.
 
-**The one thing that is entirely unresolved is the Canva licence question** — Next Up item
-4. It is the only open item that could invalidate work already deployed, because the
-aircraft is live on both sites now. Everything else on the list is ordinary work.
+**Three guards were corrected this session, all the same failure mode: the check was
+coarser than its own intent** and failed on legitimate markup. The self-contained check
+treated `rel="canonical"` as a fetched asset; the Bell-wording check counted mentions
+inside HTML comments, then CSS comments. Each now tests what it means and was re-confirmed
+to still fail on the real thing it guards against. **Worth remembering as a pattern** — a
+guard that fires on correct work gets disabled by the next person unless it is fixed
+properly.
 
 Last session's guess that more client material was coming was right — this was it.
 
@@ -284,22 +294,23 @@ content in a logo, which means **one unanswered question can invalidate the appr
 aircraft**: stock element, or Canva AI? That is Next Up item 4 and is written up under
 Constraints That Bite.
 
-**Four things were asked of the user and are unanswered as of this writing:** stock-vs-AI,
-which Canva plan, the editable Canva and Claude Design source files, and — unrelated but
-still blocking Next Up item 1 — the exact domain string.
+**Both of those questions are now closed.** Mike was told how the mark was made and okayed
+it, so nothing about the logo is blocked; and the domain string, missing from this file for
+five sessions, is recorded and the site is live on it.
 
-**Next session, per the user (2026-08-04):** point the domain (Next Up item 1), and fold in
-an update on the questionnaire. Get the exact domain string first — it is still written down
-nowhere. **Added 2026-08-06:** replying to Bell (Next Up item 3) is now a fast, high-value
-job — the rep is warm and invited questions.
+**Next session, the two highest-value moves, in order.** First, **send Mike the package** —
+Next Up item 1. It is fully unblocked, and there is now something much better to send than
+before: a live domain he can open on his phone, carrying his own logo and the Bell seal.
+Almost everything else on the list waits on answers only he has. Second, **reply to
+Zachariah at Bell** — item 2 — which is a warm reply rather than a cold ask, and which
+would also get the proper RGB/vector seal to replace the CMYK conversion now on the live
+page.
 
 
-**The landing page is built, deployed, and staged — not merely planned.** Live at
-https://sah-coming-soon.netlify.app on its own Netlify site (id
-`de01967d-071f-433e-a5af-6e87b7870b22`, name `sah-coming-soon`). Built behind the
-`verify.py` guard described above, checked in a real browser at 390px and 1280px against
-the live URL (console clean, zero errors, zero warnings), and approved by the office
-manager. No DNS points at it; it is not indexed and not public.
+**The landing page is live and public** at https://southairhelicopters.com, on its own
+Netlify site (id `de01967d-071f-433e-a5af-6e87b7870b22`, name `sah-coming-soon`). Built
+behind the `verify.py` guard described above and checked in a real browser at 390px, 760px
+and 1280px, console clean.
 
 Along the way, the plan's own architecture turned out to be wrong: the plan called for a
 `coming-soon/_headers` file to set the noindex header, but the served header actually came
