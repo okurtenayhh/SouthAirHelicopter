@@ -64,7 +64,7 @@ content changes, both made: the page now carries the Bell CSF credential verbati
 the founding year `Established 1979` replaced a status line that turned out to be
 factually wrong. Both are explained under Decisions Locked. No DNS points at the page yet.
 
-**The logo is chosen (2026-08-10).** The user handed over a five-variant set at
+**The logo is chosen and approved (2026-08-10).** The user handed over a five-variant set at
 `C:\Users\kourt\Desktop\SAH LOGO\` and named **`south-air-5a.jpg` as the official mark** —
 stacked, on a near-white ground: heavy slab-serif `SOUTH AIR`, a detailed grayscale
 helicopter illustration, a navy band reading `HELICOPTERS`, and a rule-flanked
@@ -73,11 +73,13 @@ supersedes both the shipping two-mark system and the parked sphere exploration.
 
 **What is settled is the design, not the artwork.** The delivered file is a 1160×822
 opaque JPEG — there is no vector source, no transparency, and the site's own logo slots
-need light-on-navy. So nothing on the site changes yet, and four things have to be
-resolved before it can ship: production files, the aircraft's provenance, whether a
-recognizable Bell airframe may sit in South Air's own mark, and an embroidery-capable
-version. These are now Next Up item 4, and they are spelled out under Constraints That
-Bite rather than left to be rediscovered.
+need light-on-navy. So nothing on the site changes yet. **Two things stand in the way, and
+neither is an approval:** production artwork (vector, transparent, plus a reduced version
+that can be stitched and read at favicon size), and Bell's answer on whether an
+identifiable **429** may sit inside South Air's own mark. The first needs nobody's
+permission and is Next Up item 4; the second rides on the reply to Zachariah at item 3.
+The aircraft's provenance was a third worry and is now traced — see Constraints That Bite,
+which also records why re-running the generation fixes the artwork problem cheaply.
 
 ## Next Up
 
@@ -97,7 +99,7 @@ Things that can move without waiting on anyone:
 ## Waiting On The Client
 
 **Mike (owner / president)**
-- ~~Sign-off on the logo — hold until the user settles which mark.~~ **The user settled it on 2026-08-10: `south-air-5a.jpg`.** What replaces this item is narrower: **has anyone on the client side actually approved 5a, or is "official" the user's own pick?** The two are different gates and this project has conflated them before. If it has not been through the office manager, it has not been approved — see Decisions Locked on why her sign-off is the real one. Ask before treating the mark as client-blessed in front of anyone.
+- ~~Sign-off on the logo.~~ **Closed 2026-08-10 — the mark is chosen *and* client-approved.** `south-air-5a.jpg`, confirmed approved by the user when asked directly whether it had been through the client or was their own pick. **The specific approver and date were not captured**; on this project that almost certainly means the office manager, which is the real approval channel (see Decisions Locked) — but it is an assumption, so don't cite a name. Worth one line in the next message to her to pin it down. This is the project's second client sign-off, after the coming-soon page.
 - Exact scope of the NASA relationship, in writing — which center or program, and what South Air actually does for them. Also: **does the contract require NASA to review marketing that mentions them?** (JPL requires it for its vendors; center-specific.) See `docs/trademark-research.md` and the standing warning on `nasa-partnership.html` before writing a word of this.
 - **His copy of the Bell Customer Service Facility agreement.** Bell publishes no third-party trademark policy, so the trademark clause in that contract is the actual governing text. This is the single highest-value document still outstanding.
 - **Which airframes the shop is rated on**, and what work is authorized per model. `platforms.html` is entirely empty until this lands, by design. **Partially answered 2026-08-04** — the office manager reported by text that the shop is certified on the **206 series, 407 series, and 429**. Treat as unconfirmed: it came from the wrong person for this question, it has not been checked against the certificate, and it says nothing about *what work* is authorized per model. `tools/verify.py:23` still blocks those three strings from the markup and that guard stays until Mike confirms.
@@ -151,7 +153,7 @@ in this list is still open.*
 
 - **Static HTML/CSS/JS, no framework** — a marketing site with no backend; keeps hosting free and hand-editing possible later.
 - **Company name is plural: "South Air Helicopters, Inc."** — confirmed on Mike's business card. The repo name `SouthAirHelicopter` is singular and misleading; ignore it.
-- **The logo is `south-air-5a.jpg`, chosen by the user on 2026-08-10 and declared official.** A stacked mark on a near-white ground: heavy slab-serif `SOUTH AIR`, a detailed grayscale helicopter illustration, a navy band reading `HELICOPTERS` in letter-spaced white, and a rule-flanked `PEARLAND, TX`. It delivers Mike's own brief — a helicopter, with the name in the mark — so it outranks everything below it. **The design is not to be reopened.** Source set of five variants: `C:\Users\kourt\Desktop\SAH LOGO\` (`5a`–`5e`); the other four share the same aircraft art on different grounds and layouts. **Deliberately not committed** — it is a flat JPEG that no page can use, and the aircraft's provenance is unconfirmed (see Constraints That Bite). **This is currently the only copy; move the folder somewhere durable before the Desktop gets tidied.**
+- **The logo is `south-air-5a.jpg` — chosen by the user on 2026-08-10, declared official, and confirmed client-approved the same day.** A stacked mark on a near-white ground: heavy slab-serif `SOUTH AIR`, a detailed grayscale helicopter illustration, a navy band reading `HELICOPTERS` in letter-spaced white, and a rule-flanked `PEARLAND, TX`. It delivers Mike's own brief — a helicopter, with the name in the mark — so it outranks everything below it. **The design is not to be reopened.** Source set of five variants: `C:\Users\kourt\Desktop\SAH LOGO\` (`5a`–`5e`); the other four share the same aircraft art on different grounds and layouts. **Deliberately not committed** — it is a flat JPEG that no page can use, and the aircraft's provenance is unconfirmed (see Constraints That Bite). **This is currently the only copy; move the folder somewhere durable before the Desktop gets tidied.**
 - ~~**Logo is a two-mark system**~~ — **superseded 2026-08-10.** The stacked badge plus three-blade rotor icon is still what the ten-page site and the coming-soon page ship *today*, so it is live code, not history: `images/logo-*.svg` (7 files), `images/favicon.svg`, the rotor SVG **inlined** at `coming-soon/index.html:208`, and a **base64 favicon** at `coming-soon/index.html:9`. Replacing the logo means all of those, not just the `images/` folder.
 - ~~The sphere exploration~~ — **dead, 2026-08-10.** Superseded by 5a. `claude/sphere-logo` is local-only and never pushed; delete it or leave it, but do not revive it. The one durable lesson, so nobody re-derives it: `SAH` cannot form a circle, because no letter in it has an arc to donate, and the only letter that does is the `O` in SOUTH.
 - **Mike asked specifically for a 429, and the chosen mark's aircraft is one** — built to the 429's actual published dimensions, not a generic helicopter that happens to resemble one (see Constraints That Bite for how it was made). Recording this because it is the live risk in an otherwise settled decision, not to reopen the design. A Bell aircraft inside South Air's *own* logo asserts affiliation in a way the CSF seal does not: the seal says "authorized by Bell", a Bell aircraft in your mark says "we are Bell". Bell's do-not list forbids shield lockups and is silent on aircraft, so this is a question to ask, not a rule to infer — it is on the list for Zachariah at Next Up item 3. **If Bell objects, the fix is redrawing the aircraft to be generic, not abandoning the mark**; the wordmark, band and layout are unaffected either way.
@@ -242,9 +244,11 @@ re-investigated. It also produced the session's most useful finding: **the gener
 ignored the rendering constraints the prompt specified**, which is the whole reason the
 mark will not embroider or reduce — so re-running it is a cheap fix, not a redesign.
 
-**One question is genuinely still open:** whether anyone on the client side has approved
-5a, or whether "official" is the user's own pick. It is in Waiting On under Mike.
-**Nothing here blocks vectorising the wordmark, band and layout** — only the aircraft.
+**The approval question was asked and answered in-session: 5a is client-approved.** The
+approver's name and date were not captured — see Waiting On. **So no approval gate remains
+on the logo.** The only thing still standing between the mark and the site is production
+artwork, and the only thing standing between it and *public* use is Bell's answer on the
+429. Vectorising the wordmark, band and layout is unblocked entirely.
 
 **Next session, per the user (2026-08-04):** point the domain (Next Up item 1), and fold in
 an update on the questionnaire. Get the exact domain string first — it is still written down
