@@ -1,4 +1,8 @@
-# This file is the ONLY thing controlling indexing for the sah-coming-soon site; going live means removing the [[headers]] block below.
+# This file is the ONLY thing controlling indexing for the sah-coming-soon site.
+# GO-LIVE HAPPENED 2026-08-10: the [[headers]] block that set X-Robots-Tag was
+# deleted, so this site is now indexable. Everything below is kept because it is
+# still exactly how this site deploys, and because putting the block BACK (to
+# take the page private again) has the same trap in reverse.
 # It is read ONLY when the CLI's working directory is this directory. Deploy with:
 #   netlify deploy --prod --cwd=coming-soon --dir=. --site=<sah-coming-soon-site-id>
 # `--dir=coming-soon` run from the repo root does NOT set the working directory to
@@ -21,8 +25,3 @@
 # ignored — it looks load-bearing and isn't. The deploy command above always
 # passes --dir explicitly anyway, so nothing needs to declare it here. Don't add
 # it back thinking its absence is an oversight.
-
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Robots-Tag = "noindex, nofollow"
