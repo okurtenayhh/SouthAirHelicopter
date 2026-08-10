@@ -23,6 +23,18 @@ HREF_RE = re.compile(r'href="([^"#?:]+\.html)"')
 MODEL_RE = re.compile(
     r"\b(206|407|412|429|505|jetranger|longranger|huey|uh-1)\b", re.IGNORECASE
 )
+# A founding year is permanent; an age derived from it rots every January.
+# State 1979, never "46 years" or "nearly five decades".
+AGE_CLAIM_RE = re.compile(
+    r"\b\d{1,3}\+?[\s-]?(?:years?|yrs?)\b"
+    r"|\b(?:(?:almost|nearly|over|more than|well over|about|roughly)\s+)?"
+    r"(?:one|two|three|four|five|six|seven|eight|nine|ten)\s+decades?\b",
+    re.IGNORECASE,
+)
+# 1997 is a transposition of the real founding year that sat in the
+# placeholders for several sessions. Pin it so it cannot come back.
+FOUNDED = "1979"
+WRONG_FOUNDED_RE = re.compile(r"\b(?:1997|1978|1980)\b")
 
 failures = []
 
@@ -79,6 +91,16 @@ check("no invented aircraft model names", not hits, ", ".join(hits))
 css = (ROOT / "css" / "style.css").read_text()
 html_all = "".join((ROOT / n).read_text() for n in PAGES)
 check("no .pricing-table references", "pricing-table" not in css + html_all)
+
+# 5b. The founding year is confirmed, so guard it on the main site too:
+#     no derived age claim, and no near-miss year.
+age_hits, year_hits = [], []
+for name in PAGES:
+    text = (ROOT / name).read_text()
+    age_hits += [f"{name}:{m}" for m in AGE_CLAIM_RE.findall(text)]
+    year_hits += [f"{name}:{m.group(0)}" for m in WRONG_FOUNDED_RE.finditer(text)]
+check("no age claim that will go stale", not age_hits, ", ".join(age_hits))
+check("no near-miss founding year", not year_hits, ", ".join(year_hits))
 
 # 6. No Bell logo asset snuck in.
 imgs = sorted(p.name for p in (ROOT / "images").glob("*"))
