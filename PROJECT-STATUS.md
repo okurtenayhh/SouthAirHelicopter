@@ -4,9 +4,9 @@
 
 *Unmerged branches: `claude/coming-soon-page` (current — carries the built coming-soon landing page, now staged and live, plus last session's tracker commit) · `claude/client-content-brief` (brief documents, pushed, no PR) · `claude/sphere-logo` (a logo exploration, local only, **now dead** — the logo is settled, see Decisions Locked)*
 
-**Live preview (ten-page work-in-progress site): https://south-air-helicopters.netlify.app** — noindexed, deployed and current as of 2026-07-30, verified live. Safe to send to Mike.
+**Live preview (ten-page work-in-progress site): https://south-air-helicopters.netlify.app** — noindexed, **redeployed 2026-08-10 with the new logo**, verified live. Safe to send to Mike.
 
-**Coming-soon landing page (one page, built for the real domain): https://sah-coming-soon.netlify.app** — noindexed, staged, **not attached to the client's domain — no DNS change has been made, and the page is not public and not indexed.** Its own Netlify site, separate from the preview above (which is untouched): site id `de01967d-071f-433e-a5af-6e87b7870b22`, site name `sah-coming-soon`.
+**Coming-soon landing page (one page, built for the real domain): https://sah-coming-soon.netlify.app** — noindexed, staged, **redeployed 2026-08-10 with the new logo** (indexing header re-verified after the deploy: two-token `noindex, nofollow`, which is its own config answering, not the repo root's), **not attached to the client's domain — no DNS change has been made, and the page is not public and not indexed.** Its own Netlify site, separate from the preview above (which is untouched): site id `de01967d-071f-433e-a5af-6e87b7870b22`, site name `sah-coming-soon`.
 
 > Maintained by the `/sa-wrap-up` skill. If this file and the repo disagree, the repo is right — fix this file.
 
@@ -71,17 +71,27 @@ helicopter illustration, a navy band reading `HELICOPTERS`, and a rule-flanked
 `PEARLAND, TX`. This closes the logo question that has been open since 2026-07-30 and
 supersedes both the shipping two-mark system and the parked sphere exploration.
 
-**What is settled is the design, not the artwork.** The delivered file is a 1160×822
-opaque JPEG — there is no vector source, no transparency, and the site's own logo slots
-need light-on-navy. So nothing on the site changes yet. **Both approvals are in — the
-office manager's and Mike's — so nothing here is waiting on the client.** Three things
-stand in the way instead: **a Canva licence question that can invalidate the aircraft**
-(Canva forbids stock content in a logo, so it matters whether the helicopter is a stock
-element or Canva AI), production artwork, and Bell's answer on whether an identifiable
-**429** may sit in South Air's own mark. The first two are Next Up item 4; the third rides
-on the reply to Zachariah at item 3. All three are spelled out under Constraints That Bite —
-including why one regeneration fixes the artwork *and* serves as the escape route if the
-licence answer goes badly, leaving the approved wordmark and layout untouched.
+**The mark is now live on both sites** (2026-08-10). The user supplied the aircraft art
+isolated on white, which made real assets possible, and the user's instruction was to
+proceed with this logo. So the full set was rebuilt and deployed: header lockups, stacked
+primary, icon, and favicon, in light and dark. **The ten pages needed no markup change** —
+they already point at `images/logo-horizontal-light.svg`, so replacing the file in place
+updated every page and left the shared header byte-identical. Regenerate any time with
+`python tools/build_logo.py`.
+
+**Two things about the artwork are worth being honest about.** The assets are **PNG
+embedded in an SVG wrapper**, because both sources are raster — there is still no vector,
+which matters for print, signage and embroidery but not for the web. And the **favicon
+reads as a helicopter at 32px and as a vague shape below that**, which is the detail level
+the source art allows.
+
+**What remains is not an approval.** Both the office manager and Mike approved the mark.
+Outstanding: the **Canva licence question** (Canva forbids stock content in a logo, so it
+matters whether the aircraft is a stock element or Canva AI — Next Up item 4), Bell's
+answer on whether an identifiable **429** may sit in South Air's own mark (item 3), and a
+vector/embroidery version. All three are under Constraints That Bite, including why one
+regeneration would fix the artwork *and* serve as the escape route if the licence answer
+goes badly, leaving the approved wordmark and layout untouched.
 
 ## Next Up
 
@@ -90,8 +100,8 @@ Things that can move without waiting on anyone:
 1. **Point the domain at the coming-soon page.** The page is finished, staged, and approved; the domain is bought and pointing nowhere. Two steps, in this order: remove the `[[headers]]` block from `coming-soon/netlify.toml`, redeploy with `netlify deploy --prod --cwd=coming-soon --dir=. --site=de01967d-071f-433e-a5af-6e87b7870b22`, then **confirm by real HTTP request that no `X-Robots-Tag` comes back at all** — if you see the four-token `noindex, nofollow, noarchive, nosnippet`, the wrong config was read and the page will never be indexed. Then the DNS records in Squarespace. **The exact domain string is still not written down anywhere** — get it first.
 2. **Send Mike the package — this is now fully unblocked and is a very high-value action.** Three things travel together: the preview link (deployed and current), `docs/client-checklist.pdf`, and `docs/client-questions-form.pdf`. Everything that previously blocked this is resolved. People answer far better against a page they can see, so the preview and the questions go in one message. Nothing else on this list moves the project as much, because almost every remaining item is waiting on answers only he has.
 3. **Reply to Zachariah Langley at Bell, and request brand-portal access.** Bell opened the door on 2026-08-06 and explicitly invited questions, so this is now a reply rather than a cold ask — the hard part is done. Seven things are still outstanding and one message covers them all: the **Bell Seal Guidelines** document (referenced twice in the deck, not attached — it's where web rules live), **web-format artwork** (RGB vector or transparent PNG; Summit Aviation serves exactly such a file, so it exists), the exact authorized body-copy wording, whether we may name the 206/407/429, whether a footer attribution line is required, whether Bell wants to review the site pre-launch, and whether a recognizable Bell airframe may appear in South Air's *own* logo (the do-not list forbids shield lockups but is silent on aircraft, so this needs asking, not inferring). **That last question got sharper on 2026-08-10 and should lead:** the chosen mark does not contain a generic stylized helicopter, it contains a detailed rendering that reads as a specific Bell airframe — so this is no longer hypothetical, it is a question about the logo the company has actually adopted. The live list is at `docs/trademark-research.md` under "What Bell still hasn't answered." **Separately, request access at <https://brand.bellflight.com/> — but from a South Air address, not the user's.** Bell is vetting its own vendor network; a request from the facility they already emailed moves faster than one from a stranger.
-4. **Turn the chosen logo into usable artwork.** The design is settled (`south-air-5a.jpg`, see Decisions Locked); what exists is a flat 1160×822 JPEG with an opaque `#f2f2f0` ground, which cannot be used anywhere on the site — every logo slot is light-on-navy, and the favicon needs to work at 32px. **Get the vector source from whatever produced the set** before doing anything else; that single answer also settles the provenance question below. Then the deliverables are: a horizontal lockup, an icon-only mark, a favicon, light and dark variants, and a reduced high-contrast version that can be stitched. **Do the Canva licence check first — it is one question and it can invalidate the aircraft.** If the helicopter is a Canva **stock element**, Canva's licence forbids using it in a logo and it has to be replaced; if it is Canva **AI**, it stands, subject to a paid plan. Full detail under Constraints That Bite. **Then get the editable sources** — the Canva design and the Claude Design file — because exporting from those (transparent PNG, ideally SVG) is a far shorter path to production artwork than rebuilding from a JPEG. **The regeneration described under Constraints is the move that pays off either way:** it produces the icon mark, favicon and embroiderable version, *and* it is the escape route if the licence answer is bad, since replacing the aircraft leaves the approved wordmark, band and layout untouched. **Still gating public use, not the work:** whether Bell is content with an identifiable **429** in South Air's own mark — on the list for Zachariah at item 3 and the sharpest question on it. **The rest of the mark is reconstructable in vector today**; the aircraft is the only blocked element.
-5. **Propagate the founding year through the main site — now unblocked.** **1979 is confirmed** (user, 2026-08-04, restated after the office manager's original *"1979. Or 78, whatever Jeff said"*). Unwrap `[PLACEHOLDER Year]` in roughly fourteen places across the ten-page site. **Do not bring back derived age claims** ("46 years") when this lands — a year is permanent, a computed age rots annually. `tools/verify.py` already guards the coming-soon page against exactly that pattern; extend the same guard to the main site once the year lands there too.
+4. **Answer the Canva licence question — one question, and it can invalidate the aircraft that is now live on both sites.** Canva's Content License Agreement forbids Free or Pro **stock content** in a logo (fonts, simple shapes and lines excepted), because stock is licensed non-exclusively. So: **was the helicopter a Canva stock element, or Canva AI (Magic Media / Dream Lab)?** Stock → the aircraft must be replaced. AI → it stands, but commercial use needs a **paid** Canva plan, and the artwork is not copyrightable, so the mark would likely be unregistrable as a trademark — an acceptable trade for a small MRO shop, but it should be Mike's decision rather than a surprise. Full detail under Constraints That Bite. **The web assets themselves are done and deployed** (`tools/build_logo.py` regenerates them); what is still missing is a **vector** for print, signage and embroidery, and a **reduced high-contrast version that can be stitched** — the current art is grayscale shading and hairline blades, which no needle will render. **Regenerating the aircraft to the 2026-08-06 prompt in `.recall/history.md` remains the move that pays off either way** — it produces the stitchable version *and* is the escape route if the licence answer is bad, since replacing the aircraft leaves the approved wordmark, band and layout untouched.
+5. **Propagate the founding year through the main site — now unblocked, and the current text is actively wrong.** **1979 is confirmed** (user, 2026-08-04, restated after the office manager's original *"1979. Or 78, whatever Jeff said"*). **The markup currently guesses `1997`** — a transposition of the real year — in five places: `index.html:39`, `:41`, `:70` and `history.html:51`, `:56`. It sits inside flagged placeholders, so no unqualified false claim reaches a customer, but it contradicts a confirmed fact on a preview link the client has. Fix those five first, then unwrap `[PLACEHOLDER Year]` in roughly fourteen places across the ten-page site. **Do not bring back derived age claims** ("46 years") when this lands — a year is permanent, a computed age rots annually. `tools/verify.py` already guards the coming-soon page against exactly that pattern; extend the same guard to the main site once the year lands there too.
 6. **Wire the contact form to a real handler.** Still the highest-severity *functional* item — a customer who fills it in today reaches nobody. Cheap now: the site is on Netlify, so **Netlify Forms** is a `data-netlify="true"` attribute plus a notification address, no third-party service and no backend. Blocked only on knowing which inbox submissions should go to.
 7. **Land the open branches.** `claude/coming-soon-page` has a PR open now, carrying the built coming-soon landing page and last session's tracker commit. `claude/client-content-brief` is pushed with no PR — open one. **PR #4** (the older questionnaire, 50 questions plus a `.docx`) still needs a rebase; `PROJECT-STATUS.md` has now been rewritten several times since, so expect a conflict. Its content is superseded by the new PDFs, so merging it is optional — but decide deliberately rather than leaving it to rot.
 8. **Correct the "Bell Helicopter" wording on `bell-service-center.html:41`.** Bell dropped "Helicopter" from the brand in 2018; the page echoes Mike's business card, which predates that. The homepage says "Bell Customer Service Facility" (current form) while the Bell page says "Bell Helicopter Customer Service Facility" (retired form) — so the two pages disagree. Note the coming-soon page now deliberately uses the retired form too, but that was the client's explicit, overruled-objection choice for that one page (see Decisions Locked) — it doesn't settle what the main site should say. Confirm against Bell's answer to item 2 rather than guessing either way.
@@ -139,7 +149,7 @@ in this list is still open.*
 
 | Page | Real | Still placeholder |
 | --- | --- | --- |
-| `index.html` | Nav, footer contact block, quote CTAs, **Bell CSF + FAA Repair Station status** (business-card sourced, now the hero's lead claim) | Hero positioning line, all three service blurbs, the stat strip (**"100%" and "24/7" still invented**; the years figure and the Bell tile's exact wording are flagged), the Bell section body, history and NASA teasers. **The logo in the header is now a known-wrong asset** — the old two-mark system, superseded by `south-air-5a` on 2026-08-10, still shipping everywhere because no usable file of the new mark exists yet |
+| `index.html` | Nav, footer contact block, quote CTAs, **Bell CSF + FAA Repair Station status** (business-card sourced, now the hero's lead claim) | Hero positioning line, all three service blurbs, the stat strip (**"100%" and "24/7" still invented**; the years figure and the Bell tile's exact wording are flagged), the Bell section body, history and NASA teasers. **The hero's cartoon helicopter illustration now clashes with the new mark** and should go. **The founding year in the placeholders reads `1997`, which is wrong** — see Next Up item 5 |
 | `about.html` | Mike Pike as President; Bell Customer Service Facility + Repair Station #XRIR622K; Pearland Regional Airport | Company overview, mission, all three values, Mike's bio, two other team slots, every photo |
 | `services.html` | Bell certification line; quote-only framing | The entire six-service list, all three "How Pricing Works" steps, the testimonial |
 | `bell-service-center.html` | Repair Station #XRIR622K; Bell CSF status (business-card wording) | What the certification covers, how long it's been held, the ratings on the certificate. Page carries a standing trademark warning and an empty reserved badge slot |
@@ -156,7 +166,8 @@ in this list is still open.*
 - **Static HTML/CSS/JS, no framework** — a marketing site with no backend; keeps hosting free and hand-editing possible later.
 - **Company name is plural: "South Air Helicopters, Inc."** — confirmed on Mike's business card. The repo name `SouthAirHelicopter` is singular and misleading; ignore it.
 - **The logo is `south-air-5a.jpg` — chosen by the user on 2026-08-10 and approved the same day by both the office manager and Mike.** Built by the user: **helicopter art in Canva, composition in Claude Design** (see the licence caveat under Constraints That Bite before treating the aircraft as final). A stacked mark on a near-white ground: heavy slab-serif `SOUTH AIR`, a detailed grayscale helicopter illustration, a navy band reading `HELICOPTERS` in letter-spaced white, and a rule-flanked `PEARLAND, TX`. It delivers Mike's own brief — a helicopter, with the name in the mark — so it outranks everything below it. **The design is not to be reopened.** Source set of five variants: `C:\Users\kourt\Desktop\SAH LOGO\` (`5a`–`5e`); the other four share the same aircraft art on different grounds and layouts. **Deliberately not committed** — it is a flat JPEG that no page can use, and the aircraft's provenance is unconfirmed (see Constraints That Bite). **This is currently the only copy; move the folder somewhere durable before the Desktop gets tidied.**
-- ~~**Logo is a two-mark system**~~ — **superseded 2026-08-10.** The stacked badge plus three-blade rotor icon is still what the ten-page site and the coming-soon page ship *today*, so it is live code, not history: `images/logo-*.svg` (7 files), `images/favicon.svg`, the rotor SVG **inlined** at `coming-soon/index.html:208`, and a **base64 favicon** at `coming-soon/index.html:9`. Replacing the logo means all of those, not just the `images/` folder.
+- ~~**Logo is a two-mark system**~~ — **gone as of 2026-08-10.** The stacked badge and three-blade rotor icon have been replaced everywhere by the approved mark: all 7 `images/logo-*.svg`, `images/favicon.svg`, the mark **inlined** at `coming-soon/index.html:208`, and the **base64 favicon** at `coming-soon/index.html:9`. That list is the full set of places a logo change has to touch — keep it, since there is no templating layer.
+- **The logo assets are PNG embedded in an SVG wrapper, deliberately** (2026-08-10). Both sources are raster, so there is no vector being thrown away; the wrapper exists so every existing `.svg` reference and file extension keeps working, which is why swapping the logo needed **zero markup change** across the ten pages and kept the shared header byte-identical for `verify.py`. It also satisfies the coming-soon page's self-contained guard, which already permits `data:` URIs on `<image>`. **When real vector artwork arrives, replace the file contents and the same trick still holds.** Regenerate with `python tools/build_logo.py`; it reads the two approved sources off the Desktop and writes all seven files.
 - ~~The sphere exploration~~ — **dead, 2026-08-10.** Superseded by 5a. `claude/sphere-logo` is local-only and never pushed; delete it or leave it, but do not revive it. The one durable lesson, so nobody re-derives it: `SAH` cannot form a circle, because no letter in it has an arc to donate, and the only letter that does is the `O` in SOUTH.
 - **Mike asked specifically for a 429, and the chosen mark's aircraft is one** — built to the 429's actual published dimensions, not a generic helicopter that happens to resemble one (see Constraints That Bite for how it was made). Recording this because it is the live risk in an otherwise settled decision, not to reopen the design. A Bell aircraft inside South Air's *own* logo asserts affiliation in a way the CSF seal does not: the seal says "authorized by Bell", a Bell aircraft in your mark says "we are Bell". Bell's do-not list forbids shield lockups and is silent on aircraft, so this is a question to ask, not a rule to infer — it is on the list for Zachariah at Next Up item 3. **If Bell objects, the fix is redrawing the aircraft to be generic, not abandoning the mark**; the wordmark, band and layout are unaffected either way.
 - **The office manager is the approval channel, and her sign-off is the real one** (established 2026-08-04). She sees Mike in person and asks him directly, which no amount of emailing achieves. So "approved by the office manager" is not a lesser form of "approved by the owner" — it is how owner approval actually arrives on this project. **Stop holding work back waiting for Mike to review something himself.** Send it to her. Earlier sessions treated these as two separate gates and that was wrong; the practical effect was work sitting unapproved for weeks. The one thing still worth stating plainly when handing her something is what is unconfirmed in it, so she knows what to ask him.
@@ -234,11 +245,18 @@ no derived age claim that would go stale.
 
 ## In Flight
 
-**Session of 2026-08-10 was short and entirely documentary.** The user handed over the
-logo set and named 5a as official. **No site file changed, no page was touched, nothing
-was deployed** — both Netlify sites are exactly as the 2026-08-04 session left them, and
-neither needs a redeploy. The work was examining the mark and writing it into this file.
-The JPEGs were **deliberately not committed**; see Decisions Locked for why.
+**Session of 2026-08-10 started documentary and ended shipping.** The user handed over the
+logo set, named 5a as official, confirmed both approvals, supplied the aircraft art
+isolated on white, and then said to proceed with this logo. So the mark was built into a
+full asset set and **both Netlify sites were redeployed and verified live.** The source
+JPEGs are still **deliberately not committed** — see Decisions Locked — but
+`tools/build_logo.py` is, so the assets are reproducible from them.
+
+**Verified, not assumed:** `verify.py` green at 17 checks; index, about and coming-soon
+loaded in a real browser at 1280px and 390px with a clean console; the deployed logo asset
+fetched over HTTP; and the coming-soon page's indexing header re-checked after deploy,
+returning the two-token `noindex, nofollow` that proves its own config answered rather
+than the repo root's.
 
 Last session's guess that more client material was coming was right — this was it.
 
@@ -300,10 +318,16 @@ been corrected to match reality.
 by `docs/client-questions-form.pdf` on the brief branch, which covers the same ground
 in a nicer form. Merging it is now optional; it needs a rebase either way.
 
-**Nothing is uncommitted.** No markup changed on 2026-08-10 — only this file. The ten-page
-preview is still the 2026-07-30 deploy and the coming-soon page still the 2026-08-04 deploy;
-neither was invalidated by anything since. `python tools/verify.py` re-run 2026-08-10:
-all 17 checks green.
+**Nothing is uncommitted.** On 2026-08-10 the 7 logo assets, `coming-soon/index.html`,
+`tools/build_logo.py` and this file changed. **Both sites redeployed the same day and
+verified live** — the ten-page preview and the coming-soon page are current, not stale.
+`python tools/verify.py`: all 17 checks green.
+
+**Two things the new logo made visible on the live preview, neither fixed:** the homepage
+hero still carries a flat cartoon helicopter illustration that now clashes badly with the
+detailed mark, and the site is still on the **old amber `#f2a71b`**, which the palette
+decision retired in favour of safety orange. Both were out of scope for a logo swap; both
+are now more conspicuous than they were.
 
 **Still never done: a page-by-page look at the ten-page site in a real browser.** The
 coming-soon page got exactly that treatment this session — the first page in the project
