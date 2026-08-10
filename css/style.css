@@ -228,8 +228,14 @@ h1, h2, h3, h4 {
   flex-wrap: wrap;
 }
 
+/* Single-column hero. The cartoon helicopter that used to sit beside this was
+   removed once the real logo landed — a flat vector toy next to a detailed
+   technical mark read as two different companies. The copy is capped rather
+   than left to run the full container width, so the hero looks composed
+   rather than like a two-column layout missing its second column. */
 .hero-copy {
-  flex: 1 1 420px;
+  flex: 1 1 100%;
+  max-width: 760px;
 }
 
 .hero-copy .eyebrow {
@@ -251,17 +257,6 @@ h1, h2, h3, h4 {
   font-size: 1.1rem;
   color: rgba(255,255,255,0.85);
   max-width: 560px;
-}
-
-.hero-art {
-  flex: 1 1 320px;
-  display: flex;
-  justify-content: center;
-}
-
-.hero-art svg {
-  width: 100%;
-  max-width: 420px;
 }
 
 .hero-small {
