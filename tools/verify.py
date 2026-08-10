@@ -177,10 +177,20 @@ else:
     # kept verbatim over the objection that "Bell Helicopter" is a name Bell
     # retired in 2018. Pin the exact approved string: any other Bell phrasing
     # on this page is unapproved use of someone else's trademark.
+    # This is about what a VISITOR reads, so count against the page's copy only:
+    # strip HTML comments (which have to be able to say "Bell" to explain the
+    # seal's usage rules) and data: URIs (a base64 blob can contain the letters
+    # by chance — roughly a 3% shot per 30KB image, which would be a baffling
+    # failure to debug). Everything a visitor can actually see still counts.
+    copy_only = re.sub(r"<!--.*?-->", "", cs, flags=re.DOTALL)          # HTML comments
+    copy_only = re.sub(r"/\*.*?\*/", "", copy_only, flags=re.DOTALL)    # CSS/JS comments
+    copy_only = re.sub(r"data:[a-z/+.-]+;base64,[A-Za-z0-9+/=]+", "", copy_only)
     APPROVED_BELL = "Certified Bell Helicopter Customer Service Facility"
+    bell_mentions = copy_only.lower().count("bell")
     check(
         "coming-soon page uses only the approved Bell wording",
-        cs.count(APPROVED_BELL) == 1 and cs.lower().count("bell") == 1,
+        copy_only.count(APPROVED_BELL) == 1 and bell_mentions == 1,
+        "%d mention(s) in visible copy" % bell_mentions if bell_mentions != 1 else "",
     )
 
     # Presence of the plural alone isn't enough — the repo directory is named
