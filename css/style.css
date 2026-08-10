@@ -3,17 +3,40 @@
    =========================================================== */
 
 :root {
-  --color-navy: #0b2545;
-  --color-navy-light: #13355e;
-  --color-steel: #4a5a6a;
-  --color-sky: #2f7fb8;
-  --color-amber: #f2a71b;
-  --color-amber-dark: #cf8a0d;
-  --color-cloud: #f5f7fa;
+  /* Palette confirmed against the company's own shirts (2026-08-04) and then
+     against the approved logo (2026-08-10). Where the two disagreed the logo
+     won, because a logo is a fixed asset and the site is the flexible one:
+     the navy is the mark's #1e3a5f, not the older, darker #0b2545. */
+  --color-navy: #1e3a5f;
+  --color-navy-deep: #14283f;
+  --color-navy-light: #2a4f7d;
+  --color-sky: #3585cf;        /* royal blue, measured off a company shirt */
+  --color-gunmetal: #3d4854;
+  --color-steel: #7d8b99;
+  --color-ink: #14171c;        /* the logo wordmark's black */
+  --color-cloud: #eef2f6;
   --color-white: #ffffff;
   --color-text: #1c2733;
   --color-text-muted: #55636f;
   --color-border: #e1e6eb;
+
+  /* Safety orange is the single accent — hue 22 against the blue's 211, so a
+     true complement, and it reads as equipment rather than gold. It replaces
+     the amber #f2a71b, which was the one invented colour in the project. */
+  --color-accent: #f26722;
+  --color-accent-dark: #d4551a;
+  /* Neither the accent nor the royal clears 4.5:1 for small text, so each has
+     a shifted tint for that job. Fills and large type use the brand value;
+     links, eyebrows and captions use these. Don't collapse them back. */
+  --color-accent-on-dark: #ff8b4d;   /* 5.1:1 on navy */
+  --color-accent-on-light: #b8460f;  /* 5.3:1 on white */
+  --color-sky-on-light: #205d94;     /* 6.8:1 on white */
+
+  /* Placeholder flags stay amber on purpose. They are a build-time warning,
+     not brand — and now that the accent is orange they no longer read as a
+     design choice, which is exactly what we want from them. */
+  --color-flag: #f2a71b;
+  --color-flag-dark: #cf8a0d;
 
   --font-heading: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --font-body: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
@@ -46,7 +69,7 @@ img {
 }
 
 a {
-  color: var(--color-sky);
+  color: var(--color-sky-on-light);
   text-decoration: none;
 }
 
@@ -70,7 +93,7 @@ h1, h2, h3, h4 {
 /* ---------- Placeholder marker ---------- */
 .placeholder {
   background: #fff8e6;
-  border: 1px dashed var(--color-amber-dark);
+  border: 1px dashed var(--color-flag-dark);
   border-radius: var(--radius);
   padding: 2px 8px;
   color: #8a5d00;
@@ -80,7 +103,7 @@ h1, h2, h3, h4 {
 
 .placeholder-block {
   background: #fff8e6;
-  border: 1px dashed var(--color-amber-dark);
+  border: 1px dashed var(--color-flag-dark);
   border-radius: var(--radius);
   padding: 16px 20px;
   color: #8a5d00;
@@ -171,8 +194,8 @@ h1, h2, h3, h4 {
 }
 
 .nav-links a.active {
-  color: var(--color-navy);
-  background: var(--color-amber);
+  color: var(--color-ink);
+  background: var(--color-accent);
 }
 
 /* Collapse to the hamburger at 940px, not 860px: the 8-item nav needs the extra
@@ -213,7 +236,7 @@ h1, h2, h3, h4 {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 80% 20%, rgba(242,167,27,0.18), transparent 45%);
+  background-image: radial-gradient(circle at 80% 20%, rgba(242,103,34,0.16), transparent 45%);
   pointer-events: none;
 }
 
@@ -239,7 +262,7 @@ h1, h2, h3, h4 {
 }
 
 .hero-copy .eyebrow {
-  color: var(--color-amber);
+  color: var(--color-accent-on-dark);
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 0.8rem;
@@ -281,13 +304,13 @@ h1, h2, h3, h4 {
 }
 
 .btn-primary {
-  background: var(--color-amber);
-  color: var(--color-navy);
+  background: var(--color-accent);
+  color: var(--color-ink);
 }
 
 .btn-primary:hover {
-  background: var(--color-amber-dark);
-  color: var(--color-navy);
+  background: var(--color-accent-dark);
+  color: var(--color-ink);
 }
 
 .btn-outline {
@@ -335,7 +358,7 @@ h1, h2, h3, h4 {
 }
 
 .section-header .eyebrow {
-  color: var(--color-sky);
+  color: var(--color-sky-on-light);
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 0.8rem;
@@ -424,7 +447,7 @@ h1, h2, h3, h4 {
 .stat .num {
   font-size: 2.2rem;
   font-weight: 700;
-  color: var(--color-amber);
+  color: var(--color-accent);
   font-family: var(--font-heading);
 }
 
@@ -462,12 +485,12 @@ h1, h2, h3, h4 {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: var(--color-amber);
+  background: var(--color-accent);
   border: 3px solid var(--color-navy);
 }
 
 .timeline-item .year {
-  color: var(--color-sky);
+  color: var(--color-sky-on-light);
   font-weight: 700;
   font-family: var(--font-heading);
   margin-bottom: 6px;
@@ -515,7 +538,7 @@ h1, h2, h3, h4 {
 }
 
 .news-date {
-  color: var(--color-sky);
+  color: var(--color-sky-on-light);
   font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -536,7 +559,7 @@ h1, h2, h3, h4 {
 /* ---------- Quote / Callout ---------- */
 .callout {
   background: var(--color-white);
-  border-left: 4px solid var(--color-amber);
+  border-left: 4px solid var(--color-accent);
   border-radius: var(--radius);
   padding: 26px 28px;
   box-shadow: var(--shadow);
@@ -567,7 +590,7 @@ h1, h2, h3, h4 {
   flex-wrap: wrap;
   background: var(--color-cloud);
   border: 1px solid var(--color-border);
-  border-left: 4px solid var(--color-amber);
+  border-left: 4px solid var(--color-accent);
   border-radius: var(--radius);
   padding: 24px 28px;
 }
@@ -752,7 +775,7 @@ form.contact-form {
 }
 
 .footer-grid a:hover {
-  color: var(--color-amber);
+  color: var(--color-accent-on-dark);
 }
 
 .footer-brand p {
@@ -796,7 +819,7 @@ form.contact-form {
 
 /* ---------- Breadcrumb / page intro ---------- */
 .page-eyebrow {
-  color: var(--color-amber);
+  color: var(--color-accent-on-light);
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 0.8rem;
