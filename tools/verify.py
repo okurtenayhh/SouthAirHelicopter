@@ -43,11 +43,43 @@ UNCONFIRMED_MODEL_RE = re.compile(
     r"\b(412|505|th-?57|jetranger|longranger|huey|uh-1)\b", re.IGNORECASE
 )
 # A founding year is permanent; an age derived from it rots every January.
-# State 1979, never "46 years" or "nearly five decades".
+#
+# Refined 2026-08-13, because the original rule was blunter than its own reason.
+# What actually goes stale is an *exact* age: "47 years" is wrong next January.
+# A *floored* age does not — "45+ years" and "over four decades" are true today
+# and still true in ten years, because a floor can only become understated, never
+# incorrect. So the guard now blocks the exact forms and permits the floored ones.
+#
+# This was the user's call and it is the better rule: it encodes the reason the
+# check exists instead of a proxy for it. The cost is that a floor drifts from
+# flattering to modest over time and wants bumping every few years, which is a
+# copy decision rather than a correctness bug.
+#
+# "almost"/"nearly"/"about"/"roughly" are NOT floors — they approximate an exact
+# age and go stale with it, so they stay blocked.
+FLOOR_QUALIFIER = r"(?:over|more than|well over|at least|upwards of)"
+# Each lookbehind must be fixed-width in Python, so they are listed separately
+# rather than alternated. Applied to BOTH branches — an earlier version guarded
+# only the decades branch, which let "over 45 years" fail as if it were exact.
+_NOT_FLOORED = (
+    r"(?<!over )(?<!more than )(?<!well over )(?<!at least )(?<!upwards of )"
+)
 AGE_CLAIM_RE = re.compile(
-    r"\b\d{1,3}\+?[\s-]?(?:years?|yrs?)\b"
-    r"|\b(?:(?:almost|nearly|over|more than|well over|about|roughly)\s+)?"
+    # "47 years", "27 yrs" — bare exact age. A trailing "+" makes it a floor, so
+    # require that no "+" follows the digits.
+    r"\b" + _NOT_FLOORED + r"\d{1,3}(?!\+)[\s-]?(?:years?|yrs?)\b"
+    # spelled-out decades, unless explicitly floored
+    r"|\b" + _NOT_FLOORED +
+    r"(?:(?:almost|nearly|about|roughly)\s+)?"
     r"(?:one|two|three|four|five|six|seven|eight|nine|ten)\s+decades?\b",
+    re.IGNORECASE,
+)
+# Floors are allowed on the ten-page site but must still be *explicit* floors.
+FLOORED_AGE_RE = re.compile(
+    r"\b\d{1,3}\+[\s-]?(?:years?|yrs?)\b"
+    r"|\b" + FLOOR_QUALIFIER + r"\s+\d{1,3}[\s-]?(?:years?|yrs?)\b"
+    r"|\b" + FLOOR_QUALIFIER +
+    r"\s+(?:one|two|three|four|five|six|seven|eight|nine|ten)\s+decades?\b",
     re.IGNORECASE,
 )
 # 1997 is a transposition of the real founding year that sat in the
@@ -119,7 +151,7 @@ for name in PAGES:
     text = (ROOT / name).read_text()
     age_hits += [f"{name}:{m}" for m in AGE_CLAIM_RE.findall(text)]
     year_hits += [f"{name}:{m.group(0)}" for m in WRONG_FOUNDED_RE.finditer(text)]
-check("no age claim that will go stale", not age_hits, ", ".join(age_hits))
+check("no exact age claim that will go stale", not age_hits, ", ".join(age_hits))
 check("no near-miss founding year", not year_hits, ", ".join(year_hits))
 
 # 6. No Bell logo asset snuck in.
@@ -228,16 +260,19 @@ else:
     check("coming-soon page states the confirmed founding year", "Established 1979" in cs)
 
     # "46 years", "27+ yrs", "46-year history", "over four decades" — anything
-    # derived from the founding year goes stale silently. Catches numeric forms
-    # (with or without a hyphen to the following word) and spelled-out decade
-    # claims, optionally qualified ("nearly", "over", "more than", ...).
-    AGE_CLAIM_RE = re.compile(
+    # derived from the founding year. This page stays on the ORIGINAL blanket
+    # rule, floors included, and deliberately does not follow the ten-page site's
+    # 2026-08-13 relaxation. Two reasons: it is the one page the public can
+    # actually reach today, and it is a single screen whose whole job is
+    # "Established 1979" — there is nowhere on it a floored age would earn its
+    # keep, so the looser rule would buy nothing and cost the guarantee.
+    CS_AGE_CLAIM_RE = re.compile(
         r"\b\d{1,3}\+?[\s-]?(?:years?|yrs?)\b"
         r"|\b(?:(?:almost|nearly|over|more than|well over|about|roughly)\s+)?"
         r"(?:one|two|three|four|five|six|seven|eight|nine|ten)\s+decades?\b",
         re.IGNORECASE,
     )
-    age_claims = AGE_CLAIM_RE.findall(cs)
+    age_claims = CS_AGE_CLAIM_RE.findall(cs)
     check("coming-soon page makes no age claim that will go stale", not age_claims, ", ".join(age_claims))
 
 print()
