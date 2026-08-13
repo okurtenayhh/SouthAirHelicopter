@@ -18,10 +18,29 @@ HEADER_RE = re.compile(r'<header class="site-header">.*?</header>', re.DOTALL)
 FOOTER_RE = re.compile(r'<footer class="site-footer">.*?</footer>', re.DOTALL)
 NAV_LI_RE = re.compile(r'<ul class="nav-links">(.*?)</ul>', re.DOTALL)
 HREF_RE = re.compile(r'href="([^"#?:]+\.html)"')
-# Bell model designations and common nicknames. Must never appear until
-# ownership confirms which airframes the shop is actually rated on.
+# Aircraft model designations and common nicknames.
+#
+# MODEL_RE blocks all of them. It still guards the coming-soon landing page,
+# which is public and names no aircraft at all.
+#
+# The ten-page site is different since 2026-08-13: ownership confirmed in
+# writing which airframes the shop is rated on, which was the stated condition
+# for lifting the blanket ban. So the main site is guarded by an allowlist
+# instead — the confirmed models may appear, anything else may not. That keeps
+# the actual risk covered (naming a model the shop isn't rated for is a claim a
+# customer could make a maintenance decision on) without blocking the page the
+# confirmation was collected to build.
+#
+# TH-57 is in the unconfirmed list for a different reason: it is the airframe in
+# the NASA answers, and nothing from that section is publishable until NASA's
+# review question is settled. Keeping it here means it cannot reach the markup
+# by accident.
 MODEL_RE = re.compile(
-    r"\b(206|407|412|429|505|jetranger|longranger|huey|uh-1)\b", re.IGNORECASE
+    r"\b(206|407|412|429|505|md ?500|th-?57|jetranger|longranger|huey|uh-1)\b",
+    re.IGNORECASE,
+)
+UNCONFIRMED_MODEL_RE = re.compile(
+    r"\b(412|505|th-?57|jetranger|longranger|huey|uh-1)\b", re.IGNORECASE
 )
 # A founding year is permanent; an age derived from it rots every January.
 # State 1979, never "46 years" or "nearly five decades".
@@ -80,12 +99,13 @@ for name in PAGES:
             broken.add(f"{name} -> {href}")
 check("all internal .html links resolve", not broken, ", ".join(sorted(broken)))
 
-# 4. No aircraft model names anywhere.
+# 4. No UNCONFIRMED aircraft model names. The confirmed ones (206, 407, 429,
+#    MD 500) are allowed as of 2026-08-13; see the note on the patterns above.
 hits = []
 for name in PAGES:
-    for match in MODEL_RE.finditer((ROOT / name).read_text()):
+    for match in UNCONFIRMED_MODEL_RE.finditer((ROOT / name).read_text()):
         hits.append(f"{name}:{match.group(0)}")
-check("no invented aircraft model names", not hits, ", ".join(hits))
+check("no unconfirmed aircraft model names", not hits, ", ".join(hits))
 
 # 5. Dead CSS gone.
 css = (ROOT / "css" / "style.css").read_text()
