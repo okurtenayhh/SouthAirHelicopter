@@ -108,7 +108,118 @@ team for how it may be *described*.
 
 ---
 
-## Bell — no public policy exists; the answer is in Mike's contract
+## Bell — Bell has now answered, and sent rules in writing
+
+> **Updated 2026-08-06.** Everything in this section down to "What Bell still hasn't
+> answered" is now **primary source material from Bell**, not desk research. The desk
+> research that follows it is kept because it was largely right and explains *why* the
+> questions were asked — but where the two disagree, Bell's own document wins.
+
+### Bell made contact, unprompted, with the seal artwork
+
+**[Authoritative — from Bell]** On 2026-08-06, **Zachariah Langley, CSF Network Manager,
+Americas** (zlangley@bellflight.com, 817-280-8123) emailed South Air's sbcglobal address
+with the CSF seal artwork attached and a link to Bell's brand portal. This is the
+account-rep route the research below predicted, and it worked — **authorization is not in
+question and never was.** They closed by inviting further questions, which is the opening
+for everything under "What Bell still hasn't answered."
+
+Three things arrived. The source folder is `C:\Users\kourt\Desktop\fwbellcsfbrandingmaterial (1)`
+— **not in this repo, deliberately.** The repo is public and this is Bell's trademark
+artwork; `tools/verify.py` also fails the build on any Bell-named image in `images/`, and
+that guard stays.
+
+1. **The CSF seal, two versions** — full colour and all-black. 750×750px, **CMYK JPEG on a
+   white background.** These are print assets for signage. They are *not* usable on the
+   website as-is: no transparency, wrong colour space, raster only.
+2. **`CSF AMC facility signs_2025.pptx`** — Bell's *Seal Signage Program* deck, revised
+   October 2025, covering CSFs, AMCs, Authorized Delivery Centers, Authorized Resellers,
+   Customer Training Facilities, and Independent Representatives.
+3. **A link to Bell's media hangar, <https://brand.bellflight.com/>** — external vendors
+   click "Request access" at the bottom of the login screen. Bell employees use SSO.
+
+### The seal itself does not say "Helicopter"
+
+**[Authoritative — from Bell]** The issued seal reads **"CUSTOMER SERVICE FACILITY"**
+around the ring and **"CSF"** on the lower banner, around the red Bell shield with the
+dragonfly device. The word "Helicopter" appears nowhere on it. Neither does "Certified."
+
+More pointedly, **the entire deck is about retiring that name.** Slide 2: "CSFs/AMCs
+should remove all existing Bell Helicopter signs and install new Bell seal signs," at the
+facility's own cost. Slides 4 and 5 are procedures for replacing legacy *Bell Helicopter*
+sign panels. So "Bell Helicopter Customer Service Facility" is not merely a dated form —
+it is a name Bell is actively paying its network to take down.
+
+This bears directly on the coming-soon page, which carries "Certified Bell Helicopter
+Customer Service Facility" as an explicit, twice-affirmed client decision. **That decision
+stands until the client changes it** — see Decisions Locked in `PROJECT-STATUS.md`. What's
+new is that the objection is no longer an inference from Bell's 2018 rebrand; it is Bell's
+own current document. Worth putting to the office manager once, factually, and then
+dropping either way.
+
+### The co-branding rules, in Bell's words
+
+**[Authoritative — from Bell]** Slide 3, on size and placement. Written for signage, but
+it is Bell's statement of how the seal relates to a facility's own brand, and the
+principles carry to a website:
+
+- **"Please make sure that your company signage is the most prominent visual brand."**
+- **The seal must be "surrounded by ample clear space and smaller in size than your
+  company logo."**
+- **"You should never physically connect your company logo or any others directly to the
+  Bell seal logo."**
+- Where other OEM logos appear, the Bell seal should be **"as equal in size as possible"**
+  to them, with **"balanced and equal clear space between them."**
+
+The slide's own mockup shows the pattern plainly: the facility's wordmark large at the
+left of the sign, the Bell seal small at the right, an equal-sized slot beside it for
+another OEM, generous space around everything.
+
+**This is exactly the reserved badge slot already built on `bell-service-center.html`.**
+That design was right before we had the rules; it now has a citation.
+
+### The do-not list
+
+**[Authoritative — from Bell]** Slide 6, "What To Avoid." Six illustrated prohibitions:
+
+| Rule | What it means here |
+| --- | --- |
+| **Do not rotate the seal.** | No jaunty angles, no CSS transforms. |
+| **Do not create company logo or text lockups with seals.** | The seal never becomes part of a South Air composite mark. |
+| **Do not create lockups with the Bell shield or use it as a standalone element.** | **Settles the corporate-shield question permanently.** The bare red shield may not appear at all. |
+| **Do not substitute the font type or redraw the seals.** | **We cannot hand-build the seal as an SVG.** Bell's own vector file is the only legitimate source — which is what the brand portal is for. |
+| **Do not alter the colors** in the shield or any element of the seal. | No recolouring to the site palette, no monochrome variant we invent ourselves. Bell supplies an all-black version; use theirs. |
+| **Do not add effects — such as drop shadows — to the seal.** | No CSS shadow, glow, or border treatment on the badge. |
+
+Slide 6 also points to a separate **"Bell Seal Guidelines" document** for the full rules.
+**That document was not attached** and is presumably in the brand portal. It is where any
+*digital/web-specific* rules would live — the deck we have is signage-only.
+
+### What Bell still hasn't answered
+
+The signage deck answers artwork, placement, and prohibitions. It does not answer:
+
+- **The Bell Seal Guidelines document itself** — the full rules, including web use.
+- **Web-format artwork** — RGB, vector or transparent PNG. Summit Aviation serves exactly
+  such a file (see below), so it exists.
+- **The exact authorized wording** for describing our status in body copy.
+- **Whether we may name the models we're rated on** (206 series, 407 series, 429), and how
+  those designations should be written.
+- **Whether any trademark attribution line is required** in the footer.
+- **Whether Bell wants to review the site before launch.**
+- **Whether a stylized helicopter may appear in South Air's own logo** — Mike asked for a
+  429 specifically. Note slide 6 forbids lockups with the *shield*; it says nothing about
+  aircraft, so this genuinely needs asking rather than inferring.
+
+Zachariah invited questions. One reply covers all seven.
+
+**One practical note:** the brand-portal access request should come from a **South Air
+address** — Bell is vetting its own vendor network, and a request from an unfamiliar
+personal address is a slower path than one from the facility Bell already emailed.
+
+---
+
+### Desk research (2026-07-30) — superseded above, kept for context
 
 ### There is no published third-party trademark policy
 
@@ -153,6 +264,9 @@ someone whose job is to say yes.
 
 ### Flag: the wording on the business card may be out of date
 
+> **Confirmed 2026-08-06.** This was inferred; Bell's own signage deck now says it
+> outright. See "The seal itself does not say 'Helicopter'" above.
+
 **[Inferred — worth checking]** Mike's card says "**Bell Helicopter** Customer Service
 Facility." Bell dropped "Helicopter" from its brand in 2018, becoming simply **Bell**
 (legal entity Bell Textron Inc.). Current Bell and CSF materials say "**Bell**
@@ -165,13 +279,22 @@ anyone in the industry, and the kind of detail a Bell rep will notice immediatel
 
 ### Questions to put to Bell (via Mike's CSF account rep, not the ethics line)
 
-- Please send the current CSF seal artwork and any co-branding guidelines.
+> **Partly answered 2026-08-06** by Zachariah Langley's email — see the top of this
+> section. The rep is identified, reachable, and has invited follow-up. The live version
+> of this list is now **"What Bell still hasn't answered"** above; the original list is
+> kept here to show what was asked and what came back.
+
+- ~~Please send the current CSF seal artwork and any co-branding guidelines.~~
+  **Answered** — print artwork received, plus the signage deck's placement and do-not
+  rules. Still outstanding: web-format artwork and the full Bell Seal Guidelines document.
 - What is the exact authorized wording for our status — "Bell Authorized Customer
-  Service Facility"? Does it still include "Helicopter"?
+  Service Facility"? Does it still include "Helicopter"? **Partly answered** — the seal
+  says "Customer Service Facility" with no "Helicopter," and Bell is retiring that name
+  from signage. The exact *body-copy* wording is still unconfirmed.
 - May we state which Bell models we're authorized to work on, and how should those
-  model designations be written?
-- Is any trademark attribution line required in our footer?
-- Does Bell need to review the site before launch?
+  model designations be written? **Unanswered.**
+- Is any trademark attribution line required in our footer? **Unanswered.**
+- Does Bell need to review the site before launch? **Unanswered.**
 
 ---
 
@@ -183,7 +306,7 @@ research narrows what we're waiting for:
 | Page | Current state | What the research says |
 | --- | --- | --- |
 | `nasa-partnership.html` | Empty, standing pre-publication warning | Warning stays. The **logo is a settled no** — stop treating that as an open question. A factual description is achievable; get the sentence approved, and check whether prior review is contractual |
-| `bell-service-center.html` | Empty reserved badge slot, standing warning | The badge slot is **the right design** — Bell issues exactly such a seal. Request the artwork rather than asking permission to use the corporate logo. Also re-check the "Bell Helicopter" wording |
+| `bell-service-center.html` | Empty reserved badge slot, standing warning | The badge slot is **confirmed correct** by Bell's own placement rules (2026-08-06): seal smaller than the company logo, ample clear space, never physically connected. It stays empty until **web-format artwork** arrives from the brand portal — the print JPEGs can't be used, and redrawing the seal is explicitly forbidden |
 | `index.html` | No Bell/NASA marks | Keep it that way. **"Trusted by" is verbatim on NASA's prohibited-wording list** — so a trust/logo strip is not merely risky framing, it's the exact phrase NASA names. Don't build one that includes NASA |
 
 Also worth noting: **Summit names Bell models on their site.** South Air's
@@ -202,4 +325,11 @@ category — and `tools/verify.py` will need its `MODEL_RE` check relaxed at tha
 - [NASA STI disclaimers](https://sti.nasa.gov/disclaimers/)
 - [JPL Acquisition & Supplier Resources](https://acquisition.jpl.nasa.gov/)
 - [Bell legal information](https://www.bellflight.com/legal)
+- [Bell brand portal / media hangar](https://brand.bellflight.com/) — external vendors
+  request access from the login screen
+- **Bell, *Seal Signage Program*, revised October 2025** (`CSF AMC facility signs_2025.pptx`)
+  — supplied direct by Bell 2026-08-06. Not in this repo; see the Bell section above for
+  where the source folder sits and why it's kept out
+- **Bell CSF seal artwork**, colour and all-black, CMYK print JPEGs — supplied with the
+  same email
 - [Summit Aviation — Bell maintenance](https://summit-aviation.com/services/maintenance/bell/)

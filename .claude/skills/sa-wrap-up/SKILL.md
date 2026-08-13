@@ -171,6 +171,9 @@ These recur every session and are easy to get wrong from a cold start:
 - **Adding an `.html` file means satisfying `verify.py`.** Every page must carry the
   shared header and footer, 8 nav items, and 3+ placeholders. This is why there's no
   `404.html` — Netlify's default 404 is used instead.
-- **Nothing is client-approved yet.** The user has signed off on the logo; Mike has
-  not. Keep "approved by the user" and "approved by the owner" distinct in the
-  tracker — conflating them could put unapproved work in front of a paying client.
+- **The office manager approves things, because she asks Mike in person.** Established
+  2026-08-04. Her sign-off is not a weaker substitute for the owner's — it is how his
+  approval actually arrives. Don't hold work back waiting for Mike to review something
+  directly; send it to her. Do keep tracking what is *unconfirmed* in anything you hand
+  over, so she knows what to ask him. (The user's own approval is still a separate
+  thing from the client's — don't conflate those two.)

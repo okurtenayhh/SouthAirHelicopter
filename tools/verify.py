@@ -18,11 +18,74 @@ HEADER_RE = re.compile(r'<header class="site-header">.*?</header>', re.DOTALL)
 FOOTER_RE = re.compile(r'<footer class="site-footer">.*?</footer>', re.DOTALL)
 NAV_LI_RE = re.compile(r'<ul class="nav-links">(.*?)</ul>', re.DOTALL)
 HREF_RE = re.compile(r'href="([^"#?:]+\.html)"')
-# Bell model designations and common nicknames. Must never appear until
-# ownership confirms which airframes the shop is actually rated on.
+# Aircraft model designations and common nicknames.
+#
+# MODEL_RE blocks all of them. It still guards the coming-soon landing page,
+# which is public and names no aircraft at all.
+#
+# The ten-page site is different since 2026-08-13: ownership confirmed in
+# writing which airframes the shop is rated on, which was the stated condition
+# for lifting the blanket ban. So the main site is guarded by an allowlist
+# instead — the confirmed models may appear, anything else may not. That keeps
+# the actual risk covered (naming a model the shop isn't rated for is a claim a
+# customer could make a maintenance decision on) without blocking the page the
+# confirmation was collected to build.
+#
+# TH-57 is in the unconfirmed list for a different reason: it is the airframe in
+# the NASA answers, and nothing from that section is publishable until NASA's
+# review question is settled. Keeping it here means it cannot reach the markup
+# by accident.
 MODEL_RE = re.compile(
-    r"\b(206|407|412|429|505|jetranger|longranger|huey|uh-1)\b", re.IGNORECASE
+    r"\b(206|407|412|429|505|md ?500|th-?57|jetranger|longranger|huey|uh-1)\b",
+    re.IGNORECASE,
 )
+UNCONFIRMED_MODEL_RE = re.compile(
+    r"\b(412|505|th-?57|jetranger|longranger|huey|uh-1)\b", re.IGNORECASE
+)
+# A founding year is permanent; an age derived from it rots every January.
+#
+# Refined 2026-08-13, because the original rule was blunter than its own reason.
+# What actually goes stale is an *exact* age: "47 years" is wrong next January.
+# A *floored* age does not — "45+ years" and "over four decades" are true today
+# and still true in ten years, because a floor can only become understated, never
+# incorrect. So the guard now blocks the exact forms and permits the floored ones.
+#
+# This was the user's call and it is the better rule: it encodes the reason the
+# check exists instead of a proxy for it. The cost is that a floor drifts from
+# flattering to modest over time and wants bumping every few years, which is a
+# copy decision rather than a correctness bug.
+#
+# "almost"/"nearly"/"about"/"roughly" are NOT floors — they approximate an exact
+# age and go stale with it, so they stay blocked.
+FLOOR_QUALIFIER = r"(?:over|more than|well over|at least|upwards of)"
+# Each lookbehind must be fixed-width in Python, so they are listed separately
+# rather than alternated. Applied to BOTH branches — an earlier version guarded
+# only the decades branch, which let "over 45 years" fail as if it were exact.
+_NOT_FLOORED = (
+    r"(?<!over )(?<!more than )(?<!well over )(?<!at least )(?<!upwards of )"
+)
+AGE_CLAIM_RE = re.compile(
+    # "47 years", "27 yrs" — bare exact age. A trailing "+" makes it a floor, so
+    # require that no "+" follows the digits.
+    r"\b" + _NOT_FLOORED + r"\d{1,3}(?!\+)[\s-]?(?:years?|yrs?)\b"
+    # spelled-out decades, unless explicitly floored
+    r"|\b" + _NOT_FLOORED +
+    r"(?:(?:almost|nearly|about|roughly)\s+)?"
+    r"(?:one|two|three|four|five|six|seven|eight|nine|ten)\s+decades?\b",
+    re.IGNORECASE,
+)
+# Floors are allowed on the ten-page site but must still be *explicit* floors.
+FLOORED_AGE_RE = re.compile(
+    r"\b\d{1,3}\+[\s-]?(?:years?|yrs?)\b"
+    r"|\b" + FLOOR_QUALIFIER + r"\s+\d{1,3}[\s-]?(?:years?|yrs?)\b"
+    r"|\b" + FLOOR_QUALIFIER +
+    r"\s+(?:one|two|three|four|five|six|seven|eight|nine|ten)\s+decades?\b",
+    re.IGNORECASE,
+)
+# 1997 is a transposition of the real founding year that sat in the
+# placeholders for several sessions. Pin it so it cannot come back.
+FOUNDED = "1979"
+WRONG_FOUNDED_RE = re.compile(r"\b(?:1997|1978|1980)\b")
 
 failures = []
 
@@ -68,17 +131,28 @@ for name in PAGES:
             broken.add(f"{name} -> {href}")
 check("all internal .html links resolve", not broken, ", ".join(sorted(broken)))
 
-# 4. No aircraft model names anywhere.
+# 4. No UNCONFIRMED aircraft model names. The confirmed ones (206, 407, 429,
+#    MD 500) are allowed as of 2026-08-13; see the note on the patterns above.
 hits = []
 for name in PAGES:
-    for match in MODEL_RE.finditer((ROOT / name).read_text()):
+    for match in UNCONFIRMED_MODEL_RE.finditer((ROOT / name).read_text()):
         hits.append(f"{name}:{match.group(0)}")
-check("no invented aircraft model names", not hits, ", ".join(hits))
+check("no unconfirmed aircraft model names", not hits, ", ".join(hits))
 
 # 5. Dead CSS gone.
 css = (ROOT / "css" / "style.css").read_text()
 html_all = "".join((ROOT / n).read_text() for n in PAGES)
 check("no .pricing-table references", "pricing-table" not in css + html_all)
+
+# 5b. The founding year is confirmed, so guard it on the main site too:
+#     no derived age claim, and no near-miss year.
+age_hits, year_hits = [], []
+for name in PAGES:
+    text = (ROOT / name).read_text()
+    age_hits += [f"{name}:{m}" for m in AGE_CLAIM_RE.findall(text)]
+    year_hits += [f"{name}:{m.group(0)}" for m in WRONG_FOUNDED_RE.finditer(text)]
+check("no exact age claim that will go stale", not age_hits, ", ".join(age_hits))
+check("no near-miss founding year", not year_hits, ", ".join(year_hits))
 
 # 6. No Bell logo asset snuck in.
 imgs = sorted(p.name for p in (ROOT / "images").glob("*"))
@@ -99,6 +173,107 @@ for name in PAGES:
         if "quote-strip" in match.group(1):
             misplaced.append(name)
 check("no .quote-strip inside .section-alt", not misplaced, ", ".join(misplaced))
+
+# 9. The coming-soon landing page. Deployed separately from its own directory,
+# so it is deliberately outside PAGES: no shared header, no shared footer, no
+# placeholders. It is the one page a member of the public will actually see
+# before launch, so what it claims is checked tightly instead of loosely.
+CS = ROOT / "coming-soon" / "index.html"
+if not CS.exists():
+    check("coming-soon page exists", False, "coming-soon/index.html missing")
+else:
+    cs = CS.read_text(encoding="utf-8")
+
+    # "Self-contained" means the browser fetches nothing to render this page.
+    # It does NOT mean the markup can't name an external URL at all: rel=canonical
+    # and the og:/twitter: image are pointers read by crawlers, never fetched
+    # during render, and the og:image has to be an absolute URL on a real file
+    # because a data: URI does not work in link previews. So exempt link rels
+    # that don't load anything, and keep catching stylesheets, icons and preloads.
+    NON_FETCHING_REL = ("canonical", "alternate", "author", "license", "me")
+    external = [
+        m for m in re.findall(r'<link\s[^>]*href="(?!data:)[^"]+"', cs)
+        if not any('rel="%s"' % r in m for r in NON_FETCHING_REL)
+    ]
+    external += re.findall(r'<script\s[^>]*src=', cs)
+    external += re.findall(r'<img\s[^>]*src="(?!data:)[^"]+"', cs)
+    external += re.findall(r'<iframe\s[^>]*src="(?!data:)[^"]+"', cs, re.IGNORECASE)
+    # SVG <image href="…"> / xlink:href="…" — a second way to pull in a raster asset.
+    external += re.findall(r'<image\s[^>]*(?:xlink:href|href)="(?!data:)[^"]+"', cs, re.IGNORECASE)
+    external += re.findall(r'@import\s+[^;]+;', cs, re.IGNORECASE)
+    # Any CSS url(...) that isn't a data: URI — covers background:, @font-face src:,
+    # list-style-image, cursor, etc. in one net rather than one property at a time.
+    external += re.findall(r'url\(\s*(?!["\']?data:)[^)]+\)', cs, re.IGNORECASE)
+    check("coming-soon page is self-contained", not external, ", ".join(external))
+
+    check(
+        "coming-soon page carries the confirmed phone number",
+        "281.648.5187" in cs and "+12816485187" in cs,
+    )
+
+    # The digits 648 and 684 were transposed in a screenshot taken during the
+    # domain signup. Caught by eye once; not relying on eyes again. Matched on
+    # the bare digit sequence with any (or no) separator between groups, so
+    # "(281) 684-5187", "281 684 5187", and "2816845187" are all caught too —
+    # not just the two literal forms seen so far.
+    transposed = re.findall(r"281\D{0,3}684\D{0,3}5187", cs)
+    check("no transposed phone number", not transposed, ", ".join(transposed))
+
+    check(
+        "coming-soon page names no aircraft model",
+        not MODEL_RE.search(cs),
+        ", ".join(m.group(0) for m in MODEL_RE.finditer(cs)),
+    )
+
+    # The Bell wording is the office manager's explicit choice (2026-08-04),
+    # kept verbatim over the objection that "Bell Helicopter" is a name Bell
+    # retired in 2018. Pin the exact approved string: any other Bell phrasing
+    # on this page is unapproved use of someone else's trademark.
+    # This is about what a VISITOR reads, so count against the page's copy only:
+    # strip HTML comments (which have to be able to say "Bell" to explain the
+    # seal's usage rules) and data: URIs (a base64 blob can contain the letters
+    # by chance — roughly a 3% shot per 30KB image, which would be a baffling
+    # failure to debug). Everything a visitor can actually see still counts.
+    copy_only = re.sub(r"<!--.*?-->", "", cs, flags=re.DOTALL)          # HTML comments
+    copy_only = re.sub(r"/\*.*?\*/", "", copy_only, flags=re.DOTALL)    # CSS/JS comments
+    copy_only = re.sub(r"data:[a-z/+.-]+;base64,[A-Za-z0-9+/=]+", "", copy_only)
+    APPROVED_BELL = "Certified Bell Helicopter Customer Service Facility"
+    bell_mentions = copy_only.lower().count("bell")
+    check(
+        "coming-soon page uses only the approved Bell wording",
+        copy_only.count(APPROVED_BELL) == 1 and bell_mentions == 1,
+        "%d mention(s) in visible copy" % bell_mentions if bell_mentions != 1 else "",
+    )
+
+    # Presence of the plural alone isn't enough — the repo directory is named
+    # "SouthAirHelicopter" (singular), which invites exactly that typo creeping
+    # into the markup while the plural still appears elsewhere (e.g. <title>).
+    # Assert the singular form is absent too, matched as a whole word so it
+    # doesn't fire on the substring inside "Helicopters".
+    singular_hit = re.search(r"South Air Helicopter(?!s)\b", cs)
+    check(
+        "coming-soon page uses the plural legal name",
+        "South Air Helicopters, Inc." in cs and not singular_hit,
+        singular_hit.group(0) if singular_hit else "",
+    )
+
+    check("coming-soon page states the confirmed founding year", "Established 1979" in cs)
+
+    # "46 years", "27+ yrs", "46-year history", "over four decades" — anything
+    # derived from the founding year. This page stays on the ORIGINAL blanket
+    # rule, floors included, and deliberately does not follow the ten-page site's
+    # 2026-08-13 relaxation. Two reasons: it is the one page the public can
+    # actually reach today, and it is a single screen whose whole job is
+    # "Established 1979" — there is nowhere on it a floored age would earn its
+    # keep, so the looser rule would buy nothing and cost the guarantee.
+    CS_AGE_CLAIM_RE = re.compile(
+        r"\b\d{1,3}\+?[\s-]?(?:years?|yrs?)\b"
+        r"|\b(?:(?:almost|nearly|over|more than|well over|about|roughly)\s+)?"
+        r"(?:one|two|three|four|five|six|seven|eight|nine|ten)\s+decades?\b",
+        re.IGNORECASE,
+    )
+    age_claims = CS_AGE_CLAIM_RE.findall(cs)
+    check("coming-soon page makes no age claim that will go stale", not age_claims, ", ".join(age_claims))
 
 print()
 if failures:

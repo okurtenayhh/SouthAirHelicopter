@@ -1,6 +1,26 @@
 # Netlify CLI writes the linked site ID here — local state, not shared config.
 .netlify/
 
+# Subagent-driven-development scratch: ledgers, task briefs, review packages.
+# Working notes about a real client, and this repo is public.
+.superpowers/
+
+# Playwright MCP drops snapshots and console logs here when the page is
+# screenshotted during a design pass. Local scratch, not shared config.
+.playwright-mcp/
+
 # Recall's local session transcript. This repo is public and these logs contain
 # working notes about a real client — keep them on the machine.
 .recall/
+
+# Returned client paperwork: scans, transcriptions, anything in the client's own
+# hand. This repo is public. The NASA answers in particular describe work the
+# owner himself thinks NASA probably has to review before it is published, so
+# committing them here would publish them ahead of that review — the exact thing
+# the NASA discipline on this project exists to prevent.
+private/
+
+# Screenshots taken while checking a page in a browser. Playwright's own tool
+# writes these to the repo root when given a bare filename, and `git add -A`
+# will happily sweep them into a commit — as it did once. Local scratch only.
+/*.png
