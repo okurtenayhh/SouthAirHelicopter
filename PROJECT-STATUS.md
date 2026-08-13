@@ -1,6 +1,6 @@
 # Project Status
 
-*Last updated: 2026-08-13 (local, eighth session) · `main` at `e98e73a` · working branch `claude/coming-soon-page` at `9061053`, in sync with origin · PRs #1–#3, #5–#8 merged · **PR #9 is open and carries the live landing page** — https://github.com/okurtenayhh/SouthAirHelicopter/pull/9 · **PR #4 is open as a draft** — a finished client questionnaire nobody has merged: https://github.com/okurtenayhh/SouthAirHelicopter/pull/4*
+*Last updated: 2026-08-13 (local, eighth session — **the questionnaire came back from Mike**) · `main` at `e98e73a` · working branch `claude/coming-soon-page` · PRs #1–#3, #5–#8 merged · **PR #9 is open and carries the live landing page** — https://github.com/okurtenayhh/SouthAirHelicopter/pull/9 · **PR #4 is open as a draft** — a finished client questionnaire nobody has merged: https://github.com/okurtenayhh/SouthAirHelicopter/pull/4*
 
 *Unmerged branches: `claude/coming-soon-page` (current — carries the landing page that is now **live on the client's domain**, the logo, the palette, and several sessions of tracker updates. **This branch is the live site; land it.**) · `claude/client-content-brief` (brief documents, pushed, no PR) · `claude/sphere-logo` (a logo exploration, local only, **now dead** — the logo is settled, see Decisions Locked)*
 
@@ -12,12 +12,35 @@
 
 ## Where This Stands
 
+**🔑 The questionnaire came back on 2026-08-13, filled in by hand — and it is Mike
+answering, not the office manager relaying him.** This is the largest single delivery of
+real content the project has had, and it changes what is buildable more than anything
+since the logo. Full verbatim transcription at **`private/client-answers-2026-08-13.md`**,
+with the scan beside it. **`private/` is gitignored and must stay that way** — the repo is
+public and his NASA answers are not publishable yet (see below).
+
+What it unblocks, in rough order of value: **the aircraft ratings**, which have kept
+`platforms.html` deliberately empty since it was built; **the founder's name and year**
+(Robert H. Mitchell, 1979); **business hours** (8–5 M–F, with AOG callout); **the airport
+identifier** (KLVJ); a **mission statement** and a **one-line description of the company**
+in his own words; the **services list** corrected by his own hand; and replacements for
+both unverified homepage claims. It also **closes the "Bell Helicopter" wording question**
+that has sat on this list for four sessions.
+
+**Two things in it need going back to him, and one of them is a stop sign.** The
+**attached sheet** carrying the founding story and the history milestones is referenced
+three times and **is not in the scan** — seven pages came through and all seven are the
+questionnaire. And on NASA, asked whether NASA needs to review anything mentioning them,
+he wrote **"PROBABLY"**; asked whether "partnership" is accurate, he wrote **"?"**. That
+is the owner himself saying he doesn't know if this is publishable. `nasa-partnership.html`
+is now blocked on a specific answerable question rather than on vague unease — which is
+progress, but it is a harder block than before, not a softer one.
+
 **Ten pages now, structurally complete.** The competitor research at `docs/market-research.md` was worked into the site: three new pages (`bell-service-center.html`, `platforms.html`, `careers.html`), a repeated Request-a-Quote CTA, certifications in the footer sitewide, an airport-identifier slot on Contact, and the placeholder pricing table replaced with a "How Pricing Works" section — MRO shops quote per job rather than publish rates.
 
 So there is now a *place* for everything the category expects. What's in most of those places is still placeholder text, flagged in amber on the page. The gap is content, not structure.
 
-**The site is now deployed** to Netlify at a stable URL that can be refreshed as work
-lands. Nothing has been shown to Mike yet, but there is finally a link to show him.
+**The site is deployed** to Netlify at a stable URL that can be refreshed as work lands.
 
 Trademark research for Bell and NASA is written up in `docs/trademark-research.md` —
 desk research to compare against what Bell and NASA actually say when asked.
@@ -28,17 +51,13 @@ as a side effect: the unflagged "NASA / Partnership" stat tile is gone. **PR #8 
 and the fix is deployed and verified live** — the stale-preview warning that sat here for
 two sessions is resolved.
 
-**There is now a complete brief for collecting the missing content**, on the unmerged
-branch `claude/client-content-brief`: an internal master list plus two client-facing PDFs
-(a 4-page checklist of what to collect, and an 8-page fill-in questionnaire). Everything
-in them traces to a real placeholder in the markup. **The two PDFs and the preview link
-are what goes to Mike** — that package is now assembled and unblocked.
-
-**The questionnaire went to the office manager on 2026-08-04 and the first answers came
-back.** None of them were from her own section — the site is still waiting on hours, the
-company overview, the general-inquiries inbox, job openings, and photos. What did come
-back was an aircraft-ratings answer belonging to Mike's section, a logo direction from
-Mike, and the discovery that **the Bell CSF seal is printed on Mike's business card**.
+**The content brief worked, and this is the evidence.** `claude/client-content-brief`
+carries an internal master list plus two client-facing PDFs — a checklist of what to
+collect and a fill-in questionnaire, every question traceable to a real placeholder in the
+markup. It went out on 2026-08-04, produced a partial reply that month, and on 2026-08-13
+came back filled in by the owner himself. **The approach is validated: ask in writing,
+question by question, against a page they can see.** Reuse it for the follow-ups rather
+than inventing a new format.
 
 **The domain is `southairhelicopters.com`, bought through Squarespace and now pointed at
 the landing page** (2026-08-10). The ten-page site stays on its noindexed preview URL until
@@ -93,8 +112,8 @@ the source art allows.
 and **Mike was told how it was made and okayed that too** — it is a Canva AI sketch of a
 photograph the user was given. That closed the provenance question; don't reopen it. What
 is left is ordinary production work: a **vector** for print and signage and a **stitchable**
-version for the embroidery machine (Next Up item 3), plus Bell's answer on whether an
-identifiable **429** may sit in South Air's own mark (item 2). Both under Constraints That
+version for the embroidery machine (Next Up item 4), plus Bell's answer on whether an
+identifiable **429** may sit in South Air's own mark (item 3). Both under Constraints That
 Bite, including why one regeneration from the existing text prompt would produce the
 stitchable version and leave the approved wordmark and layout untouched.
 
@@ -102,47 +121,49 @@ stitchable version and leave the approved wordmark and layout untouched.
 
 Things that can move without waiting on anyone:
 
-1. **Send Mike the package — this is now fully unblocked and is a very high-value action.** Three things travel together: the preview link (deployed and current), `docs/client-checklist.pdf`, and `docs/client-questions-form.pdf`. Everything that previously blocked this is resolved. People answer far better against a page they can see, so the preview and the questions go in one message. Nothing else on this list moves the project as much, because almost every remaining item is waiting on answers only he has.
-2. **Reply to Zachariah Langley at Bell, and request brand-portal access.** Bell opened the door on 2026-08-06 and explicitly invited questions, so this is now a reply rather than a cold ask — the hard part is done. Seven things are still outstanding and one message covers them all: the **Bell Seal Guidelines** document (referenced twice in the deck, not attached — it's where web rules live), **web-format artwork** (RGB vector or transparent PNG; Summit Aviation serves exactly such a file, so it exists), the exact authorized body-copy wording, whether we may name the 206/407/429, whether a footer attribution line is required, whether Bell wants to review the site pre-launch, and whether a recognizable Bell airframe may appear in South Air's *own* logo (the do-not list forbids shield lockups but is silent on aircraft, so this needs asking, not inferring). **That last question got sharper on 2026-08-10 and should lead:** the chosen mark does not contain a generic stylized helicopter, it contains a detailed rendering that reads as a specific Bell airframe — so this is no longer hypothetical, it is a question about the logo the company has actually adopted. The live list is at `docs/trademark-research.md` under "What Bell still hasn't answered." **Separately, request access at <https://brand.bellflight.com/> — but from a South Air address, not the user's.** Bell is vetting its own vendor network; a request from the facility they already emailed moves faster than one from a stranger.
-3. **Get vector and stitchable versions of the logo.** The web assets are done and deployed; what is missing is a **vector** for print and signage, and a **reduced high-contrast version that can be stitched** — the current art is grayscale shading with hairline blades, which no needle will render. Regenerating the aircraft from the text prompt in `.recall/history.md` produces the stitchable version. **Not urgent, and not blocking anything.** ~~Identify the source image~~ — **closed 2026-08-10: Mike was told how the mark was made and okayed it.** See Constraints That Bite. **The web assets themselves are done and deployed** (`tools/build_logo.py` regenerates them); what is still missing is a **vector** for print, signage and embroidery, and a **reduced high-contrast version that can be stitched** — the current art is grayscale shading and hairline blades, which no needle will render. **Regenerating the aircraft to the 2026-08-06 prompt in `.recall/history.md` remains the move that pays off either way** — it produces the stitchable version *and* is the escape route if the licence answer is bad, since replacing the aircraft leaves the approved wordmark, band and layout untouched.
-4. **Finish propagating the founding year — mostly done 2026-08-10.** **1979 is confirmed** (user, 2026-08-04). The wrong `1997` is gone everywhere and the year now reads as real content on the homepage eyebrow, the homepage stats tile (`1979 / Established`, replacing a "Years in Operation" tile that was a derived age claim) and the first history timeline entry. **`tools/verify.py` now guards this sitewide** — no age claim, no near-miss year. **Six `[PLACEHOLDER Year]` spans remain**, in `about.html`, `history.html` and `index.html`; they are mostly *other* dates (timeline milestones, "Since —" on the homepage's history teaser) rather than the founding year, **so check each one before unwrapping — not all of them are 1979.** The `<title>`/`<meta>` tags also never carried the year, since placeholder styling never reached them; write it in by hand if it belongs there. **Do not bring back derived age claims** ("46 years") when this lands — a year is permanent, a computed age rots annually. `tools/verify.py` already guards the coming-soon page against exactly that pattern; extend the same guard to the main site once the year lands there too.
-5. **Wire the contact form to a real handler.** Still the highest-severity *functional* item — a customer who fills it in today reaches nobody. Cheap now: the site is on Netlify, so **Netlify Forms** is a `data-netlify="true"` attribute plus a notification address, no third-party service and no backend. Blocked only on knowing which inbox submissions should go to.
-6. **Land the open branches.** `claude/coming-soon-page` has **PR #9** open, carrying the built coming-soon landing page and last session's tracker commit. **This branch is what is actually serving the live domain** — `main` does not contain the landing page, so leaving it unmerged means the deployed site and `main` disagree. `claude/client-content-brief` is pushed with no PR — open one. **PR #4** (the older questionnaire, 50 questions plus a `.docx`) still needs a rebase; `PROJECT-STATUS.md` has now been rewritten several times since, so expect a conflict. Its content is superseded by the new PDFs, so merging it is optional — but decide deliberately rather than leaving it to rot.
-7. **Correct the "Bell Helicopter" wording on `bell-service-center.html:41`.** Bell dropped "Helicopter" from the brand in 2018; the page echoes Mike's business card, which predates that. The homepage says "Bell Customer Service Facility" (current form) while the Bell page says "Bell Helicopter Customer Service Facility" (retired form) — so the two pages disagree. Note the coming-soon page now deliberately uses the retired form too, but that was the client's explicit, overruled-objection choice for that one page (see Decisions Locked) — it doesn't settle what the main site should say. Confirm against Bell's answer to item 2 rather than guessing either way.
-8. **Decide whether Careers ships.** It's built, but a careers page with no listed openings can read as a dead site. Either get openings (or an explicit "nothing right now") from the office manager, or hold the page back until launch.
-9. **Lean into the personal/small-shop angle** in About and the homepage hero — named-owner warmth is the one thing neither Arrow Aviation nor Summit Aviation has. Needs Mike's story, so it's half-blocked, but the *structure* for it is there now.
+1. **Build the answers into the site.** ~~Send Mike the package~~ — **done, and answered 2026-08-13.** The work now is turning `private/client-answers-2026-08-13.md` into pages. Rough order of value: **`platforms.html`**, which goes from entirely empty to the best-sourced page on the site; the **homepage stat strip**, where both invented claims now have true replacements; **`services.html`**, where his edits both add and *remove*; **hours and KLVJ** on `contact.html`; the founder and mission on **`about.html`**. Do this before asking him anything else — he answers better against a page he can see, and that is exactly how this delivery was won.
+2. **Go back to him for the attached sheet, and settle NASA.** One short message, two asks. The **attached sheet** with the founding story and the history milestones was referenced three times and never arrived — it is the whole company-story section and the one thing competitors cannot copy. And **NASA needs a real answer**, because "PROBABLY" is not one: does the contract require NASA to review marketing that mentions them, and is "partnership" his word or ours? Send this *after* the pages above are built, so it goes with something to look at. Worth folding in the smaller gaps too — a copy of certificate #XRIR622K, which inbox is public, phone-or-form for quotes, and whether "Parts & Fleet Support" stays.
+3. **Reply to Zachariah Langley at Bell, and request brand-portal access.** Bell opened the door on 2026-08-06 and explicitly invited questions, so this is now a reply rather than a cold ask — the hard part is done. Seven things are still outstanding and one message covers them all: the **Bell Seal Guidelines** document (referenced twice in the deck, not attached — it's where web rules live), **web-format artwork** (RGB vector or transparent PNG; Summit Aviation serves exactly such a file, so it exists), the exact authorized body-copy wording, whether we may name the 206/407/429, whether a footer attribution line is required, whether Bell wants to review the site pre-launch, and whether a recognizable Bell airframe may appear in South Air's *own* logo (the do-not list forbids shield lockups but is silent on aircraft, so this needs asking, not inferring). **That last question got sharper on 2026-08-10 and should lead:** the chosen mark does not contain a generic stylized helicopter, it contains a detailed rendering that reads as a specific Bell airframe — so this is no longer hypothetical, it is a question about the logo the company has actually adopted. The live list is at `docs/trademark-research.md` under "What Bell still hasn't answered." **Separately, request access at <https://brand.bellflight.com/> — but from a South Air address, not the user's.** Bell is vetting its own vendor network; a request from the facility they already emailed moves faster than one from a stranger.
+4. **Get vector and stitchable versions of the logo.** The web assets are done and deployed; what is missing is a **vector** for print and signage, and a **reduced high-contrast version that can be stitched** — the current art is grayscale shading with hairline blades, which no needle will render. Regenerating the aircraft from the text prompt in `.recall/history.md` produces the stitchable version. **Not urgent, and not blocking anything.** ~~Identify the source image~~ — **closed 2026-08-10: Mike was told how the mark was made and okayed it.** See Constraints That Bite. **The web assets themselves are done and deployed** (`tools/build_logo.py` regenerates them); what is still missing is a **vector** for print, signage and embroidery, and a **reduced high-contrast version that can be stitched** — the current art is grayscale shading and hairline blades, which no needle will render. **Regenerating the aircraft to the 2026-08-06 prompt in `.recall/history.md` remains the move that pays off either way** — it produces the stitchable version *and* is the escape route if the licence answer is bad, since replacing the aircraft leaves the approved wordmark, band and layout untouched.
+5. **Finish propagating the founding year — mostly done 2026-08-10.** **1979 is confirmed** (user, 2026-08-04). The wrong `1997` is gone everywhere and the year now reads as real content on the homepage eyebrow, the homepage stats tile (`1979 / Established`, replacing a "Years in Operation" tile that was a derived age claim) and the first history timeline entry. **`tools/verify.py` now guards this sitewide** — no age claim, no near-miss year. **Six `[PLACEHOLDER Year]` spans remain**, in `about.html`, `history.html` and `index.html`; they are mostly *other* dates (timeline milestones, "Since —" on the homepage's history teaser) rather than the founding year, **so check each one before unwrapping — not all of them are 1979.** The `<title>`/`<meta>` tags also never carried the year, since placeholder styling never reached them; write it in by hand if it belongs there. **Do not bring back derived age claims** ("46 years") when this lands — a year is permanent, a computed age rots annually. `tools/verify.py` already guards the coming-soon page against exactly that pattern; extend the same guard to the main site once the year lands there too.
+6. **Wire the contact form to a real handler.** Still the highest-severity *functional* item — a customer who fills it in today reaches nobody. Cheap now: the site is on Netlify, so **Netlify Forms** is a `data-netlify="true"` attribute plus a notification address, no third-party service and no backend. Blocked only on knowing which inbox submissions should go to. **Note this was asked twice on the questionnaire and left blank both times** — "should quote requests come in by phone, through a form, or both?" and "which email address should be the public one?". Neither is an oversight worth guessing past: pointing the form at the wrong inbox is worse than the form not existing, because it fails silently. Ask once more, plainly, and it is a ten-minute job.
+7. **Land the open branches.** `claude/coming-soon-page` has **PR #9** open, carrying the built coming-soon landing page and last session's tracker commit. **This branch is what is actually serving the live domain** — `main` does not contain the landing page, so leaving it unmerged means the deployed site and `main` disagree. `claude/client-content-brief` is pushed with no PR — open one. **PR #4** (the older questionnaire, 50 questions plus a `.docx`) still needs a rebase; `PROJECT-STATUS.md` has now been rewritten several times since, so expect a conflict. Its content is superseded by the new PDFs, so merging it is optional — but decide deliberately rather than leaving it to rot.
+8. **Make the "Bell Helicopter" wording consistent — the client has now answered, so this is a tidy-up rather than a question.** Asked directly whether the retired form is still current, Mike wrote: *"It changed in 2018 but 60-70 ys of being Bell Helicopter, either is accepted"* (2026-08-13). **So both forms are authorized by the client and no wording is wrong.** What remains is only that the site contradicts itself: the homepage says "Bell Customer Service Facility" and `bell-service-center.html:41` says "Bell Helicopter Customer Service Facility". **Pick the current form for the main site** — it matches Bell's own current documents, and Bell's signage deck is actively retiring the old name — and **leave the coming-soon page alone**, since its wording is a separate, twice-affirmed client decision (see Decisions Locked). Don't re-raise the 2018 rebrand with him; he addressed it and moved on.
+9. **Decide whether Careers ships.** It's built, but a careers page with no listed openings can read as a dead site. Every hiring question on the questionnaire came back blank except two, and both are usable: *"a great place to work"*, and — the genuinely good one — **the shop pays to send mechanics to factory schools after a year on staff**. That is a concrete benefit a competitor page doesn't have. Still not enough on its own; it needs an explicit "nothing right now" or a list, plus EEO wording and a resume inbox. Hold the page back until then.
+10. **Lean into the personal/small-shop angle** in About and the homepage hero — named-owner warmth is the one thing neither Arrow Aviation nor Summit Aviation has. **The raw material for this is precisely what is on the missing attached sheet** (item 2), so it is blocked on one piece of paper rather than on a conversation. The *structure* is there and waiting.
 
 ## Waiting On The Client
 
-**Mike (owner / president)**
-- ~~Sign-off on the logo.~~ **Closed 2026-08-10 — approved by the office manager *and* by Mike.** `south-air-5a.jpg`, confirmed by the user. **Both named approvers, which is a first on this project** — every prior sign-off came through the office manager relaying Mike. Don't read it as a change in how approvals work (see Decisions Locked: her sign-off remains the working channel), but the logo specifically has the owner's direct approval and does not need re-confirming. It is also the mark he briefed, so this is him approving his own request.
-- Exact scope of the NASA relationship, in writing — which center or program, and what South Air actually does for them. Also: **does the contract require NASA to review marketing that mentions them?** (JPL requires it for its vendors; center-specific.) See `docs/trademark-research.md` and the standing warning on `nasa-partnership.html` before writing a word of this.
-- **His copy of the Bell Customer Service Facility agreement.** Bell publishes no third-party trademark policy, so the trademark clause in that contract is the actual governing text. This is the single highest-value document still outstanding.
-- **Which airframes the shop is rated on**, and what work is authorized per model. `platforms.html` is entirely empty until this lands, by design. **Partially answered 2026-08-04** — the office manager reported by text that the shop is certified on the **206 series, 407 series, and 429**. Treat as unconfirmed: it came from the wrong person for this question, it has not been checked against the certificate, and it says nothing about *what work* is authorized per model. `tools/verify.py:23` still blocks those three strings from the markup and that guard stays until Mike confirms.
-- What the Bell Customer Service Facility certification actually covers, and what ratings are on Repair Station certificate #XRIR622K.
-- ~~The **CSF seal artwork and co-branding guidelines** from his Bell account rep.~~ **Delivered 2026-08-06 — this item is closed.** Zachariah Langley (CSF Network Manager, Americas) sent the seal and the signage rules directly. What replaces it is narrower and is now Next Up item 3: the Bell Seal Guidelines document, web-format artwork, and five factual answers. **His copy of the CSF agreement is still wanted** — see the item above — because the signage deck is not the licence.
-- Confirmed service list. The current six services are generic helicopter-shop categories, not a confirmed offering.
-- How quoting actually works — what he needs from a customer to quote, how the quote comes back, and typical turnaround. Fills the three cards on `services.html`.
-- The airport identifier and heliport coordinates for Pearland Regional Airport.
-- How public the recent change of ownership should be.
+*Substantially rewritten 2026-08-13 after the returned questionnaire. Everything it
+answered has been deleted from this list rather than struck through — the answers live in
+`private/client-answers-2026-08-13.md` and in the Real column below. What is left is only
+what is genuinely still open.*
+
+**Mike (owner / president)** — *he has now answered once, in writing, which is the
+precedent worth using. He responds well to a specific written question next to a page he
+can look at.*
+
+- **The attached sheet.** Referenced three times on the returned form — the founding story, the milestones, and how public the ownership change should be — and not in the scan. **This is the single most valuable thing still outstanding**, because it is the only item on this whole list that a competitor could not also write.
+- **NASA, and this one blocks a page.** He answered *what* the work is, *which* field, and *when* it started. He did **not** answer whether it can be published: asked if NASA needs to review anything mentioning them he wrote **"PROBABLY"**, and asked if "partnership" is the right word he wrote **"?"**. Needed before a word of `nasa-partnership.html` goes public: does the contract restrict what may be advertised, does NASA review it, and what does he want it called. See `docs/trademark-research.md` and the standing warning on the page.
+- **A copy of FAA Repair Station certificate #XRIR622K.** He wrote **"MAKE COPY"**, so he intends to send one. It settles the ratings and any limitations from the source document rather than from memory.
+- **His copy of the Bell Customer Service Facility agreement.** Bell publishes no third-party trademark policy, so the trademark clause in that contract is the actual governing text. Still the highest-value *document* outstanding, and unaffected by the seal arriving — the signage deck is not the licence.
+- **Does "Parts & Fleet Support" stay?** The one service on the list he marked neither way, while marking every other one clearly.
+- **A short bio, and whether anyone else goes on the team page.** Two slots sit open.
+- **Phone, form, or both for quote requests** — see Next Up item 6; left blank.
 
 **Office manager (the user's mother)**
 
-*She has the questionnaire as of 2026-08-04 and has started replying. Nothing below has
-been answered yet — her replies so far were about Mike's items, not her own. Everything
-in this list is still open.*
+*Her own sections are still the gap. The 2026-08-13 return answered Mike's questions, and
+two of hers by side effect — hours, and the mission statement.*
 
-- Business hours.
-- Company overview and mission statement for the About page.
-- Which inbox is the public "general inquiries" one, and whether other staff should appear on the team page.
-- Whether there are any current job openings — and if not, that's fine, `careers.html` should just say so.
-- Whether resumes should go to a separate inbox rather than the general one, plus the EEO statement wording.
-- Photos: hangar, aircraft, team, anything historical. **When these arrive, check each one for NASA facilities, NASA hardware, or identifiable NASA personnel** — those need clearing even though the photos are South Air's own. See `docs/trademark-research.md`.
+- **Which inbox is the public "general inquiries" one.** Asked on the form, left blank. Blocks the contact form.
+- Whether there are any current job openings — and if not, that's fine, `careers.html` should just say so. Plus the resume inbox and the EEO statement wording.
+- Photos: hangar, aircraft, team, anything historical — or an afternoon at the hangar with a phone camera, which the form offered and which came back blank. **When these arrive, check each one for NASA facilities, NASA hardware, or identifiable NASA personnel** — those need clearing even though the photos are South Air's own. See `docs/trademark-research.md`.
 
 **Either**
-- **The exact domain string as registered.** The domain *was* purchased on or before 2026-08-04, through **Squarespace** (which absorbed Google Domains in 2023), but nobody has written down which name was bought. Needed before DNS can be pointed at anything.
+- Any news or stories worth featuring. Asked, blank. An empty news page is worse than no news page, so `news.html` waits.
+- A tagline, if one exists. Asked, blank — and a perfectly fine answer, since we can write options.
 - The Google Workspace email addresses that follow from the domain. Until they exist, the sbcglobal address stands. **⚠ When that happens, the DNS has a trap waiting.** `southairhelicopters.com` currently carries Squarespace's default email-hardening records: `TXT @` = `v=spf1 -all` (meaning *no server on earth is authorised to send mail as this domain*) and `TXT _dmarc` = `v=DMARC1; p=reject; sp=reject`, which tells receivers to reject anything that fails. That is correct for a domain that sends no mail, and it must be **updated before or as Workspace is set up** — otherwise every message sent from a `@southairhelicopters.com` address gets rejected, and it will look like Workspace is broken rather than DNS. Google publishes the SPF value to use; DKIM comes from the Workspace admin console.
-- Any news or stories worth featuring.
 
 **Action on the user, not the client**
 - **The Squarespace account may carry a typo'd phone number.** A screenshot taken during the domain signup shows `281-684-5187`; the business card reads `281.648.5187`. The site has always had it right. Fix it at the registrar.
@@ -151,18 +172,26 @@ in this list is still open.*
 
 ## Content: Real vs Placeholder
 
+> **Read this table as "what is on the page", not "what we know" — since 2026-08-13 those
+> are two different things.** A large amount of confirmed content arrived that afternoon
+> and **none of it is built in yet**, so it correctly still shows as placeholder below.
+> The third column now marks those with **✅ answered** so the next session can see at a
+> glance which placeholders are a writing job and which are still a client job. Move them
+> left as they land, and don't let the two states blur — an answer sitting in a file is not
+> content on a page, and this table is the one place that distinction is tracked.
+
 | Page | Real | Still placeholder |
 | --- | --- | --- |
-| `index.html` | Nav, footer contact block, quote CTAs, **logo, founding year 1979 (eyebrow + stats tile)**, **Bell CSF + FAA Repair Station status** (business-card sourced, now the hero's lead claim) | Hero positioning line, all three service blurbs, the stat strip (**"100%" and "24/7" still invented**; the years figure and the Bell tile's exact wording are flagged), the Bell section body, history and NASA teasers. **The hero is now single-column** — the cartoon helicopter that sat beside it was removed 2026-08-10 |
-| `about.html` | Mike Pike as President; Bell Customer Service Facility + Repair Station #XRIR622K; Pearland Regional Airport | Company overview, mission, all three values, Mike's bio, two other team slots, every photo |
-| `services.html` | Bell certification line; quote-only framing | The entire six-service list, all three "How Pricing Works" steps, the testimonial |
-| `bell-service-center.html` | Repair Station #XRIR622K; Bell CSF status (business-card wording) | What the certification covers, how long it's been held, the ratings on the certificate. Page carries a standing trademark warning and an empty reserved badge slot |
-| `platforms.html` | — | **Everything.** No aircraft model is named anywhere. Page carries a standing warning that the model list is unconfirmed |
-| `history.html` | **Founding year 1979** (first timeline entry) | Every other timeline entry, and what actually happened in 1979; the longer origin story |
+| `index.html` | Nav, footer contact block, quote CTAs, **logo, founding year 1979 (eyebrow + stats tile)**, **Bell CSF + FAA Repair Station status** (business-card sourced, now the hero's lead claim) | ✅ **the stat strip is answered and both invented claims must change**: "100%" becomes his own factual line — *no maintenance-related accident since 1979* (write it as the year, never as "47 years") — and **"24/7" is simply not true** and comes off, replaced by the real 8–5 M–F plus AOG callout. ✅ a one-line description of the company, in his words, for the hero. Still open: the three service blurbs, the Bell section body, the history and NASA teasers. **The hero is single-column** since 2026-08-10 and its empty slot is a natural home for a real photo |
+| `about.html` | Mike Pike as President; Bell Customer Service Facility + Repair Station #XRIR622K; Pearland Regional Airport | ✅ **mission statement** (*"Quality and safety is our priority and our history reflects it"*), ✅ **company overview** (his one-liner), ✅ **all three values confirmed** — Safety First / Reliability / Precision, kept by his own underlining. Still open: what each value looks like in practice, Mike's bio, two other team slots, every photo |
+| `services.html` | Bell certification line; quote-only framing | ✅ **the service list is corrected in his own hand** — four confirmed (Scheduled Maintenance, Airframe & Engine Repair, Avionics & Systems, Pre-Purchase & Annual Inspections), **Ground Support & Logistics struck out**, Parts & Fleet Support left unmarked and still open. ✅ **the page must also lose charter/flight support — "ground runs only"** — and state there is **no fuel and no tie-downs** on site. ✅ quoting: needs a scope of work, comes back by the customer's preferred method, *"we don't do a lot of quoting"* so publish no turnaround figure. Still open: the testimonial, though he says one *"could be aquired if asked"* |
+| `bell-service-center.html` | Repair Station #XRIR622K; Bell CSF status (business-card wording) | ✅ **what the CSF designation authorizes** — *warranty work on new aircraft and parts*. ✅ **held since 1981**, and kept by recurring audits, factory training and specific tooling. ✅ **the wording question is closed** — Mike: *"either is accepted"*. Still open: the ratings on the certificate (he will send a copy), the reserved badge slot, and the standing trademark warning stays |
+| `platforms.html` | — | ✅ **answered in full, and this page goes from the emptiest to the best-sourced on the site.** 206 B/L/L-3/L-4 and 407/407GX/407GXi — field maintenance **and component overhaul**; 429 — field maintenance, inspection, airframe and engine; MD 500 C/D/E on the repair station certificate. **No engine overhauls — engines are sent out**; avionics via a shop on the field. *"Bell is our forte."* The standing warning and the `verify.py` model-name guard both come off with this — see Decisions Locked |
+| `history.html` | **Founding year 1979** (first timeline entry) | ✅ **founded 1979 by Robert H. Mitchell** — the founder's name is new and is real content. ✅ **Bell designation since 1981** is a genuine second timeline entry. Still open, and blocked on the missing attached sheet: every other milestone, the origin story, and how public the ownership change should be |
 | `nasa-partnership.html` | — | Everything. Page carries a standing pre-publication warning |
 | `news.html` | — | All three article cards are format demos, not stories |
-| `careers.html` | Phone and general email as the apply-to contact | Why-work-here cards, all openings (incl. whether there are any), resume inbox, EEO statement |
-| `contact.html` | Address, phone, both emails, Google map embed | Airport identifier/coordinates; business hours; **the form doesn't submit anywhere** |
+| `careers.html` | Phone and general email as the apply-to contact | ✅ one real benefit worth leading with — **the shop pays to send mechanics to factory schools after a year on staff**. Still open: openings (incl. whether there are any), the resume inbox, the EEO statement, and everything about the day-to-day role |
+| `contact.html` | Address, phone, both emails, Google map embed | ✅ **business hours: 8–5 Monday–Friday, with AOG callout** — publish the AOG line, it is the useful half. ✅ **airport identifier KLVJ** (he wrote it with a question mark; it matches Pearland Regional, but take the **coordinates** off the FAA airport record rather than from him). Still open: **the form still doesn't submit anywhere**, and the two questions that would fix it came back blank |
 | `coming-soon/index.html` — **LIVE at southairhelicopters.com**, separate site, not part of the 10-page site above | **Everything. The only page in the project with no placeholders** — legal name, address, confirmed phone number, FAA Repair Station #XRIR622K, the client-approved Bell CSF wording and Bell's own CSF seal, founding year 1979, the approved logo | None |
 
 ## Decisions Locked
@@ -190,7 +219,10 @@ in this list is still open.*
 - **Nav is 8 items; History and Careers are footer-only** — 10 top-level links don't fit, and dropdowns aren't worth the CSS+JS+ARIA cost across 10 hand-copied files. History still has three inbound paths (homepage teaser, About's closing CTA, footer).
 - **Nav collapses to the hamburger at 940px, not 860px** — the 8-item nav wraps below ~940px. If nav items are added or renamed, re-check where the wrap actually starts.
 - **No published pricing** — quote-only is the category norm; both competitors do it. The old placeholder pricing table is gone, replaced by "How Pricing Works".
-- **No aircraft model is named anywhere on the site** — until Mike confirms which airframes the shop is rated on, naming one is a claim a customer could make a maintenance decision on. There's an automated check for this (see below).
+- ~~**No aircraft model is named anywhere on the site**~~ — **the condition on this has been met (2026-08-13).** The rule was always explicitly conditional: no model names *until Mike confirms which airframes the shop is rated on*, because naming one is a claim a customer could make a maintenance decision on. **He has now confirmed, in his own handwriting, on the question that was marked IMPORTANT for exactly this reason.** So the models may be named, and `tools/verify.py`'s `MODEL_RE` guard comes off **as part of building `platforms.html`, not before** — dropping the guard while the page is still empty removes the protection and gains nothing. **Two things survive the change:** publish the *pairing* of model to authorized work rather than a bare model list, since "we're rated on the 429" and "we do field maintenance on the 429" are different claims and only the second is what he said; and **get the certificate copy anyway** (he wrote "MAKE COPY"), because a handwritten answer is a confirmation and a certificate is a source. Note his list is **wider than the office manager's** 2026-08-04 relay — it adds the 206 sub-variants, the 407 GX/GXi, component overhaul, and the MD 500 series, which is not a Bell airframe at all.
+- **Returned client paperwork lives in `private/`, which is gitignored** (2026-08-13). Scans, transcriptions, anything in the client's own hand. **The reason is specific, not general caution:** the repo is public, and his NASA answers describe work he himself thinks NASA probably has to review before it is published. Committing them would publish them ahead of that review — precisely what the NASA discipline on this project exists to prevent. The rest of his answers are destined for a public website anyway, but they travel in the same document, so the whole document stays out. **Don't "tidy" this into `docs/`.**
+- **His safety claim is published as a year, never as an age** (2026-08-13). He wrote *"SAH has never had a maint. related accident in it's 47 yr. history"* — a real, specific, verifiable-by-him claim, and a far better one than the invented "100% safety-first culture" it replaces. **But "47 years" is a derived age that is wrong next year**, which is the exact pattern `tools/verify.py` already fails the build on. Publish it as **"no maintenance-related accident since 1979"** — same claim, same strength, doesn't rot. This is a formatting rule, not a softening: don't weaken the claim itself, he made it plainly and it is his to make.
+- **"Bell Helicopter" and "Bell" are both acceptable, per the client** (2026-08-13). Asked directly, Mike wrote *"It changed in 2018 but 60-70 ys of being Bell Helicopter, either is accepted."* **This closes a question that has been reopened in four separate sessions.** The objection that Bell's own signage deck is actively retiring the old name is real and is recorded under Constraints That Bite — but it has now been put to the client, twice, and answered. **Stop raising it.** What remains is internal consistency only, at Next Up item 8.
 - **Structure follows `docs/market-research.md`** — the Bell page, the repeated quote CTA, footer certifications, and the airport identifier slot all exist because the competitor analysis says the category expects them.
 - **Hosting is Netlify, not GitHub Pages** — chosen over Pages because it needs no repo-owner action, gives a stable URL, and brings Netlify Forms, which makes the contact form (the top open item) nearly free.
 - **The preview deploys to production, not draft URLs** — a stable link Mike can bookmark and refresh beats an unguessable one that changes every deploy. Search engines are blocked instead (`robots.txt` + `X-Robots-Tag`). Note the URL is public to anyone holding it; it is *not* access-controlled. Real restriction needs Netlify's paid password protection.
@@ -219,7 +251,8 @@ in this list is still open.*
 - **Bell media kit photos are not usable on this site.** Offered by the office manager 2026-08-04. A media kit licenses press use — journalists writing about Bell. A Bell service vendor putting Bell's photography on its own commercial marketing site is a different use and is not covered by it. Same line as everything else here: the seal says "authorized by Bell", Bell's own photography says "we are Bell".
 - **NASA: the logo is a settled no.** Not an open question anymore. The Insignia, worm, and Seal are protected under 14 CFR 1221 and NASA states they must not be used as branding on third-party websites. There is no permission path that changes this — stop re-litigating it. What *is* allowed is a **factual, specific** description of the work ("vendors are free to state that JPL is one of their customers, and to describe factually the services and products they provide"). What is prohibited: "NASA approved", "official NASA", and — verbatim on NASA's list — **"trusted by"**. So no trust/logo strip may ever include NASA. Also: no quotes attributable to NASA staff, which rules out a testimonial on that page. Full detail in `docs/trademark-research.md`.
 - **The founding year is 1979** (confirmed by the user 2026-08-04; originally from the office manager, who offered "1979. Or 78, whatever Jeff said"). It is live on the coming-soon page. The main site still has it wrapped in `[PLACEHOLDER Year]` in ~14 places, and it was stripped from `<title>`/`<meta>` tags entirely — those need unwrapping, and the meta tags need it written back by hand, since placeholder styling never reached them. **Don't put any age claim back anywhere** — `tools/verify.py` already guards the coming-soon page against exactly that ("46 years" etc.), and the same guard should extend to the main site once the year lands there too.
-- **Unverified claims on the homepage.** The stat strip still asserts "100% safety-first culture" and "24/7 support availability." Both were design filler, both are marked for verification, and both should be confirmed or removed before launch. The fourth tile is now "Bell / Customer Service Facility", flagged pending Bell's confirmation of exact wording.
+- **The two unverified homepage claims are now adjudicated, and one of them was false** (2026-08-13). Both were design filler carried since the first build. **"24/7 support availability" is not true** — the shop is 8–5 Monday–Friday and will turn out for AOG, which is a real and better claim but is not the same claim. It has to come off; it is exactly the kind of thing someone calls at 2am expecting. **"100% safety-first culture" is replaced by something stronger and factual** — no maintenance-related accident since 1979, in his words. **Until the homepage is edited, the live-adjacent preview still carries a claim the owner has effectively contradicted**, so this is now a correction rather than a to-do. The fourth tile is "Bell / Customer Service Facility" and its wording is settled — see Decisions Locked.
+- **NASA is now a harder block than it was, and the block is specific.** The 2026-08-13 return finally described the work: South Air assisted NASA's initial introduction to helicopters and its first flight, after completing the necessary inspections and repairs; it began in 2025 with the receipt of Bell TH-57s; the location is given as Ellington Field, with his own question mark. **But asked whether NASA needs to review anything mentioning them he wrote "PROBABLY", and asked whether "partnership" is accurate he wrote "?".** Treat that as a stop, not a shrug: the owner does not know whether this is publishable, so nobody else does either. **Nothing from that section goes on the site, or into the public repo, until he answers properly** — the detail is held in `private/` for that reason. This sits on top of the existing NASA rules, which are unchanged and are not the issue here: the logo is a permanent no, "trusted by" is prohibited outright, and only factual description of services is permitted. The new risk is different — it is *contractual*, about what he is allowed to advertise, and it is the one question `docs/trademark-research.md` flagged as center-specific and unanswerable from the outside.
 - **Bell logo files are sitting in the user's Downloads and are the wrong asset — now settled, not merely suspected.** `Bell_Outline_black.png` (corporate shield) and `Bell_logo_2018.svg` (corporate wordmark) were logo-aggregator downloads, neither Bell-issued nor the CSF seal, and were deliberately not added. **Bell's own do-not list now forbids the bare shield outright** ("Do not create company logo or text lockups with the Bell shield or use it as a standalone element"), so this is no longer contingent on reading the CSF agreement. Delete them; there is no version of this project where they get used.
 - **The repo is public.** Anything committed here is world-readable, including the client's contact details (already public on a business card) and any draft copy. `.recall/` (local session transcripts) and `.netlify/` are gitignored for this reason — **don't commit either.**
 - **The no-model-names rule is self-imposed, not a Bell restriction.** Summit Aviation, a Bell CSF, names models freely. Once Mike confirms the shop's ratings, naming models is normal for the category — and `tools/verify.py`'s `MODEL_RE` check will need relaxing at that point. Until then it stays.
@@ -258,53 +291,43 @@ no derived age claim that would go stale.
 
 ## In Flight
 
-**Session of 2026-08-10 started documentary and ended with the site live on its domain.**
-The user handed over the logo set, named 5a official, confirmed both approvals, supplied
-the aircraft art, and said to proceed. **Eight things shipped:** the logo asset set, the
-confirmed founding year, copy-to-clipboard emails, the hero cartoon's removal, the palette
-roll-out, the go-live and DNS cutover, the link-preview card, and the prominent Bell CSF
-block with Bell's own seal. The source JPEGs are still **deliberately not committed** —
-see Decisions Locked — but `tools/build_logo.py` is, so the assets are reproducible.
+**2026-08-13 — the questionnaire came back, and nothing has been built from it yet.**
+This session was receipt and recording only. **No page was edited and no deploy was made,
+deliberately** — the answers were captured, verified against the scan page by page, and
+written down before any of them got turned into markup. That is the whole state: a large
+pile of confirmed content sitting in `private/client-answers-2026-08-13.md`, and ten pages
+that still say what they said yesterday.
 
-**Verified, not assumed:** `verify.py` green at 19 checks; pages loaded in a real browser
-at 1280px, 760px and 390px with a clean console; the clipboard read back after a click to
-confirm it genuinely held the address; computed styles measured rather than eyeballed; and
-every deploy re-checked over real HTTP, including the go-live header and the certificate.
+**What was actually done:** the scan was read (7 pages, no text layer — it was rendered to
+images and read visually), transcribed verbatim including his spelling and his two question
+marks, and `private/` was created and gitignored *before* anything was written into it.
+This tracker was then rewritten against it — Where This Stands, Next Up, Waiting On, the
+content table, three new Decisions Locked, and two Constraints.
 
-**Three guards were corrected this session, all the same failure mode: the check was
-coarser than its own intent** and failed on legitimate markup. The self-contained check
-treated `rel="canonical"` as a fetched asset; the Bell-wording check counted mentions
-inside HTML comments, then CSS comments. Each now tests what it means and was re-confirmed
-to still fail on the real thing it guards against. **Worth remembering as a pattern** — a
-guard that fires on correct work gets disabled by the next person unless it is fixed
-properly.
+**The single most important thing to carry forward:** the ✅ marks in the content table
+mean *answered*, not *built*. An answer in a file is not content on a page, and this is the
+first session in the project where those two states have diverged this widely. Don't let a
+later session read the table and conclude the work is done.
 
-Last session's guess that more client material was coming was right — this was it.
+**Two corrections to prior belief, both worth stating plainly.** The tracker has said for
+several sessions that the model-name guard "stays until Mike confirms" — **he has now
+confirmed**, so that condition is met and the guard comes off with the page (see Decisions
+Locked; not before). And the homepage's "24/7 support availability" is not merely
+unverified, which is how this file has described it since the first build — **it is
+contradicted by his own answer** and is now a live inaccuracy on the preview.
 
-**Approval is fully settled: the office manager and Mike both approved 5a.** No approval
-gate remains anywhere on the logo.
+**Nothing is uncommitted and nothing is half-finished.** The commit carries the tracker,
+`.gitignore`, and nothing else; the client material is intentionally outside git.
+`python tools/verify.py`: 19 checks green, run before the commit. Both sites were checked
+over real HTTP at the start of the session and neither was touched after: the live domain
+returns 200 with no `X-Robots-Tag`, the preview returns 200 still noindexed.
 
-**Provenance went wrong once mid-session and the correction matters.** An earlier commit
-inferred from `.recall/history.md` that the aircraft came from this project's own 2026-08-06
-prompt, built off Bell's spec PDF and a watermarked the-blueprints.com drawing. **The user
-then stated it plainly: helicopter art made in Canva, composition in Claude Design.** The
-inference is retracted in the file. **Chasing it did produce the session's most valuable
-finding, though** — Canva's Content License Agreement forbids using Free or Pro stock
-content in a logo, which means **one unanswered question can invalidate the approved
-aircraft**: stock element, or Canva AI? That is Next Up item 4 and is written up under
-Constraints That Bite.
-
-**Both of those questions are now closed.** Mike was told how the mark was made and okayed
-it, so nothing about the logo is blocked; and the domain string, missing from this file for
-five sessions, is recorded and the site is live on it.
-
-**Next session, the two highest-value moves, in order.** First, **send Mike the package** —
-Next Up item 1. It is fully unblocked, and there is now something much better to send than
-before: a live domain he can open on his phone, carrying his own logo and the Bell seal.
-Almost everything else on the list waits on answers only he has. Second, **reply to
-Zachariah at Bell** — item 2 — which is a warm reply rather than a cold ask, and which
-would also get the proper RGB/vector seal to replace the CMYK conversion now on the live
-page.
+**Next session, in order.** **Build `platforms.html`** — it is the biggest single jump
+available, from the emptiest page on the site to the best-sourced one, and it needs nothing
+from anybody. Then the **homepage stat strip**, because it currently carries a claim the
+owner has contradicted. Then `services.html`, hours and KLVJ on `contact.html`, and the
+founder and mission on `about.html`. **Only then go back to Mike** — with the pages built,
+asking for the attached sheet and a real answer on NASA.
 
 
 **The landing page is live and public** at https://southairhelicopters.com, on its own
