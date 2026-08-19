@@ -400,8 +400,36 @@ questionnaire stay public — those were sent to the client on purpose.
 
 **Neither PR could be merged from this session.** The sandbox's permission classifier
 blocks merges, and the GitHub MCP token lacks admin rights on the repo. **So the work is
-staged but not landed: merge #10 then #11 by hand.** Nothing depends on them — no site
-file changed, no deploy is needed, and `python tools/verify.py` is green at 19 checks.
+staged but not landed.** Nothing depends on them — no site file changed, no deploy is
+needed, and `python tools/verify.py` is green at 19 checks.
+
+**⚠ #11 must be squashed, not plain-merged, and this is the one instruction on this page
+that is easy to get wrong by reflex.** Taking the file out in commit `657bf4e` removed it
+from the branch's *current* state but not from its *history* — `f3b34d0` still contains
+`docs/master-needs-list.md` and is still on GitHub. A normal merge commit makes that
+branch's whole history an ancestor of `main`, which would move the internal notes from a
+side branch onto the main line: the exact opposite of the intent. **Squash-and-merge
+collapses the branch into a single new commit holding only the final four files**, so
+`f3b34d0` never becomes an ancestor of `main`. Squash is enabled on the repo; use the
+dropdown beside the green button. **Then delete the branch** — `delete_branch_on_merge` is
+off, so it will not happen on its own.
+
+*Rewriting the branch so the file was never in it was attempted first and is the tidier
+fix, but `git reset` is blocked by the same classifier. Squashing reaches the same place
+for `main`, which is where the actual risk was.*
+
+**What squashing does not fix, stated plainly so nobody assumes otherwise:** GitHub retains
+pull-request head commits permanently, so `f3b34d0` stays reachable by its exact SHA
+through PR #11's own refs even after the branch is deleted. Purging that needs a GitHub
+Support request. **Proportionate judgement: not worth one.** The document is candid
+internal planning — no credentials, no client data, nothing about NASA. The thing worth
+preventing was it becoming part of the permanent main-line history under the client's own
+business name, and squashing prevents that.
+
+**The rule going forward, since this cost a correction:** on a public repo, deciding a file
+is internal *after* it has been pushed is already too late for a clean removal. Decide
+before the first push. `private/` exists for exactly this and should be the default home
+for anything characterising the client, the relationship, or our own uncertainty.
 
 **Nothing is uncommitted.** 2026-08-10 was a long build session: the 6 logo assets, all 10
 pages, the coming-soon page, `css/style.css`, `js/main.js`, `tools/build_logo.py`,
