@@ -341,7 +341,9 @@ deleted. No NASA fact from the questionnaire is anywhere in this repo.
 sheet and a real answer on NASA, plus the certificate copy, which inbox is public,
 phone-or-form for quotes, and whether Parts & Fleet Support stays. Send it with the preview
 link — he has just demonstrated he answers well against something he can look at. After
-that, **PR #9** is still open and `main` still does not contain the live landing page.
+that, land the leftovers: **PR #9 merged on 2026-08-13**, so `main` now carries the live
+landing page and the full site build. What is left is `claude/client-content-brief` (pushed,
+no PR) and the draft **PR #4**.
 
 **The landing page is live and public** at https://southairhelicopters.com, on its own
 Netlify site (id `de01967d-071f-433e-a5af-6e87b7870b22`, name `sah-coming-soon`). Built
@@ -357,13 +359,15 @@ own `coming-soon/netlify.toml`, deployed with the `--cwd` flag documented under
 Constraints That Bite. The spec's architecture diagram, which still named `_headers`, has
 been corrected to match reality.
 
-**Three unmerged branches.**
+**Branch state, re-checked 2026-08-19 against the repo.**
 
-- `claude/coming-soon-page` — current, pushed, PR opens with this commit. Carries the
-  built coming-soon landing page, the spec and plan, this tracker update, and **last
-  session's tracker commit `6bb69ac`**, which was pushed on `claude/status-2026-07-30`
-  with no PR and which an earlier version of this file failed to list. One PR lands
-  all of it.
+- `claude/coming-soon-page` — **merged via PR #9** on 2026-08-13; it carried the coming-soon
+  landing page, the spec and plan, and last session's orphaned tracker commit `6bb69ac`.
+  **One commit sits on it that is not on `origin/main`: `0f3150a`, this tracker's own
+  "Point the tracker at merged main" update.** Harmless — it touches no site file — but it
+  means `main`'s copy of this file is one revision stale. Fold it in with the next PR.
+  *(Local `main` is also stale at `e98e73a`; `git checkout main && git pull` before
+  branching from it.)*
 - `claude/client-content-brief` — pushed, **no PR opened**. Contains
   `docs/master-needs-list.md` (internal), plus the checklist and questionnaire in
   both `.html` source and `.pdf`. Touches no site file.
