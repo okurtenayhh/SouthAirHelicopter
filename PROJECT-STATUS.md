@@ -1,8 +1,8 @@
 # Project Status
 
-*Last updated: 2026-08-13 (local, eighth session — **the questionnaire came back from Mike**) · `main` at `e98e73a` · working branch `claude/coming-soon-page` · PRs #1–#3, #5–#8 merged · **PR #9 is open and carries the live landing page** — https://github.com/okurtenayhh/SouthAirHelicopter/pull/9 · **PR #4 is open as a draft** — a finished client questionnaire nobody has merged: https://github.com/okurtenayhh/SouthAirHelicopter/pull/4*
+*Last updated: 2026-08-19 (local, ninth session — **branch cleanup**) · `main` at `a00c1bc`, which **contains the live landing page and the whole site build** · working branch `claude/coming-soon-page` · PRs #1–#3, #5–#9 merged · **PR #4 closed 2026-08-19 as superseded** · **two PRs are open and both need a human to merge them** — [#10](https://github.com/okurtenayhh/SouthAirHelicopter/pull/10) (tracker corrections) and [#11](https://github.com/okurtenayhh/SouthAirHelicopter/pull/11) (the client brief documents)*
 
-*Unmerged branches: `claude/coming-soon-page` (current — carries the landing page that is now **live on the client's domain**, the logo, the palette, and several sessions of tracker updates. **This branch is the live site; land it.**) · `claude/client-content-brief` (brief documents, pushed, no PR) · `claude/sphere-logo` (a logo exploration, local only, **now dead** — the logo is settled, see Decisions Locked)*
+*Branches, after the 2026-08-19 sweep: only `main`, `claude/coming-soon-page` (PR #10) and `claude/client-content-brief` (PR #11) exist on the remote. Four dead branches were deleted — `claude/status-2026-07-30` (`6bb69ac`, fully merged), `claude/south-air-helicopter-site-1fyg5b` (`3cc9e75`, fully merged), `claude/new-session-cymw5g` (`3705fbd`, three July tracker commits that would have regressed this file) and `claude/client-questions` (`fd0c761`, PR #4). **All four SHAs are written down here on purpose** — a deleted branch is recoverable from its tip for as long as GitHub keeps the object. `claude/sphere-logo` survives locally, never pushed, dead but harmless.*
 
 **Live preview (ten-page work-in-progress site): https://south-air-helicopters.netlify.app** — noindexed, **redeployed 2026-08-10 with the new logo**, verified live. Safe to send to Mike.
 
@@ -52,9 +52,10 @@ and the fix is deployed and verified live** — the stale-preview warning that s
 two sessions is resolved.
 
 **The content brief worked, and this is the evidence.** `claude/client-content-brief`
-carries an internal master list plus two client-facing PDFs — a checklist of what to
-collect and a fill-in questionnaire, every question traceable to a real placeholder in the
-markup. It went out on 2026-08-04, produced a partial reply that month, and on 2026-08-13
+carries two client-facing PDFs — a checklist of what to collect and a fill-in
+questionnaire, every question traceable to a real placeholder in the markup. *(The
+internal master list that sat beside them moved to `private/master-needs-list.md` on
+2026-08-19 and is deliberately not on the public repo — see In Flight.)* It went out on 2026-08-04, produced a partial reply that month, and on 2026-08-13
 came back filled in by the owner himself. **The approach is validated: ask in writing,
 question by question, against a page they can see.** Reuse it for the follow-ups rather
 than inventing a new format.
@@ -127,7 +128,7 @@ Things that can move without waiting on anyone:
 4. **Get vector and stitchable versions of the logo.** The web assets are done and deployed; what is missing is a **vector** for print and signage, and a **reduced high-contrast version that can be stitched** — the current art is grayscale shading with hairline blades, which no needle will render. Regenerating the aircraft from the text prompt in `.recall/history.md` produces the stitchable version. **Not urgent, and not blocking anything.** ~~Identify the source image~~ — **closed 2026-08-10: Mike was told how the mark was made and okayed it.** See Constraints That Bite. **The web assets themselves are done and deployed** (`tools/build_logo.py` regenerates them); what is still missing is a **vector** for print, signage and embroidery, and a **reduced high-contrast version that can be stitched** — the current art is grayscale shading and hairline blades, which no needle will render. **Regenerating the aircraft to the 2026-08-06 prompt in `.recall/history.md` remains the move that pays off either way** — it produces the stitchable version *and* is the escape route if the licence answer is bad, since replacing the aircraft leaves the approved wordmark, band and layout untouched.
 5. ~~**Finish propagating the founding year.**~~ **Done 2026-08-13.** 1979 now reads as real content on the homepage eyebrow, stats tile, history teaser and Bell section, on the About page, and as the first history timeline entry. **Three `[PLACEHOLDER Year]` spans remain and all three are in `history.html`** — they are *milestone* dates, not the founding year, and they are on the missing attached sheet, so they belong to item 2 rather than here. `tools/verify.py` guards the year sitewide: no derived age claim, no near-miss year. **Do not reintroduce an age claim** — a year is permanent, a computed age rots annually.
 6. **Wire the contact form to a real handler.** Still the highest-severity *functional* item — a customer who fills it in today reaches nobody. Cheap now: the site is on Netlify, so **Netlify Forms** is a `data-netlify="true"` attribute plus a notification address, no third-party service and no backend. Blocked only on knowing which inbox submissions should go to. **Note this was asked twice on the questionnaire and left blank both times** — "should quote requests come in by phone, through a form, or both?" and "which email address should be the public one?". Neither is an oversight worth guessing past: pointing the form at the wrong inbox is worse than the form not existing, because it fails silently. Ask once more, plainly, and it is a ten-minute job.
-7. **Land the open branches.** `claude/coming-soon-page` has **PR #9** open, carrying the built coming-soon landing page and last session's tracker commit. **This branch is what is actually serving the live domain** — `main` does not contain the landing page, so leaving it unmerged means the deployed site and `main` disagree. `claude/client-content-brief` is pushed with no PR — open one. **PR #4** (the older questionnaire, 50 questions plus a `.docx`) still needs a rebase; `PROJECT-STATUS.md` has now been rewritten several times since, so expect a conflict. Its content is superseded by the new PDFs, so merging it is optional — but decide deliberately rather than leaving it to rot.
+7. ~~**Land the remaining branches.**~~ **Done 2026-08-19, except the two merge clicks.** PR #4 closed as superseded, with the reasoning on the thread so it is not re-decided. Four dead branches deleted from the remote, SHAs recorded above. The brief branch now has **PR #11**, carrying the four client-facing documents only. The tracker corrections are **PR #10**. **Neither could be merged from this session — merging is blocked by the sandbox's permission classifier, and the GitHub token in use lacks admin rights on the repo.** So the last step is manual and takes a minute: merge #10, then #11. Nothing else is queued behind them.
 8. ~~**Make the "Bell Helicopter" wording consistent.**~~ **Done 2026-08-13.** Mike settled it — *"It changed in 2018 but 60-70 ys of being Bell Helicopter, either is accepted"* — and the main site now uses Bell's current form throughout: the string "Bell Helicopter" appears nowhere in the ten pages, including the shared footer, which previously carried the retired form on every page. **The coming-soon page deliberately still uses the retired form** and is pinned to it by `verify.py`; that is a separate, twice-affirmed client decision. Don't re-raise the 2018 rebrand with him — he addressed it.
 9. **Decide whether Careers ships.** It's built, but a careers page with no listed openings can read as a dead site. Every hiring question on the questionnaire came back blank except two, and both are usable: *"a great place to work"*, and — the genuinely good one — **the shop pays to send mechanics to factory schools after a year on staff**. That is a concrete benefit a competitor page doesn't have. Still not enough on its own; it needs an explicit "nothing right now" or a list, plus EEO wording and a resume inbox. Hold the page back until then.
 10. **Lean into the personal/small-shop angle** in About and the homepage hero — named-owner warmth is the one thing neither Arrow Aviation nor Summit Aviation has. **The raw material for this is precisely what is on the missing attached sheet** (item 2), so it is blocked on one piece of paper rather than on a conversation. The *structure* is there and waiting.
@@ -341,7 +342,8 @@ deleted. No NASA fact from the questionnaire is anywhere in this repo.
 sheet and a real answer on NASA, plus the certificate copy, which inbox is public,
 phone-or-form for quotes, and whether Parts & Fleet Support stays. Send it with the preview
 link — he has just demonstrated he answers well against something he can look at. After
-that, **PR #9** is still open and `main` still does not contain the live landing page.
+that, land the leftovers — **done on 2026-08-19, see the entry at the top of this
+section.**
 
 **The landing page is live and public** at https://southairhelicopters.com, on its own
 Netlify site (id `de01967d-071f-433e-a5af-6e87b7870b22`, name `sah-coming-soon`). Built
@@ -357,24 +359,77 @@ own `coming-soon/netlify.toml`, deployed with the `--cwd` flag documented under
 Constraints That Bite. The spec's architecture diagram, which still named `_headers`, has
 been corrected to match reality.
 
-**Three unmerged branches.**
+**Branch state after the 2026-08-19 sweep.** The remote now carries exactly three
+branches, and every one of them has a reason to exist.
 
-- `claude/coming-soon-page` — current, pushed, PR opens with this commit. Carries the
-  built coming-soon landing page, the spec and plan, this tracker update, and **last
-  session's tracker commit `6bb69ac`**, which was pushed on `claude/status-2026-07-30`
-  with no PR and which an earlier version of this file failed to list. One PR lands
-  all of it.
-- `claude/client-content-brief` — pushed, **no PR opened**. Contains
-  `docs/master-needs-list.md` (internal), plus the checklist and questionnaire in
-  both `.html` source and `.pdf`. Touches no site file.
-- `claude/sphere-logo` — **local only, never pushed, and now dead rather than parked**
-  (2026-08-10). A logo spec, a generator (`tools/make_sphere_logo.py`), and a full
-  alternative mark family, all superseded by the chosen `south-air-5a`. Safe to delete;
-  the only thing worth keeping from it is the one-line lesson in Decisions Locked.
+- `main` — at `a00c1bc`. The live landing page and the full site build.
+- `claude/coming-soon-page` — **PR #10**, open. Three tracker-only commits: `0f3150a` and
+  `4ac980a` correcting claims that went stale when PR #9 merged, plus this entry. The
+  branch name is now misleading — the coming-soon page shipped on 2026-08-10 and this is
+  simply the working branch. Worth renaming next time it is empty.
+- `claude/client-content-brief` — **PR #11**, open. The four client-facing documents.
 
-**PR #4 is still an open draft.** Its 50-question questionnaire has been superseded
-by `docs/client-questions-form.pdf` on the brief branch, which covers the same ground
-in a nicer form. Merging it is now optional; it needs a rebase either way.
+Deleted, with tips recorded at the top of this file so they stay recoverable:
+`claude/status-2026-07-30` (`6bb69ac`, already in `main`),
+`claude/south-air-helicopter-site-1fyg5b` (`3cc9e75`, already in `main`),
+`claude/new-session-cymw5g` (`3705fbd`) and `claude/client-questions` (`fd0c761`).
+
+**Two of those were not merely stale, they were actively harmful to merge**, which is why
+they were checked rather than swept. `claude/new-session-cymw5g` was never listed in this
+file at all — three July commits, all editing `PROJECT-STATUS.md`, which would have
+reverted a tracker that has been rewritten several times since. `claude/client-questions`
+(PR #4) carried the same hazard: 34 lines of July tracker edits riding along with its
+questionnaire. **Diff a branch against `main` before merging it on age alone.**
+
+**PR #4 is closed, not merged, and the reasoning is on the thread** so it does not get
+re-decided from the branch name. Its 50-question `docs/client-questions.md` was superseded
+by `docs/client-questions-form.pdf`, which is the version that actually went out and came
+back filled in.
+
+**One thing on the brief branch was held back from the public repo, deliberately.**
+`docs/master-needs-list.md` — the 499-line internal plan behind the client-facing
+documents — is now at `private/master-needs-list.md` and out of git. This repo is public
+under the client's own business name, and that document identifies the office manager as
+the user's mother, carries a section headed *"Invented content that must be confirmed or
+killed"*, records that the site chose the three company values rather than the client,
+calls `nasa-partnership.html` the highest-liability page, and asks openly who should own
+the Netlify account long-term. All true, all useful, none of it written for the client to
+find on GitHub. **The `private/` convention already existed for the returned questionnaire
+and the scans; this is the same rule applied to our own working notes.** The checklist and
+questionnaire stay public — those were sent to the client on purpose.
+
+**Neither PR could be merged from this session.** The sandbox's permission classifier
+blocks merges, and the GitHub MCP token lacks admin rights on the repo. **So the work is
+staged but not landed.** Nothing depends on them — no site file changed, no deploy is
+needed, and `python tools/verify.py` is green at 19 checks.
+
+**⚠ #11 must be squashed, not plain-merged, and this is the one instruction on this page
+that is easy to get wrong by reflex.** Taking the file out in commit `657bf4e` removed it
+from the branch's *current* state but not from its *history* — `f3b34d0` still contains
+`docs/master-needs-list.md` and is still on GitHub. A normal merge commit makes that
+branch's whole history an ancestor of `main`, which would move the internal notes from a
+side branch onto the main line: the exact opposite of the intent. **Squash-and-merge
+collapses the branch into a single new commit holding only the final four files**, so
+`f3b34d0` never becomes an ancestor of `main`. Squash is enabled on the repo; use the
+dropdown beside the green button. **Then delete the branch** — `delete_branch_on_merge` is
+off, so it will not happen on its own.
+
+*Rewriting the branch so the file was never in it was attempted first and is the tidier
+fix, but `git reset` is blocked by the same classifier. Squashing reaches the same place
+for `main`, which is where the actual risk was.*
+
+**What squashing does not fix, stated plainly so nobody assumes otherwise:** GitHub retains
+pull-request head commits permanently, so `f3b34d0` stays reachable by its exact SHA
+through PR #11's own refs even after the branch is deleted. Purging that needs a GitHub
+Support request. **Proportionate judgement: not worth one.** The document is candid
+internal planning — no credentials, no client data, nothing about NASA. The thing worth
+preventing was it becoming part of the permanent main-line history under the client's own
+business name, and squashing prevents that.
+
+**The rule going forward, since this cost a correction:** on a public repo, deciding a file
+is internal *after* it has been pushed is already too late for a clean removal. Decide
+before the first push. `private/` exists for exactly this and should be the default home
+for anything characterising the client, the relationship, or our own uncertainty.
 
 **Nothing is uncommitted.** 2026-08-10 was a long build session: the 6 logo assets, all 10
 pages, the coming-soon page, `css/style.css`, `js/main.js`, `tools/build_logo.py`,
