@@ -148,7 +148,7 @@ None of these name an aircraft model, per the 2026-09-08 decision.
 | 1 | Helicopter Maintenance at Pearland Regional Since 1979 | **Plain and factual.** Says exactly what it is. Best for search |
 | 2 | Forty-Seven Years. Zero Maintenance-Related Accidents. | **The record.** Bold, checkable, nobody else in the region can say it |
 | 3 | The Same Shop, the Same Hands, Since 1979 | **Continuity.** The three-generations angle. Warm |
-| 4 | Quality and Safety — and a History That Reflects It | **His own words.** Nearly verbatim from his mission statement |
+| 4 | Quality and Safety — and a History That Reflects It | **Institutional.** Drawn from the returned form's mission-statement answer — but see the warning below: that sentence is an employee's, not Mike's |
 | 5 | Tell Us What It Needs. We'll Tell You Straight. | **Plainspoken.** Sounds like a person, not a company. Direct address |
 | 6 | Three Generations of Mechanics, One Hangar | **Craft and pride.** Leads with the people who do the work |
 | 7 | The Shop Operators Keep Coming Back To | **Relationship.** Repeat business as the proof |
@@ -165,8 +165,9 @@ narrows the voice faster than a lukewarm yes.
 ## Voice discovery — how we get Mike's actual voice
 
 The problem: nothing on this site should be written in a voice invented for him, and
-so far we have one confirmed sentence of his — the mission statement above. Everything
-else came back as short factual answers, because that is what the form asked for.
+**we have not one word from him.** See the warning below — both documents we hold were
+written by other people. Everything on the site today is either ours or an office
+employee's.
 
 **Recommendation: this should be a conversation, not another form.** Written
 questionnaires have twice come back terse. Twenty minutes on the phone, or an hour at
@@ -192,10 +193,33 @@ his voice beats a polished one in ours, and the tagline, the hero headline and t
 "What Sets Us Apart" section can all be built out of his own words rather than
 approximations of them.
 
-**On the mission statement:** he did give one — *"Quality and safety is our priority
-and our history reflects it."* It is short, it is his, and it is already on the About
-page. The job is to confirm it is what he wants published and build around it, not to
-invent one.
+### ⚠️ We have zero words from Mike
+
+Established 2026-09-08 and it corrects an assumption that had been running through
+this whole project. **Neither document we hold was written by Mike.**
+
+- The **returned questionnaire** was filled in by an office employee, not the owner.
+- The **company history note** was typed up quickly by someone in the office at
+  Kristina's request. It is not an official document and not his account.
+
+So the sentence *"Quality and safety is our priority and our history reflects it"* —
+which is on the About page now, and which earlier notes described as his mission
+statement verbatim — **is an employee's phrasing.** It may well be a fair description
+of the business. It is not the owner's voice, and it has not been approved by him.
+
+Two consequences:
+
+1. **Every word on this site is currently either ours or an employee's.** Nothing
+   traces to Mike. For a site whose whole differentiator is that it is a named
+   owner's small shop, that is the gap that matters most.
+2. **The conversation above is not optional polish — it is the only way to get any
+   of his voice at all.** It is not "we have one sentence and want more." It is
+   "we have none."
+
+Also worth re-reading the factual answers in that light. They came from someone
+competent and close to the business, but they are secondhand: the "PROBABLY" on
+whether NASA needs to review marketing, and the "?" against the word "partnership",
+were guesses by a person who likely has not read the contract.
 
 ---
 
