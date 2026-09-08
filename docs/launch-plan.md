@@ -1,222 +1,253 @@
 # Launch Plan
 
-*Drafted 2026-09-08. Supersedes nothing — this is the first written rollout plan.
-`PROJECT-STATUS.md` remains the source of truth for what is real content versus
-placeholder; this file is the source of truth for **the order things go public in
-and what gates each step.***
+*Rewritten 2026-09-08, replacing the earlier five-phase version. Locked with the user
+in conversation on the same day.*
+
+*`PROJECT-STATUS.md` remains the source of truth for what is real content versus
+placeholder. This file is the source of truth for **what the site is, what order it
+goes public in, and what has to be true before each step.***
+
+**Nothing in this document has been implemented.** No page has been changed, deleted,
+or moved; `tools/verify.py` and `netlify.toml` are untouched. This is the plan only.
 
 ---
 
-## The shape of it
+## The site is five pages
 
-The site is nine pages once `news.html` is dropped. They do **not** all go live at
-once. The domain moves off the coming-soon page in Phase 1 with three pages behind
-it, and each later phase adds pages as their content is confirmed.
+**Home · Services · About · History · Contact**
 
-| Phase | Goes live | Gated on |
-| --- | --- | --- |
-| **1** | `index.html`, `services.html`, `contact.html` + **the domain** | A working contact route, and a decision on each Phase 1 placeholder |
-| **2** | `about.html`, `history.html` | The founding story / milestones sheet; Mike's bio |
-| **3** | `bell-service-center.html`, `platforms.html` | Copy of FAA certificate #XRIR622K; Bell's web-format seal artwork |
-| **4** | `careers.html` | Whether there are openings; resume inbox; EEO wording |
-| **5** | `nasa-partnership.html` | A real answer on whether the NASA work may be published, and in what words |
+Four pages were cut. That decision came from the client relationship, not from the
+content: this is a small shop, the owner is not going to maintain a website, and a
+thin page reads worse than no page. Nothing is lost — it relocates.
 
-Phase 5 may never happen, and that is an acceptable outcome. The page exists; it
-publishes only if the answer comes back yes.
-
-**Newsworthy items no longer get their own page.** `news.html` is deleted (decided
-2026-09-08). If stories ever arrive they become a section on the homepage rather
-than a page that looks abandoned when empty.
-
----
-
-## How a page goes from draft to live
-
-One mechanism, used identically in every phase, so that "launch a page" is a small
-and boring action rather than a judgement call each time:
-
-1. **The page is 404'd until its phase.** `netlify.toml` gets an explicit redirect
-   to 404 for every not-yet-launched page, exactly the way `docs/` and `tools/` are
-   already handled. Launching a page = deleting its redirect block.
-2. **The nav and footer only list live pages.** Trimmed in Phase 1 to Home,
-   Services, Contact; each phase adds its pages back to the shared header and
-   footer across every page. This stays a hand-edit across all files — there is no
-   templating layer — so it must be followed by `python tools/verify.py`.
-3. **A live page carries zero placeholders.** This inverts the current rule.
-   `tools/verify.py` today asserts *at least three* `[PLACEHOLDER]` blocks per page,
-   as a guard against invented content reaching a page. That guard is correct for a
-   work-in-progress site and exactly wrong for a live one. It becomes two rules
-   against an explicit `LAUNCHED` list in `verify.py`:
-   - a page on the list: **zero** placeholders, or the check fails;
-   - a page not on the list: **three or more**, as today.
-
-   Adding a page to `LAUNCHED` is therefore the single act that both makes it
-   public and makes the build refuse to ship it with unfinished copy.
-4. **Search indexing follows the same list.** `robots.txt` and the site-wide
-   `X-Robots-Tag` in `netlify.toml` currently noindex everything. At Phase 1 they
-   become per-path: launched pages indexable, everything else still `noindex`.
-
-The rule this encodes: **a placeholder is never resolved by writing something
-plausible.** It is resolved by getting the answer, or by deleting the section it
-sits in. Both are fine. Inventing is not.
-
----
-
-## Phase 0 — before any page goes public
-
-Work that has nothing to do with content and can be done at any time.
-
-- **Wire the contact form to something real.** Highest-severity item on the site: a
-  customer who fills it in today reaches nobody. See *Contact form* below — this
-  needs a decision before it needs code.
-- **Delete `news.html`**, remove it from the nav and footer on all pages, and drop
-  the nav-count check in `verify.py` from 8 to whatever the trimmed nav holds.
-- **Rework `verify.py`** for the `LAUNCHED` list as described above.
-- **Add the 404 redirect blocks** to `netlify.toml` for the six pages not in Phase 1.
-- **Take the coordinates off the FAA airport record** for Pearland Regional / KLVJ.
-  This is a lookup, not a client question — it does not belong on any ask sheet.
-- **Fix the registrar phone number.** The Squarespace account may carry
-  `281-684-5187`; the business card reads `281.648.5187`. The site has it right.
-
----
-
-## Phase 1 — Home, Services, Contact, and the domain
-
-### Content that must be settled first
-
-Sixteen placeholder blocks sit across the three pages. Each one has exactly three
-possible resolutions: **fill** (the answer arrives), **cut** (the section is removed
-for launch and can return later), or **defer** (the section stays but is rewritten
-not to need the missing fact).
-
-**`index.html`**
-
-| Placeholder | Recommended |
+| Cut | Where its content goes |
 | --- | --- |
-| Founding story / milestones | **Cut for Phase 1** — it is the History teaser, and History is Phase 2 |
-| Photo: hangar, team, or aircraft | **Fill** — needs one usable photo, or cut the slot |
-| Photo: shop floor or Bell airframe | **Fill or cut** — same |
-| FAA certificate ratings | **Cut from the homepage** — the ratings belong on the Bell page (Phase 3) |
-| NASA teaser block | **Cut** — NASA is Phase 5 and unconfirmed for publication |
-| Tagline | **Decide** — a tagline can be written; it does not have to be the client's |
+| `news.html` | Nothing. Newsworthy items become a homepage section if any ever arrive; an empty news page reads as an abandoned business |
+| `platforms.html` | **The top of Services.** The aircraft list is the most commercially useful content on the site, so it moves up in prominence, not down |
+| `bell-service-center.html` | **About** — the CSF designation, FAA #XRIR622K, what it authorizes. The Bell warranty work stays as a Services card |
+| `careers.html` | A line on Contact, or nothing. The factory-schools benefit is good but does not need a page |
+| `nasa-partnership.html` | Deleted. This also removes the hardest unresolved problem on the project |
 
-**`services.html`**
+### Why the aircraft list leads Services
 
-| Placeholder | Recommended |
-| --- | --- |
-| Bell CSF seal slot | **Cut for Phase 1** — the seal has its home on the Bell page |
-| FAA certificate ratings | **Cut** — same as above |
-| "Parts & Fleet Support" card | **Ask** — the one service marked neither way. Keep or remove, one word |
-| Quote route: phone, form, or both | **Ask** — but the form decision below may settle it |
-| Customer testimonial | **Cut for Phase 1** — returns when a testimonial is obtained |
-| Tagline | Same decision as the homepage |
+Research across a dozen-plus helicopter MRO sites nationally — Bell CSFs and
+others — found one consistent pattern: **every shop leads with which models it is
+approved on.** Helicopter Specialties advertises "33+ models"; Rotorcraft Support
+publishes an explicit FAA-approved model list; CBH Aviation names "Bell 206B, 206L,
+MD500." It is how an operator self-qualifies in about four seconds — *do you touch my
+aircraft, yes or no.*
 
-**`contact.html`**
+The industry's own stated selection criteria run: certifications, then model-specific
+experience, then breadth of capability, then reputation. Company history appears
+nowhere on that list — which is the argument for keeping History as its own quiet page
+rather than letting the story colonise the front of the site. Nobody picks a shop
+because of 1979. But 1979 is why they remember you.
 
-| Placeholder | Recommended |
-| --- | --- |
-| Airport coordinates | **Fill from the FAA record** — Phase 0, not a client question |
-| Temporary email addresses | **Ask** — which inbox is public; blocks the footer on every page too |
-| Form submits nowhere | **Fix** — see below |
-| Tagline | Same decision |
+*Caveat on that research: this environment blocks outbound page fetches, so it came
+from search results rather than from reading the sites directly. The pattern was
+consistent across independent sources; no single detail should be treated as verified.*
 
-Three of the sixteen are the same tagline placeholder repeated, and five are
-recommended cuts that Phases 2–5 bring back. **The genuinely blocking set is small:
-the public inbox, "Parts & Fleet Support" yes or no, at least one photo, and a
-tagline decision.**
+### AOG
 
-### The contact form
+AOG response is a category expectation — several comparable shops lead with it. South
+Air does it. It is currently one line at the bottom of Contact and deserves a visible
+callout on Home and Contact both.
 
-The form is the reason Phase 1 cannot ship on content alone. Two routes:
+**Wording is constrained.** The returned questionnaire gives hours as *"8-5 M-F, will
+do AOG"* and left the 24/7 question blank. So: AOG response, yes. Around-the-clock
+availability, no — not until someone confirms it.
 
-**Netlify Forms** — a `data-netlify="true"` attribute plus a notification address.
-No third-party account, no backend, no DNS work; the notification email arrives
-from Netlify's own sending domain. Free tier covers 100 submissions a month, which
-is far above what this site will see.
+---
 
-**A Netlify Function calling Resend** — more control over how the email looks, and
-it sends *as* the company's own domain. It needs a Resend account, a verified
-sending domain, and an API key held as a Netlify environment variable.
+## Two phases
 
-⚠️ **If Resend is chosen, the DNS has a trap already waiting.** `southairhelicopters.com`
-currently carries hardening records left by the registrar's default setup:
-`TXT @` = `v=spf1 -all` and `TXT _dmarc` = `p=reject`. In plain terms, the domain
-currently declares that *no server anywhere is authorised to send mail as it*, and
-that receivers should reject anything that tries. Resend will appear configured and
-its mail will still be rejected until those records are replaced with Resend's own
-SPF and DKIM values. Netlify Forms is unaffected, because it never sends as the
-domain.
+**Phase 1 — Home · Services · Contact, and the domain switch**
+The three pages a customer needs: who you are, what you do, how to reach you. This is
+what turns southairhelicopters.com from a holding page into a real site.
 
-**Recommendation: Netlify Forms for Phase 1.** It removes the blocker today with one
-attribute. Resend becomes a Phase 2+ upgrade if branded email is wanted, at which
-point the DNS work is a deliberate task rather than a launch-day surprise.
+**Phase 2 — About · History**
+The company story. One body of work split across two pages — the founder, the
+ownership chain, the people.
 
-Either way it still needs **one answer: which inbox receives submissions.**
+That is the whole rollout.
+
+---
+
+## Phase 1
+
+### Before anything goes live
+
+Three things have to be true, in this order.
+
+**1. The site has to be in the company's Netlify account.**
+
+It is currently on the user's personal account, along with the separate coming-soon
+site. Netlify supports transferring a project self-serve — *Project configuration →
+General → Project information → Transfer project* — provided you have Owner access on
+the source and are an Owner or Developer on the destination. If the two teams share
+nobody, it needs a support ticket, which is avoidable.
+
+So: the company creates a Netlify team, adds the user to it, and the user transfers the
+main site over.
+
+**Do this before the domain switch, not after.** Right now the domain points at the
+coming-soon site and the ten-page site is not serving it, so a transfer that goes
+sideways is invisible to the public. Netlify's docs do not say whether the
+`.netlify.app` subdomain, site ID, and deploy history survive a transfer intact —
+doing it pre-launch makes that question harmless. Once the domain is pointed at it,
+the same move is a live-site migration.
+
+**2. The contact form has to reach somebody.**
+
+It currently submits nowhere. A customer who fills it in today reaches no one — the
+highest-severity item on the site, and it blocks Phase 1 on its own.
+
+**Decided: a Netlify Function calling Resend.** Not Netlify Forms.
+
+Three reasons, in order of weight:
+
+- **Portability.** The function is code in this repo. It moves with the site to
+  whatever host, under whoever's account. Netlify Forms ties the client's customer
+  inquiries to a Netlify dashboard, and submission history is exactly the kind of
+  thing that may not survive a team transfer.
+- **Ownership.** With Forms, the client's leads sit in the user's personal Netlify
+  account. With Resend, the account can be created under the company's email on day
+  one and nothing is retained anywhere.
+- **The DNS work is not Resend overhead.** Google Workspace email on this domain is
+  already on the list, and it requires replacing the same SPF record. Resend's
+  marginal cost is one DKIM record added while already in there.
+
+⚠️ **The DNS trap.** `southairhelicopters.com` carries registrar-default hardening:
+`TXT @` = `v=spf1 -all` and `TXT _dmarc` = `p=reject`. In plain terms the domain
+currently declares that *no server anywhere may send mail as it*, and that receivers
+should reject anything that tries. Resend will appear correctly configured and its
+mail will still be rejected until those are replaced with Resend's own SPF include and
+DKIM values. *(Read from a note taken during domain signup — confirm in the Squarespace
+DNS panel before acting.)*
+
+**Build in a visible failure path.** Resend stores nothing. If the API call fails the
+inquiry is gone and nobody knows. The function must return an error the visitor
+actually sees — "something went wrong, please call us" — rather than a false success.
+
+Still needed from the client: **which inbox receives submissions.**
+
+**3. The Phase 1 placeholders have to be resolved.**
+
+Sixteen blocks across the three pages. Each resolves one of three ways: **fill** (the
+answer arrives), **cut** (the section comes out and returns in a later phase), or
+**defer** (rewrite the section so it no longer needs the missing fact). Filling one in
+with something plausible is not on the list.
+
+Most resolve to cuts now that the site is five pages — the certificate ratings, the
+Bell seal slot and the NASA teaser belong to pages that no longer exist. Three are the
+same tagline placeholder repeated, and a tagline can be written; it does not have to
+come from the client.
+
+**What genuinely blocks Phase 1 is four items:**
+
+1. Which inbox receives contact-form submissions
+2. Whether "Parts & Fleet Support" stays as a service — the one item never marked
+   either way on the returned form
+3. At least one usable photograph
+4. Whether quote requests should come by phone, by form, or both
+
+The airport coordinates are also outstanding, but those come off the FAA record for
+Pearland Regional. That is a lookup, not a client question.
 
 ### The domain switch
 
-`southairhelicopters.com` currently points at the `sah-coming-soon` Netlify site
-(site id `de01967d-071f-433e-a5af-6e87b7870b22`). The three-page site is a
-different Netlify site, currently at `south-air-helicopters.netlify.app`.
+Order matters.
 
-Order of operations, and it matters:
-
-1. Deploy the Phase 1 build to the main site and **check it at its `.netlify.app`
-   URL first** — every page, on a phone as well as a desktop.
-2. Remove `southairhelicopters.com` and `www` from `sah-coming-soon`.
-3. Add both to the main site. Netlify reissues the Let's Encrypt certificate; there
-   is a window of a few minutes where HTTPS may fail. Do this at a quiet hour.
-4. Confirm `www` → apex and `http` → `https` redirects survived the move. They were
-   configured on the old site, not inherited.
-5. Remove `robots.txt`'s blanket `Disallow: /` and the site-wide `X-Robots-Tag`,
-   replacing both with the per-path form.
-6. **Keep the coming-soon site deployed** at `sah-coming-soon.netlify.app` rather
-   than deleting it. It costs nothing and is the rollback if the new site has a
-   problem — the domain can be pointed back in minutes.
-7. Load the real domain and confirm the launched pages resolve and the unlaunched
-   ones 404.
+1. Deploy the Phase 1 build and **check it at the `.netlify.app` URL first** — every
+   page, on a phone as well as a desktop.
+2. Remove `southairhelicopters.com` and `www` from the coming-soon site.
+3. Add both to the main site. Netlify reissues the Let's Encrypt certificate; there is
+   a window of a few minutes where HTTPS may fail. Do it at a quiet hour.
+4. Confirm `www` → apex and `http` → `https` survived. They were configured on the old
+   site, not inherited.
+5. Replace `robots.txt`'s blanket `Disallow: /` and the site-wide `X-Robots-Tag` with
+   per-path versions — launched pages indexable, About and History still noindex.
+6. **Keep the coming-soon site deployed.** It costs nothing and it is the rollback: the
+   domain can be pointed back in minutes.
+7. Load the real domain. Confirm the three pages resolve and the unlaunched two 404.
 
 ---
 
-## Phases 2–5
+## Phase 2 — About and History
 
-Each follows the same four steps: content confirmed → placeholders resolved → page
-added to `LAUNCHED` → nav, footer and `netlify.toml` updated across every file →
-`verify.py` → deploy → load the live URL and look at it.
+Both are largely written and both now have real material.
 
-**Phase 2 — About + History.** Both are blocked on the same thing: the founding
-story and milestone dates. Three empty timeline slots on History and the origin
-story are one document away from done. Also needs Mike's bio, a decision on whether
-anyone else appears on the team page, and a one-line description for the third
-company value. Launching these two together means one document unblocks a whole
-phase.
+**History** has eight datable events from the company-history note the client sent:
+founded October 1979 by Robert H. Mitchell; Jeffrey P. Helton joins May 1980; Bell CSF
+network 1981; MD 500 added through the 1980s; Helton buys the company February 2001 and
+Mitchell retires after 22 years; 407 / 407GX / GXi in the early 2000s; Bell 429 in 2011;
+Mike Pike becomes president around 2025.
 
-**Phase 3 — Bell CSF + Platforms.** Blocked on a copy of FAA Repair Station
-certificate #XRIR622K (for the ratings, from the document rather than from memory)
-and on Bell's web-format seal artwork from the brand portal. The standing trademark
-warnings on the Bell page stay until Bell's own written rules are in hand —
-`docs/trademark-research.md` settles what is and is not allowed and should be
-re-read before this phase, not re-litigated during it.
+Two cautions carried forward, both about accuracy rather than about the client:
 
-**Phase 4 — Careers.** Blocked on whether there are current openings, the resume
-inbox, and the EEO statement wording. If there are no openings, the page says so
-plainly — that is a fine answer and does not block the phase. The factory-schools
-benefit is already confirmed and is the strongest thing on the page.
+- **The dates want one confirmation pass** before they are published. They were typed
+  up quickly in answer to a question, not taken from a record, and a wrong date on a
+  live timeline is the kind of thing a long-serving employee notices immediately.
+- **Bell 47 and 222 appear in that note** as certifications gained in 1981. They are
+  not on the site and they are not on any record we hold. They may belong on the
+  timeline as history; they must not appear anywhere as current capability. The FAA
+  certificate settles current ratings, and nothing settles historical ones.
 
-**Phase 5 — NASA.** Blocked on a real answer, not a probably: does the contract
-restrict what may be published about the work, does NASA have to review marketing
-that mentions them, and is "partnership" an acceptable word. Until then no NASA
-detail enters this repo at all. If the answer is no, the page is deleted and the
-rollout ends at Phase 4 — which is a complete site.
+**About** needs Mike's bio, a decision on the other two team slots, and descriptions
+for the three company values — all three came back blank on the questionnaire, not
+just one.
+
+Still outstanding for both: how openly the ownership change should be described. That
+question is not answered by the fact that a staff member described it in a note to us.
 
 ---
 
-## Open decisions
+## The launch gate
 
-- **Netlify Forms or Resend** for the contact form. Recommendation above.
-- **404 redirects or a `drafts/` folder** for hiding unlaunched pages. The plan
-  above uses redirects because it keeps every file at the repo root, so relative
-  links and `verify.py` keep working unchanged. A `drafts/` folder is tidier but
-  breaks both. Reversible either way.
-- **Whether the tagline is written or waited for.** It came back blank, and it is
-  the one open item that does not actually need the client.
+One mechanism, so that launching a page stays a small boring action.
+
+- **A `LAUNCHED` list in `tools/verify.py`.** A page on the list must carry **zero**
+  placeholders or the check fails. A page not on the list still needs three or more,
+  as today. Adding a page to that list is the single act that both makes it public and
+  makes the build refuse to ship it with unfinished copy.
+- **`netlify.toml` 404s the unlaunched pages** in production, matching the existing
+  `docs/` and `tools/` pattern. Launching a page means deleting its redirect block.
+- **Nav and footer list only live pages** — Home, Services, Contact at Phase 1, all
+  five at Phase 2. There is no templating layer, so this is a hand-edit across every
+  file, and `python tools/verify.py` runs after each one.
+- Dropping `news.html` takes the nav from eight items to seven before that trim, and
+  `verify.py`'s hard-coded count of 8 changes with it.
+
+**Sequencing note.** The nav trim and the 404 redirects must land together, as one
+change, on launch day. Doing either early strips pages out of the preview site the
+client has the link to.
+
+---
+
+## Accounts and ownership
+
+Things that should end up in the company's name, in order of how much it would hurt to
+lose them:
+
+1. **The domain.** This is the actual asset. Currently Squarespace, under the user's
+   personal account. Worth sorting sooner than the rest, or at minimum getting in
+   writing — moving a live domain is more stressful than moving a staging one.
+2. **Netlify.** Per Phase 1 above, transferred before the domain switch.
+3. **Resend.** Created under the company's email from the start, so it never needs
+   moving.
+4. **Google Workspace.** Theirs by definition, once it exists.
+
+None of this blocks Phase 1 except the Netlify transfer, which is deliberately
+sequenced into it.
+
+---
+
+## Still open
+
+- **Which inbox** receives contact-form submissions — blocks the form.
+- **"Parts & Fleet Support"** — stays or comes off.
+- **At least one photograph.**
+- **Phone, form, or both** for quote requests.
+- **The tagline** — can be written rather than waited for.
+- Client questions now route through **Kristina, the office manager**, who asks Mike
+  and others as needed. The question document is drafted but not revised or sent.
