@@ -50,9 +50,9 @@ as deliberately text-led rather than unfinished. That is a fallback, not the pla
 
 | Section | Have | Need | Source |
 | --- | --- | --- | --- |
-| Hero — "Keeping Helicopters Flying, Safely and On Schedule" | Eyebrow, headline, and a subhead naming the confirmed airframes | **DECIDED 2026-09-08:** present Mike four options rather than picking one — he has no headline in mind, and choosing shapes the rest of the site's voice. They go on the client question doc. The subhead already carries the airframes, so the headline can carry character. See *Headline options* below | Mike, via Kristina |
+| Hero — "Keeping Helicopters Flying, Safely and On Schedule" | Eyebrow and headline. **The subhead currently names the airframes and has to be rewritten** under the no-models decision — it can lead with the Bell CSF and FAA credentials instead | **DECIDED 2026-09-08:** present Mike four options rather than picking one — he has no headline in mind, and choosing shapes the rest of the site's voice. They go on the client question doc. The subhead already carries the airframes, so the headline can carry character. See *Headline options* below | Mike, via Kristina |
 | Stat strip | 1979 · Bell CSF · AOG | **DECIDED 2026-09-08:** the safety tile becomes **Zero** / *maintenance-related accidents since 1979*. Putting "Zero" in the number slot is what lands, it never goes stale, and "since 1979" carries the length of the record without a figure to maintain. 47 stays available in body copy | Done |
-| "Full-Service Helicopter Support" — three blurbs | Maintenance & Repair, Inspections & Safety Checks, Avionics & Systems. All three confirmed, including the engine and avionics exclusions | Nothing | — |
+| "Full-Service Helicopter Support" — three blurbs | Maintenance & Repair, Inspections & Safety Checks, Avionics & Systems. All three confirmed, including the engine and avionics exclusions | **The Maintenance & Repair blurb names the 206 and 407 series** — strip the models under the no-models decision. The rest stands | Me |
 | Quote CTA strip | Copy and phone number | Nothing | — |
 | "A Legacy Built on Trust" | Founded 1979 by Robert H. Mitchell; Bell CSF since 1981; third generation of long-term employees | **DECIDED 2026-09-08:** keep the section, cut the long-story placeholder, and repoint the dead History link at Services — *"See what we do today →"*. The confirmed history reads as a complete short block on its own; no "check back later" framing, which advertises incompleteness the same way an empty news page does. In Phase 2 the CTA flips to the History page | Me |
 | Two photo slots | — | Photos | Kristina |
@@ -70,7 +70,7 @@ because the models list is how an operator self-qualifies.
 | Section | Have | Need | Source |
 | --- | --- | --- | --- |
 | Hero — "What We Offer" | Fine | Nothing | — |
-| **NEW: Aircraft We Work On** *(from Platforms)* | Bell 206 B/L/L-3/L-4 — field maintenance and component overhaul. Bell 407/407GX/407GXi — same. Bell 429 — field maintenance including airframe and engine inspection. MD 500 C/D/E — field maintenance. Plus the exclusions: no engine overhauls in house, avionics through a shop on the field. Plus "not listed? ask anyway" | **DECIDED 2026-09-08: cut all four.** The placeholders wanted a line per airframe on tooling held, parts stocked and typical work. The card already gives the model and the work authorized on it, which is what an operator is asking. Four more lines to chase for detail nobody is waiting on | Done |
+| **NEW: What We Work On** *(from Platforms)* | The exclusions, which stay: no engine overhauls in house, avionics through a shop on the field. Plus "tell us the airframe and we'll tell you straight" | **DECIDED 2026-09-08: no individual aircraft models on the site, for now.** The per-model cards come out along with their four note placeholders. Someone with a helicopter should call or send the form and talk it through — a model list filters people out, and we cannot verify current ratings without the certificate anyway. `verify.py`'s blanket model-name ban (which still guards the coming-soon page) gets re-applied to the main site, reverting the August allowlist, so the check enforces this rather than relying on memory. **Tradeoff accepted:** search traffic for "Bell 407 maintenance Houston" is lost, and an operator can no longer self-qualify in seconds. A category-level line — Bell Customer Service Facility, other manufacturers too — would recover most of that without naming models, and remains available if we want it | Done |
 | Services provided | Scheduled Maintenance · Airframe & Engine Repair · Avionics & Systems · Pre-Purchase & Annual Inspections · Bell Warranty Work | **Cut Parts & Fleet Support** (see below). Cut the Bell seal slot — no artwork, and its home moved to About | Me |
 | Quote CTA | Copy and phone | The phone-or-form placeholder **resolves itself** once the form works — the answer is both | Me |
 | "How Pricing Works" | What to Send Us / What Happens Next / Talk to Us Directly | Check this against what they actually said: quotes need "scope of work to be performed"; quotes come back by "preferred method"; and **no turnaround figure is published**, because "we don't do a lot of quoting" | Me, then review |
@@ -137,16 +137,99 @@ Either alone strips pages out of the preview the client has the link to.
 
 ## Headline options for Mike
 
-Four angles rather than four phrasings, so he is reacting to an idea. The subhead
-already names the airframes, so the headline does not have to do the technical work.
+Ten, spread across distinct **vibes** rather than ten phrasings of one idea. He has no
+headline in mind, so the useful ask is not "pick a sentence" — it is **"which of these
+sounds like your company?"** He can pick a vibe and we write into it.
 
-| | Headline | Angle |
+None of these name an aircraft model, per the 2026-09-08 decision.
+
+| | Headline | Vibe |
 | --- | --- | --- |
-| **A** | Bell Specialists at Pearland Since 1979 | Credential, location, longevity. Most operator-friendly, and the best of the four for search |
-| **B** | Forty-Seven Years Without a Maintenance-Related Accident | Leads with the record. Bold, checkable, and nobody else in the region can say it |
-| **C** | The Same Shop, the Same Hands, Since 1979 | The three-generations angle. Warm, and structurally impossible for Arrow or Summit to copy |
-| **D** | Quality and Safety — and a History That Reflects It | His own mission statement nearly verbatim. Lowest risk, already his voice |
+| 1 | Helicopter Maintenance at Pearland Regional Since 1979 | **Plain and factual.** Says exactly what it is. Best for search |
+| 2 | Forty-Seven Years. Zero Maintenance-Related Accidents. | **The record.** Bold, checkable, nobody else in the region can say it |
+| 3 | The Same Shop, the Same Hands, Since 1979 | **Continuity.** The three-generations angle. Warm |
+| 4 | Quality and Safety — and a History That Reflects It | **His own words.** Nearly verbatim from his mission statement |
+| 5 | Tell Us What It Needs. We'll Tell You Straight. | **Plainspoken.** Sounds like a person, not a company. Direct address |
+| 6 | Three Generations of Mechanics, One Hangar | **Craft and pride.** Leads with the people who do the work |
+| 7 | The Shop Operators Keep Coming Back To | **Relationship.** Repeat business as the proof |
+| 8 | A Bell Customer Service Facility Since 1981 | **Credential-forward.** Institutional, no personality, maximum trust signal |
+| 9 | Back in the Air, On Schedule | **Practical / uptime.** Speaks to the thing an operator actually loses — flight hours |
+| 10 | We've Been Keeping Helicopters Flying Since 1979 | **Understated.** Quiet confidence, no claim beyond the obvious |
 
-Recommendation: **C**, with **A** as the plainer fallback. Current live headline is
-"Keeping Helicopters Flying, Safely and On Schedule" — competent, and it could belong to
-any shop in the country.
+**How to ask:** send all ten and ask which two or three *feel* like South Air, and
+which feel wrong. The wrong ones are as useful as the right ones — a clear "not that"
+narrows the voice faster than a lukewarm yes.
+
+---
+
+## Voice discovery — how we get Mike's actual voice
+
+The problem: nothing on this site should be written in a voice invented for him, and
+so far we have one confirmed sentence of his — the mission statement above. Everything
+else came back as short factual answers, because that is what the form asked for.
+
+**Recommendation: this should be a conversation, not another form.** Written
+questionnaires have twice come back terse. Twenty minutes on the phone, or an hour at
+the hangar, will produce more usable voice than a third document ever will. Record it
+or take notes; the exact phrasings are the point.
+
+Questions that work — concrete and story-shaped, never abstract. "What is your mission
+statement?" gets nothing. These get paragraphs:
+
+1. When someone at a party asks what you do, what do you say?
+2. Why do customers come back? What do they actually tell you?
+3. Tell me about a job you were proud of.
+4. What do you turn away, and why?
+5. What do people misunderstand about helicopter maintenance?
+6. What would your longest-serving mechanic say about working here?
+7. If a customer went to another shop instead, what would they be giving up?
+8. What is the thing you will not compromise on?
+9. Is there something you find yourself saying to customers over and over?
+10. What would Mitchell or Helton have said about this place?
+
+**What to do with the answers:** pull the phrases he actually used. A real sentence in
+his voice beats a polished one in ours, and the tagline, the hero headline and the
+"What Sets Us Apart" section can all be built out of his own words rather than
+approximations of them.
+
+**On the mission statement:** he did give one — *"Quality and safety is our priority
+and our history reflects it."* It is short, it is his, and it is already on the About
+page. The job is to confirm it is what he wants published and build around it, not to
+invent one.
+
+---
+
+## Customer intake — what a new job actually looks like
+
+Requested 2026-09-08. This is website content and a question set at once: it fills the
+existing but thin **"What to Send Us"** and **"What Happens Next"** sections on
+Services, and it is the single most useful thing a shop can put on a services page,
+because it tells an operator whether calling is going to be easy or painful.
+
+Nobody has been asked any of this. For Kristina:
+
+**Before the job**
+1. When someone calls about work, what is the first thing you ask them?
+2. What do you need before you can put a quote together — make and model, serial
+   number, total time, logbook status, a description of the work?
+3. What paperwork should they have ready? Logbooks, airworthiness certificate,
+   registration, previous 8130s, anything else?
+4. Does it matter whether they are Part 91 or 135, and do you need to know that upfront?
+
+**Getting the aircraft to you**
+5. Do they fly it in, truck it in, or do you go out to it? Is that a choice?
+6. How much notice do you usually need before you can take something in?
+7. Is there anything they should do to the aircraft before it arrives?
+
+**During and after**
+8. Once it is here, how does a customer hear about progress — do you call, do they call?
+9. What happens if you find something that was not in the original scope?
+10. What does a customer get at the end — logbook entries, 8130s, a written scope?
+11. How and when does payment work?
+
+**The one that produces the best content**
+12. What is the most common thing a customer forgets to bring, or gets wrong?
+
+That last answer, published as a short "here's what to have ready" list, is worth more
+to a real operator than any amount of marketing copy.
+
