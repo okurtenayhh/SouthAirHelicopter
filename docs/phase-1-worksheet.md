@@ -50,11 +50,11 @@ as deliberately text-led rather than unfinished. That is a fallback, not the pla
 
 | Section | Have | Need | Source |
 | --- | --- | --- | --- |
-| Hero — "Keeping Helicopters Flying, Safely and On Schedule" | Eyebrow, headline, and a subhead naming the confirmed airframes | Nothing factual. **Open question of taste:** the headline is competent but generic, and the small-shop angle is the one thing competitors can't copy | Discuss |
-| Stat strip | 1979 · 45+ years no maintenance-related accident · Bell CSF · AOG | **Decide 45+ vs 47.** The returned form says "never had a maint. related accident in it's 47 yr. history." 45+ is floored so it never goes stale; 47 is what they said | Decide |
+| Hero — "Keeping Helicopters Flying, Safely and On Schedule" | Eyebrow, headline, and a subhead naming the confirmed airframes | **DECIDED 2026-09-08:** present Mike four options rather than picking one — he has no headline in mind, and choosing shapes the rest of the site's voice. They go on the client question doc. The subhead already carries the airframes, so the headline can carry character. See *Headline options* below | Mike, via Kristina |
+| Stat strip | 1979 · Bell CSF · AOG | **DECIDED 2026-09-08:** the safety tile becomes **Zero** / *maintenance-related accidents since 1979*. Putting "Zero" in the number slot is what lands, it never goes stale, and "since 1979" carries the length of the record without a figure to maintain. 47 stays available in body copy | Done |
 | "Full-Service Helicopter Support" — three blurbs | Maintenance & Repair, Inspections & Safety Checks, Avionics & Systems. All three confirmed, including the engine and avionics exclusions | Nothing | — |
 | Quote CTA strip | Copy and phone number | Nothing | — |
-| "A Legacy Built on Trust" | Founded 1979 by Robert H. Mitchell; Bell CSF since 1981 | The longer story is a placeholder, **and this section links to History, which isn't live until Phase 2.** Either cut it for Phase 1 or keep two sentences with the link removed | Decide |
+| "A Legacy Built on Trust" | Founded 1979 by Robert H. Mitchell; Bell CSF since 1981; third generation of long-term employees | **DECIDED 2026-09-08:** keep the section, cut the long-story placeholder, and repoint the dead History link at Services — *"See what we do today →"*. The confirmed history reads as a complete short block on its own; no "check back later" framing, which advertises incompleteness the same way an empty news page does. In Phase 2 the CTA flips to the History page | Me |
 | Two photo slots | — | Photos | Kristina |
 | "A Bell Customer Service Facility" | What the designation authorizes, held since 1981, audits/training/tooling, cert #XRIR622K | Cut the certificate-ratings placeholder. **Repoint the "Our Bell Authorization" link** — its target page is being folded into About | Me |
 | "Supporting Work Alongside NASA" | — | **Delete the whole section.** The page it links to is gone | Me |
@@ -70,7 +70,7 @@ because the models list is how an operator self-qualifies.
 | Section | Have | Need | Source |
 | --- | --- | --- | --- |
 | Hero — "What We Offer" | Fine | Nothing | — |
-| **NEW: Aircraft We Work On** *(from Platforms)* | Bell 206 B/L/L-3/L-4 — field maintenance and component overhaul. Bell 407/407GX/407GXi — same. Bell 429 — field maintenance including airframe and engine inspection. MD 500 C/D/E — field maintenance. Plus the exclusions: no engine overhauls in house, avionics through a shop on the field. Plus "not listed? ask anyway" | Four `[model-specific note]` placeholders — tooling held, parts stocked, typical work. **Cut them**, or ask Kristina for one line per airframe. Cutting is fine; the list already answers the question that matters | Decide |
+| **NEW: Aircraft We Work On** *(from Platforms)* | Bell 206 B/L/L-3/L-4 — field maintenance and component overhaul. Bell 407/407GX/407GXi — same. Bell 429 — field maintenance including airframe and engine inspection. MD 500 C/D/E — field maintenance. Plus the exclusions: no engine overhauls in house, avionics through a shop on the field. Plus "not listed? ask anyway" | **DECIDED 2026-09-08: cut all four.** The placeholders wanted a line per airframe on tooling held, parts stocked and typical work. The card already gives the model and the work authorized on it, which is what an operator is asking. Four more lines to chase for detail nobody is waiting on | Done |
 | Services provided | Scheduled Maintenance · Airframe & Engine Repair · Avionics & Systems · Pre-Purchase & Annual Inspections · Bell Warranty Work | **Cut Parts & Fleet Support** (see below). Cut the Bell seal slot — no artwork, and its home moved to About | Me |
 | Quote CTA | Copy and phone | The phone-or-form placeholder **resolves itself** once the form works — the answer is both | Me |
 | "How Pricing Works" | What to Send Us / What Happens Next / Talk to Us Directly | Check this against what they actually said: quotes need "scope of work to be performed"; quotes come back by "preferred method"; and **no turnaround figure is published**, because "we don't do a lot of quoting" | Me, then review |
@@ -108,7 +108,10 @@ because the models list is how an operator self-qualifies.
 - **Which inbox** should website enquiries go to. *(Fallback exists: `sahinc@sbcglobal.net` is already published on the contact page, so the form can point there on day one and swap later. This does not have to block launch.)*
 
 **For Kristina (cheap, not blocking):**
-- Do you sell parts, or hold any ongoing fleet-support contracts? *(Deciding whether "Parts & Fleet Support" was ever a real service — it appears to have been our own starting guess, never confirmed.)*
+- **Do you sell parts to operators?** *(Stocking or sourcing spares.)*
+- **Do you hold any ongoing fleet-support contracts?** *(Tracking component times and planning maintenance across an operator's whole fleet, rather than job by job.)*
+
+  These are two separate services and were bundled into one card, "Parts & Fleet Support" — which appears to have been our own starting guess and was never confirmed. **The card is cut from Phase 1.** If either answer is yes it comes back as its own card with a real description.
 - Any customer who'd give a short quote about working with you?
 
 **To write, not to ask:**
@@ -129,3 +132,21 @@ because the models list is how an operator self-qualifies.
 
 **The nav trim and the 404 redirects land together, as one change, on launch day.**
 Either alone strips pages out of the preview the client has the link to.
+
+---
+
+## Headline options for Mike
+
+Four angles rather than four phrasings, so he is reacting to an idea. The subhead
+already names the airframes, so the headline does not have to do the technical work.
+
+| | Headline | Angle |
+| --- | --- | --- |
+| **A** | Bell Specialists at Pearland Since 1979 | Credential, location, longevity. Most operator-friendly, and the best of the four for search |
+| **B** | Forty-Seven Years Without a Maintenance-Related Accident | Leads with the record. Bold, checkable, and nobody else in the region can say it |
+| **C** | The Same Shop, the Same Hands, Since 1979 | The three-generations angle. Warm, and structurally impossible for Arrow or Summit to copy |
+| **D** | Quality and Safety — and a History That Reflects It | His own mission statement nearly verbatim. Lowest risk, already his voice |
+
+Recommendation: **C**, with **A** as the plainer fallback. Current live headline is
+"Keeping Helicopters Flying, Safely and On Schedule" — competent, and it could belong to
+any shop in the country.
