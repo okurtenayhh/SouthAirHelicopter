@@ -115,8 +115,9 @@ for label, pattern in (("header", HEADER_RE), ("footer", FOOTER_RE)):
     )
 
 # 2. Nav item count. Was 8 until 2026-10-21, when the NASA page was removed
-#    outright (user's call); the NASA work will be described on another page.
-NAV_ITEMS = 7
+#    outright (user's call; the NASA work will be described on another page)
+#    and News moved to drafts/ with History and Careers until they have content.
+NAV_ITEMS = 6
 for name in PAGES:
     body = NAV_LI_RE.search((ROOT / name).read_text())
     count = body.group(1).count("<li>") if body else -1
