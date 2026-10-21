@@ -168,11 +168,10 @@ imgs = sorted(p.name for p in (ROOT / "images").glob("*"))
 unexpected = [i for i in imgs if "bell" in i.lower()]
 check("no Bell-branded image assets", not unexpected, ", ".join(unexpected))
 
-# 7. Every page carries placeholders (a page with none means invented content).
-thin = [
-    n for n in PAGES if (ROOT / n).read_text().count("PLACEHOLDER") < 3
-]
-check("every page has >=3 placeholders", not thin, ", ".join(thin))
+# 7. (Retired 2026-10-21, user's call.) This used to demand >=3 placeholders per
+# page, on the theory that a page with none must be invented. Placeholders are
+# now being filled with confirmed content and launch needs zero, so a minimum
+# only blocked real progress. Guarding against guesses is a review job.
 
 # 8. quote-strip must never sit inside a .section-alt (its fill would vanish).
 misplaced = []
