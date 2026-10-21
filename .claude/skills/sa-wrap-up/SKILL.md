@@ -169,7 +169,8 @@ These recur every session and are easy to get wrong from a cold start:
   no aircraft model name has crept in. It's the only test this project has; run it
   before every commit. (On Windows the interpreter is `python`, not `python3`.)
 - **Adding an `.html` file means satisfying `verify.py`.** Every page must carry the
-  shared header and footer, 8 nav items, and 3+ placeholders. This is why there's no
+  shared header and footer and the nav item count it pins. (The old 3+ placeholders
+  minimum was retired 2026-10-21; launch needs zero.) This is why there's no
   `404.html` — Netlify's default 404 is used instead.
 - **The office manager approves things, because she asks Mike in person.** Established
   2026-08-04. Her sign-off is not a weaker substitute for the owner's — it is how his
