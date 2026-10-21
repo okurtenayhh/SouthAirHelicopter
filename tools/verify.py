@@ -114,13 +114,15 @@ for label, pattern in (("header", HEADER_RE), ("footer", FOOTER_RE)):
         else "",
     )
 
-# 2. Nav item count.
+# 2. Nav item count. Was 8 until 2026-10-21, when the NASA page was removed
+#    outright (user's call); the NASA work will be described on another page.
+NAV_ITEMS = 7
 for name in PAGES:
     body = NAV_LI_RE.search((ROOT / name).read_text())
     count = body.group(1).count("<li>") if body else -1
-    if count != 8:
+    if count != NAV_ITEMS:
         failures.append(f"{name}: {count} nav items")
-check("every page has 8 nav items", not any("nav items" in f for f in failures))
+check(f"every page has {NAV_ITEMS} nav items", not any("nav items" in f for f in failures))
 
 # 3. Every internal .html link resolves to a real file.
 existing = set(PAGES)

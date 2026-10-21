@@ -1,6 +1,6 @@
 # Project Status
 
-*Last updated: 2026-08-19 (local, ninth session — **branch cleanup, no site change**) · `main` at `06d5114` · PRs #1–#3, #5–#8, #10, #11 merged · **PR #4 closed as superseded**, with the reasoning on the thread · **PR #9 merged 2026-08-13** · nothing is open. The tracker update recording all of this is the one PR outstanding.*
+*Last updated: 2026-10-21 (tenth session — **NASA page removed**) · branch `claude/remove-nasa-page` off `main` at `ae8a69b` · PR pending. Previous header (2026-08-19) described the branch cleanup; nothing in the repo changed between then and this session.*
 
 *Branches went from seven to two. `main` holds everything. `claude/coming-soon-page` survives but is **fully merged and 0 ahead** — its name has been misleading since the coming-soon page shipped on 2026-08-10, so **delete it and branch fresh off `main` next session** rather than reusing it. Five deleted: `claude/status-2026-07-30` (`6bb69ac`), `claude/south-air-helicopter-site-1fyg5b` (`3cc9e75`), `claude/new-session-cymw5g` (`3705fbd`), `claude/client-questions` (`fd0c761`, PR #4) and `claude/client-content-brief` (squashed into `main`). **The SHAs are written down on purpose** — a deleted branch stays recoverable from its tip for as long as GitHub keeps the object. `claude/sphere-logo` survives locally, never pushed, dead but harmless.*
 
@@ -33,7 +33,7 @@ three times and **is not in the scan** — seven pages came through and all seve
 questionnaire. And on NASA, asked whether NASA needs to review anything mentioning them,
 he wrote **"PROBABLY"**; asked whether "partnership" is accurate, he wrote **"?"**. That
 is the owner himself saying he doesn't know if this is publishable. `nasa-partnership.html`
-is now blocked on a specific answerable question rather than on vague unease — which is
+(deleted 2026-10-21 — see Decisions Locked) was blocked on a specific answerable question rather than on vague unease — which is
 progress, but it is a harder block than before, not a softer one.
 
 **Ten pages now, structurally complete.** The competitor research at `docs/market-research.md` was worked into the site: three new pages (`bell-service-center.html`, `platforms.html`, `careers.html`), a repeated Request-a-Quote CTA, certifications in the footer sitewide, an airport-identifier slot on Contact, and the placeholder pricing table replaced with a "How Pricing Works" section — MRO shops quote per job rather than publish rates.
@@ -189,7 +189,7 @@ two of hers by side effect — hours, and the mission statement.*
 | `bell-service-center.html` | #XRIR622K; **what the CSF designation authorizes** (warranty work on new Bell aircraft and parts); **held since 1981**, kept by audits, factory training and tooling. **Now uses Bell's current name**, matching the homepage | The certificate ratings. The reserved badge slot, waiting on Bell's web artwork. The standing trademark warning stays |
 | `platforms.html` | **Built.** 206 B/L/L-3/L-4 and 407/407GX/407GXi (field maintenance + component overhaul), 429 (field maintenance, inspection, airframe and engine), MD 500 C/D/E. An Engines & Avionics card carries the two exclusions: no engine overhauls in house, avionics through a shop on the field | Per-model notes (tooling, parts stocked). **The page still carries one flag: the list has not been checked against certificate #XRIR622K itself.** Verify before launch |
 | `history.html` | **Two real timeline entries** — 1979, founded by Robert H. Mitchell; 1981, becomes a Bell CSF. **The NASA entry has been removed**, since it asserted a "partnership" he could not confirm | Three empty timeline slots and the origin story, all blocked on the missing attached sheet. How public the ownership change should be — same sheet |
-| `nasa-partnership.html` | — | Everything, and **the block got harder on 2026-08-13**. The page now carries a do-not-publish warning quoting his own "PROBABLY" and "?". **The word "partnership" is stripped from the page, from the footer link on all 10 pages, and from the History CTA** — it is the exact framing he could not confirm. No NASA facts are in this repo |
+| ~~`nasa-partnership.html`~~ | **Deleted 2026-10-21** (user's call). NASA work to be described on another page later | Where it goes, and Mike's answer on whether NASA must review it |
 | `news.html` | — | All three article cards are format demos, not stories |
 | `careers.html` | Phone and general email as the apply-to contact; **factory schools after a year on staff** | Openings (incl. whether there are any), the resume inbox, the EEO statement, the day-to-day role, and a specific answer on shop size. **Still should not ship** |
 | `contact.html` | Address, phone, both emails, map embed, **business hours (8–5 Mon–Fri) and the AOG line**, **airport identifier KLVJ** | The coordinates — take them off the FAA record, not from him. **The form still submits nowhere**, and both questions that would fix it came back blank. Note a pre-existing 5px horizontal overflow at 390px from the map iframe: measured before and after, not introduced by the content work |
@@ -197,6 +197,7 @@ two of hers by side effect — hours, and the mission statement.*
 
 ## Decisions Locked
 
+- **No standalone NASA page** — decided by the user 2026-10-21. `nasa-partnership.html` is deleted, along with its menu/footer link, the homepage NASA teaser and the History CTA; the menu is now 7 items and `verify.py` checks for 7. The NASA work will be described somewhere else on the site later (where is not yet decided). The publishability question to Mike ("PROBABLY" / "?") still applies to whatever gets written.
 - **Anything characterising the client, the relationship, or our own uncertainty goes in `private/` from the start** — decided 2026-08-19 after an internal planning document spent two weeks on the public repo. This repo is public under the client's own business name, and on a public repo deciding a file is internal *after* the first push is already too late for a clean removal: git keeps history, and the removal commit does not undo the exposure. `private/` is gitignored and already holds the returned questionnaire and the scans; it is the default, not the exception.
 - **Static HTML/CSS/JS, no framework** — a marketing site with no backend; keeps hosting free and hand-editing possible later.
 - **Company name is plural: "South Air Helicopters, Inc."** — confirmed on Mike's business card. The repo name `SouthAirHelicopter` is singular and misleading; ignore it.
