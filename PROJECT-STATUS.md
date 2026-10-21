@@ -1,10 +1,10 @@
 # Project Status
 
-*Last updated: 2026-10-21 (tenth session — **site trimmed to four launch pages: Home, About, Services, Contact; contact form wired to Netlify Forms**) · PR #14 merged to `main` at `7c6348e` (NASA removed; History, News, Careers to `drafts/`; Bell folded into Services) · branch `claude/no-model-names` open for Platforms + model names. **Preview NOT redeployed** — this container cannot reach Netlify (no CLI, no token, host blocked by network policy); run the preview deploy command from the user's machine.*
+*Last updated: 2026-10-21 (tenth session) · `main` at `b41b0e7` (PRs #14, #15, #16 merged today) · branch `claude/next-placeholders` pushed with two tracker/Contact-note commits, PR open for it · **preview redeployed from `main` (`b41b0e7`) on 2026-10-21 from the user's PC and checked live** — this branch's Contact note is not on it until it merges and deploys.*
 
 *Branches went from seven to two. `main` holds everything. `claude/coming-soon-page` survives but is **fully merged and 0 ahead** — its name has been misleading since the coming-soon page shipped on 2026-08-10, so **delete it and branch fresh off `main` next session** rather than reusing it. Five deleted: `claude/status-2026-07-30` (`6bb69ac`), `claude/south-air-helicopter-site-1fyg5b` (`3cc9e75`), `claude/new-session-cymw5g` (`3705fbd`), `claude/client-questions` (`fd0c761`, PR #4) and `claude/client-content-brief` (squashed into `main`). **The SHAs are written down on purpose** — a deleted branch stays recoverable from its tip for as long as GitHub keeps the object. `claude/sphere-logo` survives locally, never pushed, dead but harmless.*
 
-**Live preview (ten-page work-in-progress site): https://south-air-helicopters.netlify.app** — noindexed, **redeployed 2026-08-10 with the new logo**, verified live. Safe to send to Mike.
+**Live preview (four-page work-in-progress site): https://south-air-helicopters.netlify.app** — noindexed, **redeployed 2026-10-21 from `main` at `b41b0e7`**, verified live: Home, About, Services, Contact return 200; Platforms, Careers, `drafts/`, `private/` and `PROJECT-STATUS.md` return 404; the `contact` form is detected by Netlify. Safe to send to Mike.
 
 **🚀 LIVE: https://southairhelicopters.com** — the coming-soon landing page, on the real domain over HTTPS, as of **2026-08-10**. `www` redirects to the apex, `http` redirects to `https`, the Let's Encrypt certificate is issued, and the page is indexable (no `X-Robots-Tag`). Also still reachable at its Netlify subdomain, https://sah-coming-soon.netlify.app. **This is the first thing the public can find. Treat changes to it accordingly** — the deploy command and its trap are under Constraints That Bite. It is its own Netlify site, separate from the ten-page preview above: site id `de01967d-071f-433e-a5af-6e87b7870b22`, site name `sah-coming-soon`.
 
@@ -127,7 +127,7 @@ Things that can move without waiting on anyone:
 3. ~~**Reply to Zachariah Langley at Bell.**~~ **Taken off the list 2026-10-21 — the user has no contact with him and this is not theirs to do.** Don't re-add it. **The user has Bell images to hand over from their computer**; the three Bell seal/badge slots (About, Services ×2) wait on those. Check them against `docs/trademark-research.md` when they arrive.
 4. **Get vector and stitchable versions of the logo.** The web assets are done and deployed; what is missing is a **vector** for print and signage, and a **reduced high-contrast version that can be stitched** — the current art is grayscale shading with hairline blades, which no needle will render. Regenerating the aircraft from the text prompt in `.recall/history.md` produces the stitchable version. **Not urgent, and not blocking anything.** ~~Identify the source image~~ — **closed 2026-08-10: Mike was told how the mark was made and okayed it.** See Constraints That Bite. **The web assets themselves are done and deployed** (`tools/build_logo.py` regenerates them); what is still missing is a **vector** for print, signage and embroidery, and a **reduced high-contrast version that can be stitched** — the current art is grayscale shading and hairline blades, which no needle will render. **Regenerating the aircraft to the 2026-08-06 prompt in `.recall/history.md` remains the move that pays off either way** — it produces the stitchable version *and* is the escape route if the licence answer is bad, since replacing the aircraft leaves the approved wordmark, band and layout untouched.
 5. ~~**Finish propagating the founding year.**~~ **Done 2026-08-13.** 1979 now reads as real content on the homepage eyebrow, stats tile, history teaser and Bell section, on the About page, and as the first history timeline entry. **Three `[PLACEHOLDER Year]` spans remain and all three are in `history.html`** — they are *milestone* dates, not the founding year, and they are on the missing attached sheet, so they belong to item 2 rather than here. `tools/verify.py` guards the year sitewide: no derived age claim, no near-miss year. **Do not reintroduce an age claim** — a year is permanent, a computed age rots annually.
-6. **Contact form: wired to Netlify Forms 2026-10-21; email notification still to set.** `data-netlify` + honeypot on `contact.html`, submitted by fetch in `js/main.js` with a success message and a call-us fallback on error; tested in Chromium against a faked 200 and 500. Submissions land in the Netlify dashboard (Forms) for the preview site, so none are lost, but **nobody is emailed until the office names the inbox** — then add it under Forms → Form notifications. Also confirm form detection is enabled on the site, and do one real test submission after the next deploy.
+6. **Contact form: wired to Netlify Forms 2026-10-21; email notification still to set.** `data-netlify` + honeypot on `contact.html`, submitted by fetch in `js/main.js` with a success message and a call-us fallback on error; tested in Chromium against a faked 200 and 500. Submissions land in the Netlify dashboard (Forms) for the preview site, so none are lost, but **nobody is emailed until `sahinc@sbcglobal.net` is added under Forms → Form notifications** (inbox confirmed 2026-10-21; a dashboard setting, not code). Form detection is confirmed on (2026-10-21) and Netlify has detected the `contact` form from the 2026-10-21 deploy. Still to do: the notification, then one real test submission.
 7. ~~**Land the remaining branches.**~~ **Done and verified 2026-08-19.** PR #4 closed as superseded with the reasoning on the thread; five dead branches gone; #10 and #11 merged by the user. `docs/` on `main` now carries the checklist and the questionnaire in HTML and PDF — the documents that produced the returned answers — and nothing else. **Verified after the merge rather than assumed:** `f3b34d0` is not an ancestor of `main`, and zero commits in `main`'s history touch `master-needs-list.md`. Both live sites still 200, `verify.py` green at 19.
 8. ~~**Make the "Bell Helicopter" wording consistent.**~~ **Done 2026-08-13.** Mike settled it — *"It changed in 2018 but 60-70 ys of being Bell Helicopter, either is accepted"* — and the main site now uses Bell's current form throughout: the string "Bell Helicopter" appears nowhere in the ten pages, including the shared footer, which previously carried the retired form on every page. **The coming-soon page deliberately still uses the retired form** and is pinned to it by `verify.py`; that is a separate, twice-affirmed client decision. Don't re-raise the 2018 rebrand with him — he addressed it.
 9. **Decide whether Careers ships.** It's built, but a careers page with no listed openings can read as a dead site. Every hiring question on the questionnaire came back blank except two, and both are usable: *"a great place to work"*, and — the genuinely good one — **the shop pays to send mechanics to factory schools after a year on staff**. That is a concrete benefit a competitor page doesn't have. Still not enough on its own; it needs an explicit "nothing right now" or a list, plus EEO wording and a resume inbox. Hold the page back until then.
@@ -157,7 +157,7 @@ can look at.*
 *Her own sections are still the gap. The 2026-08-13 return answered Mike's questions, and
 two of hers by side effect — hours, and the mission statement.*
 
-- **Which inbox is the public "general inquiries" one.** Asked on the form, left blank. Blocks the contact form.
+- ~~**Which inbox is the public "general inquiries" one.**~~ **Answered 2026-10-21: `sahinc@sbcglobal.net`** — form submissions go there. Set it in Netlify under Forms → Form notifications.
 - Whether there are any current job openings — and if not, that's fine, `careers.html` should just say so. Plus the resume inbox and the EEO statement wording.
 - Photos: hangar, aircraft, team, anything historical — or an afternoon at the hangar with a phone camera, which the form offered and which came back blank. **When these arrive, check each one for NASA facilities, NASA hardware, or identifiable NASA personnel** — those need clearing even though the photos are South Air's own. See `docs/trademark-research.md`.
 
@@ -197,6 +197,7 @@ two of hers by side effect — hours, and the mission statement.*
 
 ## Decisions Locked
 
+- **The site stays on the user's personal Netlify account until launch, then moves to a South Air account** — user's call, 2026-10-21. Form alerts go to the client's address only (Forms → Form notifications), never to the user. After launch, transfer the site(s) to a Netlify account the business owns, ideally made with the Google Workspace address once it exists. Submissions stay visible in the user's dashboard until then.
 - **No specific aircraft models anywhere on the site, for now** — user's call, 2026-10-21. The site says "Bell helicopters" and sends people to call or message the office instead. Platforms moved to `drafts/`; the MD 500 is dropped along with the Bell model numbers. Reason: the list hasn't been checked against certificate #XRIR622K and the user doesn't expect it soon. `verify.py` now blocks every model name on the main site (`MODEL_RE`). Menu is 4 items: Home, About, Services, Contact.
 - **The Bell Service Center page is folded into Services** — user's call, 2026-10-21. Services now carries the full Bell section (`#bell`, with the standing trademark warning) and the Certifications section (`#credentials`, with the reserved Bell badge slot). About carries a short version linking to `services.html#credentials`. **The principle, also the user's:** a visitor should get the full picture of who South Air is from whatever page they land on, so key facts repeat across pages — full version in one place, short versions elsewhere that link to it. Menu is now 5 items.
 - **First launch is six pages: Home, About, Services, Platforms, Contact** (Bell folded into Services, see above) — decided by the user 2026-10-21. History, News and Careers moved to `drafts/` (kept, never served: `netlify.toml` 404s `/drafts/*`, and `verify.py` only checks root pages). Their menu/footer links and the two "Read Our History" buttons are gone; the menu is 6 items. History comes back when Mike's founding-story sheet arrives; its two real facts are already on Home and About. **Pages in `drafts/` use root-relative asset paths, so move them back to the root to restore them, then re-add their links.**
@@ -306,156 +307,18 @@ no derived age claim that would go stale.
 
 ## In Flight
 
-**2026-08-13 — the questionnaire came back from Mike, and it is built.** One session, two
-halves: receive and record, then build. The transcription is at
-`private/client-answers-2026-08-13.md`, gitignored on purpose; every page it unblocked is
-now written, committed and deployed.
+**2026-10-21 — trimmed to four launch pages, form wired, paused for the user to move to their PC.**
 
-**Shipped this session:** `platforms.html` rebuilt from the confirmed ratings (empty → the
-best-sourced page on the site); both invented homepage stat claims replaced with true ones;
-`services.html` corrected to his own markup, including removing charter entirely;
-hours and KLVJ on Contact; founder and the 1981 Bell designation on the timeline; what the
-CSF authorizes on the Bell page and the homepage; the factory-schools benefit on Careers;
-the "additional certifications" placeholder removed from the shared footer on all ten pages
-because he answered no; and the word **"partnership" stripped sitewide**.
+**Done today, merged to `main`:** NASA page deleted (#14); History, News, Careers moved to `drafts/` (#14); Bell Service Center folded into Services (#14); Platforms moved to `drafts/` and every aircraft model name removed sitewide (#15); contact form wired to Netlify Forms (#16). The live site is now **Home, About, Services, Contact**. All recorded under Decisions Locked.
 
-**Verified, not assumed.** `verify.py` green at 19 before each commit. The retargeted model
-guard was proven in both directions — confirmed models pass, an injected 412 and TH-57 fail.
-Pages loaded in a real browser at 1280px and 390px, console clean. **The 5px horizontal
-overflow on `contact.html` at 390px was measured against the pre-change file and is
-pre-existing** — the map iframe, not the content work; recorded rather than quietly fixed
-or quietly ignored. The preview was redeployed with the pinned site id and then checked
-over real HTTP: the four confirmed airframes serving, no `24/7` or `100%` anywhere, no
-"additional certifications" or "NASA Partnership" string, hours and KLVJ live, and the
-preview still returning its four-token `noindex`.
+**Open branch `claude/next-placeholders`** — two commits, tracker plus the Contact form note: the Netlify-account decision, and the form inbox `sahinc@sbcglobal.net`. Merge it.
 
-**The safety claim was flagged for review and the user resolved it, improving the rule in
-the process.** It is live as **"45+ · Years without a maintenance-related accident"**. The
-first attempt rendered it as a year ("since 1979") to dodge the age-claim guard; the user
-pointed out a floored age reads better and can simply be bumped every few years. That is
-right, and sharper than the rule it replaced: a floor cannot go false, only understated.
-`verify.py` now encodes that distinction — exact ages blocked, explicit floors allowed,
-approximations still blocked — and was tested against 8 stale forms and 11 durable ones
-before committing. **Full reasoning in Decisions Locked; the claim itself is unchanged and
-is his.**
+**Not done, and why:**
+- ~~**Preview not redeployed.**~~ **Done 2026-10-21 from the user's PC, `main` at `b41b0e7`, verified live.** How it was run, and why: **deploy from a clean checkout, never from the desktop folder.** The desktop folder holds the gitignored `private/` (client answers, scans) and `netlify.toml` does not block `/private/*`, so `--dir=.` from there would publish it. Instead: `git worktree add --detach <tmp> origin/main`, `python tools/verify.py` inside it, then from inside `<tmp>`: `netlify deploy --prod --no-build --dir=. --site=b2e4b62c-aa66-40cd-a818-e568464a67e6 < /dev/null`, then `git worktree remove <tmp>`. **The `--no-build`, running from inside the folder (not `--cwd`) and the closed stdin matter** — without them the CLI hung silently for minutes with no output and no deploy.
+- **Form email not switched on.** In Netlify: form detection is confirmed on; add `sahinc@sbcglobal.net` under Forms → Form notifications, send one real test, and have the office check spam.
+- **Airport coordinates not filled.** This container's network blocks `nfdc.faa.gov` and `www.airnav.com`. Take the Lat/Long from airnav.com/airport/KLVJ (FAA data) rather than from memory.
+- **`/recall:save` not run.** It isn't available in the cloud container.
 
-**The NASA page moved backwards on purpose.** It now carries a do-not-publish block quoting
-his own "PROBABLY" and "?", and the timeline entry that asserted a partnership has been
-deleted. No NASA fact from the questionnaire is anywhere in this repo.
+**How the user wants to work (stated 2026-10-21):** placeholders are the to-do list. Fill them; don't remove or hide them to make a page look finished. Do only what is asked. No scheduled check-ins, and no drafted texts to the client unless asked.
 
-**Next session.** **Item 2 is now the whole game**: one message asking for the attached
-sheet and a real answer on NASA, plus the certificate copy, which inbox is public,
-phone-or-form for quotes, and whether Parts & Fleet Support stays. Send it with the preview
-link — he has just demonstrated he answers well against something he can look at. After
-that, land the leftovers — **done on 2026-08-19, see the entry at the top of this
-section.**
-
-**The landing page is live and public** at https://southairhelicopters.com, on its own
-Netlify site (id `de01967d-071f-433e-a5af-6e87b7870b22`, name `sah-coming-soon`). Built
-behind the `verify.py` guard described above and checked in a real browser at 390px, 760px
-and 1280px, console clean.
-
-Along the way, the plan's own architecture turned out to be wrong: the plan called for a
-`coming-soon/_headers` file to set the noindex header, but the served header actually came
-from the *repo-root* `netlify.toml` — `_headers` was a no-op. Left alone, the documented
-go-live step ("delete `_headers`") would have done nothing, and the page would have stayed
-unindexed while everyone believed it was published. Fixed by giving the subdirectory its
-own `coming-soon/netlify.toml`, deployed with the `--cwd` flag documented under
-Constraints That Bite. The spec's architecture diagram, which still named `_headers`, has
-been corrected to match reality.
-
-**2026-08-19 — branch cleanup. No page changed, nothing deployed, nothing about the live
-site is different.** A housekeeping session that turned up one real problem.
-
-**Seven branches down to two.** `main` holds everything. `claude/coming-soon-page` is
-fully merged and 0 ahead — delete it and branch fresh next session. Five removed, tips
-recorded at the top of this file so they stay recoverable.
-
-**Two of the deleted branches were not merely stale, they were actively harmful to merge,
-and that is the durable lesson.** `claude/new-session-cymw5g` was never listed in this file
-at all — three July commits, every one of them editing `PROJECT-STATUS.md`, which would
-have reverted a tracker rewritten several times since. PR #4 carried the same hazard: 34
-lines of July tracker edits riding along with its questionnaire. **Diff a branch against
-`main` before merging it on age or name alone.**
-
-**PR #4 is closed, not merged, with the reasoning on the thread.** Its 50-question
-`docs/client-questions.md` was superseded by `docs/client-questions-form.pdf` — the version
-that actually went out and came back filled in.
-
-**The real find: an internal document had been sitting on the public repo for two weeks.**
-`docs/master-needs-list.md`, the 499-line plan behind the client-facing brief, identifies
-the office manager as the user's mother, carries a section headed *"Invented content that
-must be confirmed or killed"*, records that the site chose the three company values rather
-than the client, calls `nasa-partnership.html` the highest-liability page, and asks openly
-who should own the Netlify account long-term. All true and useful; none of it written for
-the client to find on GitHub under their own business name. It now lives at
-`private/master-needs-list.md`, all 499 lines, out of git.
-
-**And the removal alone would not have been enough — this is worth understanding rather
-than just recording.** Deleting the file in a later commit took it out of the branch's
-*current* state but left it readable in the branch's *history*. A normal merge would then
-have made that history an ancestor of `main`, moving the notes from a side branch onto the
-permanent main line: strictly worse than leaving it alone. **Squash-and-merge was used
-instead**, collapsing the branch to a single commit holding only the four client-facing
-files. Rewriting the branch so the file was never in it is the tidier fix and was tried
-first, but `git reset` is blocked by the sandbox classifier — squashing reaches the same
-place for `main`, which is where the risk actually was.
-
-**Verified after the merge, not assumed:** `f3b34d0` is not an ancestor of `main`; zero
-commits in `main`'s history touch `master-needs-list.md`; PR #11 landed as one commit
-containing exactly the four documents; `verify.py` green at 19; both sites returning 200.
-
-**What squashing does not fix, so nobody assumes otherwise.** GitHub retains pull-request
-head commits permanently, so `f3b34d0` stays reachable by its exact SHA through PR #11's
-refs. Purging that needs a GitHub Support request. **Deliberate judgement: not worth one.**
-The document holds no credentials, no client data and nothing about NASA — it is candid
-internal planning. The thing worth preventing was it becoming part of the permanent
-main-line history, and that was prevented.
-
-**Nothing is uncommitted.** 2026-08-10 was a long build session: the 6 logo assets, all 10
-pages, the coming-soon page, `css/style.css`, `js/main.js`, `tools/build_logo.py`,
-`tools/verify.py`, `.gitignore` and this file. **Both sites were redeployed three times and
-verified live each time.** `python tools/verify.py`: all 19 checks green.
-
-**Live-verified after the final deploy**, by real HTTP request rather than a clean CLI
-exit: navy `#1e3a5f` and accent `#f26722` serving in `css/style.css` with no `--color-amber`
-left; the coming-soon page on the same navy in both its variable and its `theme-color`;
-`Trusted Since 1979` present and no `1997` anywhere; the copy handler present in both
-`js/main.js` and the coming-soon inline script; the deleted `logo-badge.svg` returning 404;
-and the coming-soon page still returning the two-token `noindex, nofollow`.
-
-**The homepage hero is now single-column** (2026-08-10, user's call). The flat cartoon
-helicopter read as a different company from the detailed mark in the header, so it and the
-`.hero-art` rules are gone. `.hero-copy` is capped at 760px rather than left to run the
-full container width, so it reads as composed rather than as a two-column layout missing
-its second column. **The hero is a natural home for a real photo or the video loop the
-brief asks for** — that slot is now empty by choice, not by oversight.
-
-**The palette is rolled out** — see Decisions Locked. Both sites are on navy `#1e3a5f` and
-safety orange `#f26722`; the amber survives only as the placeholder flag colour.
-`images/logo-badge.svg` was deleted as part of it: the old two-mark badge, orphaned when
-the new logo landed and still carrying the retired navy.
-
-**One trap worth knowing, because it cost time twice this session and looked like broken
-code both times:** a browser holding a cached `css/style.css` or `js/main.js` shows the new
-markup with the old rules. It presented first as a dead copy button and then as a copy icon
-rendering at 300×150. Both were caching, not bugs — local and live both measured correct.
-**Measure the computed style before believing a rendering bug**, and hard-refresh. The icons
-now carry explicit `width="14" height="14"` so that particular failure can't recur.
-
-**Still never done: a page-by-page look at the ten-page site in a real browser.** The
-coming-soon page got exactly that treatment this session — the first page in the project
-to. The ten-page site is still verified only by script and by reading markup; screenshots
-at 1280px are several sessions stale for `index.html`, and mobile at 390px was only ever
-spot-checked.
-
-Redeploy the ten-page preview after any page change with
-`netlify deploy --prod --dir=. --site=b2e4b62c-aa66-40cd-a818-e568464a67e6` from the repo
-root. **The `--site` flag is not optional now that a second Netlify site exists.**
-`.netlify/` is gitignored, so on a fresh clone there is no linked site to fall back on —
-an unqualified `netlify deploy` prompts interactively for one, and answering
-`sah-coming-soon` would push the unfinished ten-page site onto the URL the client's domain
-will eventually point at. Pin the preview site id explicitly, the same way the coming-soon
-command is pinned to its own site id. Redeploy the coming-soon page with the `--cwd`
-command under Constraints That Bite — the two sites use different deploy commands and
-mixing them up serves the wrong content or the wrong indexing header.
+**Next, in the order offered:** tagline options for the client to pick, then a draft Reliability description for Mike to approve. The Bell seal slots wait on images the user has on their PC.
