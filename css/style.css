@@ -725,6 +725,19 @@ form.contact-form {
   outline-offset: 1px;
 }
 
+.form-note {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border-left: 4px solid var(--color-sky);
+  background: var(--color-white);
+  color: var(--color-text);
+}
+
+.form-note.is-error {
+  border-left-color: var(--color-accent-dark);
+}
+
 /* ---------- Footer ---------- */
 .site-footer {
   background: var(--color-navy);

@@ -13,13 +13,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
   var form = document.querySelector(".contact-form");
   if (form) {
+    // Netlify Forms picks the submission up from a POST to the site root.
+    // Sending it with fetch keeps the visitor on the page; with JS disabled
+    // the form still posts normally and Netlify shows its own thank-you page.
     form.addEventListener("submit", function (event) {
       event.preventDefault();
       var note = form.querySelector(".form-note");
-      if (note) {
-        note.textContent = "Thanks for reaching out! This form is not yet connected to email delivery — replace this with a real form handler before launch.";
-        note.style.display = "block";
-      }
+      var button = form.querySelector('button[type="submit"]');
+      var showNote = function (text, isError) {
+        if (!note) { return; }
+        note.textContent = text;
+        note.classList.toggle("is-error", isError);
+        note.hidden = false;
+      };
+      if (button) { button.disabled = true; }
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(new FormData(form)).toString()
+      }).then(function (response) {
+        if (!response.ok) { throw new Error(response.status); }
+        form.reset();
+        showNote("Thanks — your message has been sent. We'll get back to you soon.", false);
+      }).catch(function () {
+        showNote("Sorry, your message didn't go through. Please call us at 281.648.5187.", true);
+      }).then(function () {
+        if (button) { button.disabled = false; }
+      });
     });
   }
 
