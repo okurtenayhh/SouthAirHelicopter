@@ -117,8 +117,9 @@ for label, pattern in (("header", HEADER_RE), ("footer", FOOTER_RE)):
 # 2. Nav item count. Was 8 until 2026-10-21, when the NASA page was removed
 #    outright (user's call; the NASA work will be described on another page)
 #    and News moved to drafts/ with History and Careers until they have content.
-#    Then the Bell Service Center page was folded into Services (same day).
-NAV_ITEMS = 5
+#    Then the Bell Service Center page was folded into Services, and Platforms
+#    moved to drafts/ (same day).
+NAV_ITEMS = 4
 for name in PAGES:
     body = NAV_LI_RE.search((ROOT / name).read_text())
     count = body.group(1).count("<li>") if body else -1
@@ -135,13 +136,17 @@ for name in PAGES:
             broken.add(f"{name} -> {href}")
 check("all internal .html links resolve", not broken, ", ".join(sorted(broken)))
 
-# 4. No UNCONFIRMED aircraft model names. The confirmed ones (206, 407, 429,
-#    MD 500) are allowed as of 2026-08-13; see the note on the patterns above.
+# 4. No aircraft model names at all. The confirmed ones (206, 407, 429,
+#    MD 500) were allowed from 2026-08-13, but on 2026-10-21 the user decided
+#    no specific model goes on the site until the list is checked against the
+#    certificate: the site says "Bell helicopters" and points people to call.
+#    Platforms moved to drafts/ for the same reason. UNCONFIRMED_MODEL_RE is
+#    kept for when the confirmed models come back.
 hits = []
 for name in PAGES:
-    for match in UNCONFIRMED_MODEL_RE.finditer((ROOT / name).read_text()):
+    for match in MODEL_RE.finditer((ROOT / name).read_text()):
         hits.append(f"{name}:{match.group(0)}")
-check("no unconfirmed aircraft model names", not hits, ", ".join(hits))
+check("no aircraft model names", not hits, ", ".join(hits))
 
 # 5. Dead CSS gone.
 css = (ROOT / "css" / "style.css").read_text()
