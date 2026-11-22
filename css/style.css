@@ -262,9 +262,9 @@ h1, h2, h3, h4 {
   text-decoration: none;
 }
 
-/* Collapse to the hamburger at 940px, not 860px: the 8-item nav needs the extra
-   headroom, and between 940 and 860 it would otherwise wrap to two rows. If nav
-   items are added or renamed, re-check where the wrap actually starts. */
+/* Collapse to the hamburger at 940px. The menu is 4 items plus the header
+   call link now; 940 still leaves comfortable headroom. If nav items are
+   added or renamed, re-check where the wrap actually starts. */
 @media (max-width: 940px) {
   .nav-toggle {
     display: block;
@@ -535,7 +535,9 @@ h1, h2, h3, h4 {
   z-index: 2;
 }
 
-.data-plate {
+/* Scoped under .plate-wrap so the shared riveted-plate rule further down
+   (same specificity, later in the file) can't override these. */
+.plate-wrap .data-plate {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   padding: 30px 36px;
@@ -562,7 +564,7 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 800px) {
-  .data-plate {
+  .plate-wrap .data-plate {
     grid-template-columns: 1fr 1fr;
     gap: 20px 0;
     padding: 28px 26px;
