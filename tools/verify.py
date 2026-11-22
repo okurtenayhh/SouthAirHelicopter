@@ -172,6 +172,12 @@ check("no Bell-branded image assets", not unexpected, ", ".join(unexpected))
 # page, on the theory that a page with none must be invented. Placeholders are
 # now being filled with confirmed content and launch needs zero, so a minimum
 # only blocked real progress. Guarding against guesses is a review job.
+#
+# 7b. Launch bar (2026-11-22): the root pages are the launch set, so none may
+# carry a placeholder flag. New content that isn't confirmed yet belongs in
+# drafts/, not on a root page behind an amber box.
+flagged = [n for n in PAGES if re.search(r"PLACEHOLDER|class=\"placeholder", (ROOT / n).read_text())]
+check("no placeholders on launch pages", not flagged, ", ".join(flagged))
 
 # 8. quote-strip must never sit inside a .section-alt (its fill would vanish).
 misplaced = []

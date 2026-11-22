@@ -619,6 +619,68 @@ h1, h2, h3, h4 {
   }
 }
 
+/* Single-column prose section, for text that used to sit beside a photo. */
+.narrow {
+  max-width: 760px;
+}
+
+/* ---------- Fact panel ----------
+   Stands where a photo will eventually go. Hard, sourced facts only — label on
+   the left, value on the right — so the column carries content rather than an
+   empty frame. Swap for a real photo when one arrives. */
+.fact-panel {
+  background: var(--color-navy);
+  color: var(--color-white);
+  border-top: 4px solid var(--color-accent);
+  border-radius: var(--radius);
+  padding: 28px 30px;
+  box-shadow: var(--shadow);
+  margin: 0;
+}
+
+.fact-panel div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.fact-panel div:last-child {
+  border-bottom: 0;
+}
+
+.fact-panel dt {
+  color: var(--color-accent-on-dark);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fact-panel dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  .fact-panel div {
+    flex-direction: column;
+    gap: 2px;
+  }
+  .fact-panel dd {
+    text-align: left;
+  }
+}
+
+.fact-panel h3 {
+  color: var(--color-white);
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+}
+
 .media-frame {
   background: linear-gradient(135deg, var(--color-cloud), #e6ecf2);
   border: 1px dashed var(--color-border);
@@ -893,6 +955,21 @@ form.contact-form {
 .copy-email.is-copied::after {
   opacity: 1;
   transform: translateY(-50%) translateX(0);
+}
+
+/* On phones the chip sits above the address instead of beside it — beside it,
+   the (invisible) chip ran past the screen edge and caused sideways scroll. */
+@media (max-width: 600px) {
+  .copy-email::after {
+    left: 0;
+    top: auto;
+    bottom: 100%;
+    margin: 0 0 4px;
+    transform: translateY(4px);
+  }
+  .copy-email.is-copied::after {
+    transform: translateY(0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
