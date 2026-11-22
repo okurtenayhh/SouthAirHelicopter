@@ -2,6 +2,37 @@
    South Air Helicopter — Site Stylesheet
    =========================================================== */
 
+/* Self-hosted fonts (SIL OFL — see fonts/OFL.txt). No font CDN: the site
+   loads nothing from outside itself, and tools/verify.py checks that. */
+@font-face {
+  font-family: "Zilla Slab";
+  src: url("../fonts/zilla-slab-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Zilla Slab";
+  src: url("../fonts/zilla-slab-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter Tight";
+  src: url("../fonts/inter-tight-var.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("../fonts/ibm-plex-mono-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Palette confirmed against the company's own shirts (2026-08-04) and then
      against the approved logo (2026-08-10). Where the two disagreed the logo
@@ -38,13 +69,21 @@
   --color-flag: #f2a71b;
   --color-flag-dark: #cf8a0d;
 
-  --font-heading: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --font-body: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  /* Restyle 2b (2026-11-22): slab headings echo the logo's wordmark, a
+     plain sans carries the reading, and mono marks hard numbers — the
+     certificate, the airport, the phone — like a stamped data plate. */
+  --font-heading: "Zilla Slab", Rockwell, Georgia, serif;
+  --font-body: "Inter Tight", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", Consolas, "SF Mono", Menlo, monospace;
+
+  --color-gunmetal-dark: #2b333d;
+  --color-plate-label: #b4bfca;   /* small labels on the gunmetal plate */
+  --color-steel-on-navy: #a9bcd3; /* eyebrows on navy */
 
   --max-width: 1160px;
-  --radius: 6px;
-  --shadow: 0 2px 10px rgba(11, 37, 69, 0.08);
-  --shadow-lg: 0 10px 30px rgba(11, 37, 69, 0.15);
+  --radius: 0;                    /* square corners: machined, not app-like */
+  --shadow: none;
+  --shadow-lg: 0 12px 28px rgba(10, 20, 35, 0.22);
 }
 
 * {
@@ -60,7 +99,8 @@ body {
   font-family: var(--font-body);
   color: var(--color-text);
   background: var(--color-white);
-  line-height: 1.6;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
 img {
@@ -79,8 +119,9 @@ a:hover {
 
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
-  color: var(--color-navy);
-  line-height: 1.25;
+  font-weight: 600;
+  color: var(--color-navy-deep);
+  line-height: 1.2;
   margin-top: 0;
 }
 
@@ -116,8 +157,8 @@ h1, h2, h3, h4 {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--color-navy);
-  box-shadow: var(--shadow);
+  background: var(--color-navy-deep);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .nav-bar {
@@ -159,6 +200,7 @@ h1, h2, h3, h4 {
   border-radius: var(--radius);
   padding: 8px 10px;
   cursor: pointer;
+  order: 3;
 }
 
 .nav-toggle span {
@@ -171,31 +213,53 @@ h1, h2, h3, h4 {
 
 .nav-links {
   display: flex;
-  gap: 6px;
+  gap: 4px;
   list-style: none;
-  margin: 0;
+  margin: 0 0 0 auto;
   padding: 0;
   flex-wrap: wrap;
+  order: 1;
 }
 
 .nav-links a {
-  color: rgba(255,255,255,0.85);
+  display: block;
+  color: rgba(255,255,255,0.78);
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
   padding: 8px 12px;
-  border-radius: var(--radius);
-  transition: background 0.15s ease, color 0.15s ease;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
 
 .nav-links a:hover {
-  background: rgba(255,255,255,0.08);
   color: var(--color-white);
   text-decoration: none;
 }
 
 .nav-links a.active {
-  color: var(--color-ink);
+  color: var(--color-white);
+  border-bottom-color: var(--color-accent);
+}
+
+/* The phone number lives in the header on every page. It sits outside
+   ul.nav-links on purpose: verify.py counts the menu items. */
+.nav-call {
+  order: 2;
+  margin-left: 18px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  color: var(--color-white);
+  border: 1px solid var(--color-accent);
+  padding: 7px 12px;
+  white-space: nowrap;
+}
+
+.nav-call:hover {
   background: var(--color-accent);
+  color: var(--color-ink);
+  text-decoration: none;
 }
 
 /* Collapse to the hamburger at 940px, not 860px: the 8-item nav needs the extra
@@ -212,6 +276,14 @@ h1, h2, h3, h4 {
     flex-direction: column;
     gap: 2px;
     padding-top: 12px;
+    margin: 0;
+    order: 4;
+  }
+
+  .nav-call {
+    margin-left: auto;
+    margin-right: 10px;
+    order: 2;
   }
 
   .nav-links.open {
@@ -223,21 +295,25 @@ h1, h2, h3, h4 {
   }
 }
 
-/* ---------- Hero ---------- */
-.hero {
-  background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-light) 55%, var(--color-sky) 100%);
-  color: var(--color-white);
-  padding: 90px 24px 100px;
-  position: relative;
-  overflow: hidden;
+@media (max-width: 420px) {
+  .nav-bar {
+    padding: 12px 16px;
+  }
+
+  .nav-call {
+    font-size: 0.78rem;
+    padding: 6px 8px;
+    margin-right: 8px;
+  }
 }
 
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle at 80% 20%, rgba(242,103,34,0.16), transparent 45%);
-  pointer-events: none;
+/* ---------- Hero ---------- */
+.hero {
+  background: var(--color-navy);
+  color: var(--color-white);
+  padding: 92px 24px 100px;
+  position: relative;
+  border-bottom: 4px solid var(--color-navy-deep);
 }
 
 .hero-inner {
@@ -262,28 +338,32 @@ h1, h2, h3, h4 {
 }
 
 .hero-copy .eyebrow {
-  color: var(--color-accent-on-dark);
+  font-family: var(--font-mono);
+  color: var(--color-steel-on-navy);
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  margin-bottom: 14px;
+  letter-spacing: 0.16em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 18px;
 }
 
 .hero-copy h1 {
   color: var(--color-white);
-  font-size: clamp(2rem, 4.5vw, 3.1rem);
+  font-weight: 500;
+  font-size: clamp(2.1rem, 4.6vw, 3.2rem);
+  line-height: 1.1;
   margin-bottom: 18px;
 }
 
 .hero-copy p {
   font-size: 1.1rem;
-  color: rgba(255,255,255,0.85);
+  font-weight: 300;
+  color: #c9d5e3;
   max-width: 560px;
 }
 
 .hero-small {
-  padding: 60px 24px 70px;
+  padding: 64px 24px 72px;
 }
 
 /* ---------- Buttons ---------- */
@@ -291,32 +371,47 @@ h1, h2, h3, h4 {
   display: inline-block;
   padding: 13px 26px;
   border-radius: var(--radius);
+  font-family: var(--font-body);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
   cursor: pointer;
-  border: 2px solid transparent;
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  border: 1px solid transparent;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .btn:hover {
   text-decoration: none;
-  transform: translateY(-1px);
 }
 
+/* Primary is navy on light grounds and white on dark ones; orange is kept
+   for the header call link and one accent rule, so it means something. */
 .btn-primary {
-  background: var(--color-accent);
-  color: var(--color-ink);
+  background: var(--color-navy);
+  color: var(--color-white);
 }
 
 .btn-primary:hover {
-  background: var(--color-accent-dark);
-  color: var(--color-ink);
+  background: var(--color-navy-deep);
+  color: var(--color-white);
+}
+
+.hero .btn-primary,
+.cta-band .btn-primary {
+  background: var(--color-white);
+  color: var(--color-navy-deep);
+}
+
+.hero .btn-primary:hover,
+.cta-band .btn-primary:hover {
+  background: var(--color-cloud);
+  color: var(--color-navy-deep);
 }
 
 .btn-outline {
   background: transparent;
   color: var(--color-white);
-  border-color: rgba(255,255,255,0.6);
+  border-color: rgba(255,255,255,0.55);
 }
 
 .btn-outline:hover {
@@ -344,7 +439,7 @@ h1, h2, h3, h4 {
 
 /* ---------- Sections ---------- */
 .section {
-  padding: 70px 24px;
+  padding: 80px 24px;
 }
 
 .section-alt {
@@ -358,17 +453,18 @@ h1, h2, h3, h4 {
 }
 
 .section-header .eyebrow {
+  font-family: var(--font-mono);
   color: var(--color-sky-on-light);
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  margin-bottom: 10px;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  font-weight: 500;
+  margin-bottom: 12px;
 }
 
 .section-header h2 {
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  margin-bottom: 12px;
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  margin-bottom: 14px;
 }
 
 .section-header p {
@@ -406,23 +502,21 @@ h1, h2, h3, h4 {
 }
 
 .card {
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 28px 24px;
-  box-shadow: var(--shadow);
+  background: transparent;
+  border-top: 2px solid var(--color-gunmetal);
+  padding: 22px 4px 0 0;
 }
 
 .card-icon {
-  width: 46px;
-  height: 46px;
-  margin-bottom: 16px;
-  color: var(--color-sky);
+  width: 34px;
+  height: 34px;
+  margin-bottom: 14px;
+  color: var(--color-navy);
 }
 
 .card h3 {
-  font-size: 1.15rem;
-  margin-bottom: 10px;
+  font-size: 1.25rem;
+  margin-bottom: 8px;
 }
 
 .card p {
@@ -558,18 +652,19 @@ h1, h2, h3, h4 {
 
 /* ---------- Quote / Callout ---------- */
 .callout {
-  background: var(--color-white);
-  border-left: 4px solid var(--color-accent);
-  border-radius: var(--radius);
-  padding: 26px 28px;
-  box-shadow: var(--shadow);
-  margin: 32px 0;
+  background: transparent;
+  border-left: 3px solid var(--color-navy);
+  padding: 6px 0 6px 24px;
+  margin: 36px 0;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: var(--color-navy-deep);
 }
 
 .callout p {
   margin: 0;
-  color: var(--color-text-muted);
-  font-style: italic;
+  color: var(--color-navy-deep);
 }
 
 /* ---------- Quote strip (mid-page CTA) ----------
@@ -590,7 +685,7 @@ h1, h2, h3, h4 {
   flex-wrap: wrap;
   background: var(--color-cloud);
   border: 1px solid var(--color-border);
-  border-left: 4px solid var(--color-accent);
+  border-left: 4px solid var(--color-navy);
   border-radius: var(--radius);
   padding: 24px 28px;
 }
@@ -628,13 +723,21 @@ h1, h2, h3, h4 {
    Stands where a photo will eventually go. Hard, sourced facts only — label on
    the left, value on the right — so the column carries content rather than an
    empty frame. Swap for a real photo when one arrives. */
-.fact-panel {
-  background: var(--color-navy);
+/* The riveted plate. Four rivets drawn as radial gradients over the brushed
+   gunmetal, so the markup stays a plain <dl>. Shared with .data-plate. */
+.fact-panel,
+.data-plate {
+  --rivet: radial-gradient(circle, #d3d9df 0 1.5px, #6b7783 2.5px 3.5px, transparent 4px);
+  background:
+    var(--rivet) 9px 9px / 8px 8px no-repeat,
+    var(--rivet) calc(100% - 9px) 9px / 8px 8px no-repeat,
+    var(--rivet) 9px calc(100% - 9px) / 8px 8px no-repeat,
+    var(--rivet) calc(100% - 9px) calc(100% - 9px) / 8px 8px no-repeat,
+    linear-gradient(180deg, var(--color-gunmetal), var(--color-gunmetal-dark));
   color: var(--color-white);
-  border-top: 4px solid var(--color-accent);
-  border-radius: var(--radius);
-  padding: 28px 30px;
-  box-shadow: var(--shadow);
+  border: 1px solid #55616e;
+  padding: 30px 32px;
+  box-shadow: var(--shadow-lg);
   margin: 0;
 }
 
@@ -651,18 +754,22 @@ h1, h2, h3, h4 {
   border-bottom: 0;
 }
 
-.fact-panel dt {
-  color: var(--color-accent-on-dark);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+.fact-panel dt,
+.data-plate dt {
+  color: var(--color-plate-label);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-.fact-panel dd {
+.fact-panel dd,
+.data-plate dd {
   margin: 0;
   text-align: right;
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: 0.03em;
 }
 
 @media (max-width: 480px) {
@@ -697,7 +804,8 @@ h1, h2, h3, h4 {
 
 /* ---------- CTA band ---------- */
 .cta-band {
-  background: linear-gradient(135deg, var(--color-navy), var(--color-sky));
+  background: var(--color-gunmetal-dark);
+  border-top: 3px solid var(--color-accent);
   color: var(--color-white);
   text-align: center;
   padding: 64px 24px;
@@ -705,13 +813,20 @@ h1, h2, h3, h4 {
 
 .cta-band h2 {
   color: var(--color-white);
-  margin-bottom: 14px;
+  font-weight: 500;
+  margin-bottom: 12px;
 }
 
 .cta-band p {
-  color: rgba(255,255,255,0.85);
+  color: #c3ccd5;
   max-width: 520px;
   margin: 0 auto 26px;
+}
+
+.cta-band .btn {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 1.05rem;
 }
 
 /* ---------- Contact ---------- */
@@ -734,9 +849,9 @@ h1, h2, h3, h4 {
 }
 
 .contact-info-item .icon {
-  width: 24px;
-  height: 24px;
-  color: var(--color-sky);
+  width: 22px;
+  height: 22px;
+  color: var(--color-navy);
   flex-shrink: 0;
 }
 
@@ -783,7 +898,7 @@ form.contact-form {
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-  outline: 2px solid var(--color-sky);
+  outline: 2px solid var(--color-navy);
   outline-offset: 1px;
 }
 
@@ -802,7 +917,7 @@ form.contact-form {
 
 /* ---------- Footer ---------- */
 .site-footer {
-  background: var(--color-navy);
+  background: var(--color-navy-deep);
   color: rgba(255,255,255,0.75);
   padding: 56px 24px 24px;
 }
@@ -828,10 +943,12 @@ form.contact-form {
 }
 
 .footer-grid h4 {
+  font-family: var(--font-mono);
+  font-weight: 500;
   color: var(--color-white);
-  font-size: 0.95rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.16em;
   margin-bottom: 16px;
 }
 
@@ -880,6 +997,12 @@ form.contact-form {
   font-weight: 600;
 }
 
+.footer-cert {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
 .footer-bottom {
   max-width: var(--max-width);
   margin: 24px auto 0;
@@ -894,11 +1017,12 @@ form.contact-form {
 
 /* ---------- Breadcrumb / page intro ---------- */
 .page-eyebrow {
-  color: var(--color-accent-on-light);
+  font-family: var(--font-mono);
+  color: var(--color-sky-on-light);
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 0.8rem;
-  font-weight: 700;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  font-weight: 500;
   margin-bottom: 14px;
 }
 
