@@ -524,37 +524,60 @@ h1, h2, h3, h4 {
   margin-bottom: 0;
 }
 
-/* ---------- Stats strip ---------- */
-.stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  text-align: center;
+/* ---------- Data plate (Home, under the hero) ----------
+   Overlaps the bottom of the hero like a plate riveted to the airframe.
+   Hard facts only. Shares its gunmetal and rivets with .fact-panel. */
+.plate-wrap {
+  max-width: var(--max-width);
+  margin: -52px auto 0;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
 }
 
-@media (max-width: 700px) {
-  .stats {
-    grid-template-columns: repeat(2, 1fr);
+.data-plate {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 30px 36px;
+}
+
+.data-plate div {
+  padding: 2px 22px;
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.data-plate div:first-child {
+  border-left: 0;
+  padding-left: 0;
+}
+
+.data-plate dt {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.data-plate div dd {
+  text-align: left;
+  font-size: 1.3rem;
+}
+
+@media (max-width: 800px) {
+  .data-plate {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 0;
+    padding: 28px 26px;
+  }
+
+  .data-plate div:nth-child(odd) {
+    border-left: 0;
+    padding-left: 0;
   }
 }
 
-.stat .num {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--color-accent);
-  font-family: var(--font-heading);
-}
-
-.stat .label {
-  color: rgba(255,255,255,0.8);
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.stats-band {
-  background: var(--color-navy);
-  padding: 48px 24px;
+@media (max-width: 420px) {
+  .data-plate div dd {
+    font-size: 1.05rem;
+  }
 }
 
 /* ---------- Timeline (History) ---------- */
@@ -994,7 +1017,7 @@ form.contact-form {
 
 .footer-cert strong {
   color: var(--color-white);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .footer-cert {
