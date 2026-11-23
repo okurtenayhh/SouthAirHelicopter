@@ -57,8 +57,9 @@ service". Never replace a turn-away with a new capability claim that isn't confi
 - `tel:` links on every visible number.
 - On the form, can a visitor give a call-back number easily, and is the most common
   reason (maintenance/service) easy to pick?
-- After-hours wording: a visitor seeing "8 to 5" plus "AOG" should know what to do.
-  If the answer isn't confirmed, that is a client question — not copy you write.
+- Hours: the shop schedules work during business hours (Mon–Fri, 8–5). **No AOG
+  or after-hours wording anywhere** (owner's call, 2026-11-22) — don't suggest
+  adding it back; if it's ever wanted, the owner words it.
 
 ### 4. Credibility that keeps them reading
 
