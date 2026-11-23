@@ -53,7 +53,7 @@
 | `index.html` | Hero with the company name; riveted data plate (1979 · Bell CSF 1981 · #XRIR622K · zero maintenance-related accidents since 1979); three services; founding paragraph (Mitchell, Oct 1979, Bell 1981, north side of the field, formerly Clover Field); Bell section | Photos; certificate ratings |
 | `about.html` | Who we are (Mike Pike, President); facts plate; three values each backed by a confirmed fact | Team section (bios); photos; Bell seal |
 | `services.html` | Five confirmed services; Bell section; Certifications; **"Getting Your Aircraft In"** (call during hours to schedule); What Sets Us Apart | Parts & Fleet Support (never confirmed); "What We Don't Do"; pricing/quotes; testimonial; Bell badge; ratings |
-| `contact.html` | KLVJ + coordinates, address, phone, both emails, hours + AOG line, map, **working form** (reply time 1–3 business days, default topic "Maintenance / Service") | — |
+| `contact.html` | KLVJ + coordinates, address, phone, both emails, hours, map, **working form** (reply time 1–3 business days, default topic "Maintenance / Service") | — |
 | `drafts/` (History, Platforms, News, Careers) | Held back, 404'd on deploy | Their headers lack the new call link — add it when one is promoted |
 | `coming-soon/index.html` (live) | Everything real; no placeholders | — |
 
@@ -64,6 +64,7 @@
 - **Nothing on the site sends a visitor away** (user, 2026-11-22): no "what we don't do" lists, no named exclusions, no gatekeeping. Unsure visitors are told to call. *Reverses* the older `sa-prose` advice (unmerged `claude/rollout-plan` branch) that named limits were the voice's best feature. Audited by the `sa-retention-audit` skill.
 - **No quote requests and no testimonials for now** (user, 2026-11-22). The shop schedules work during business hours "like an auto shop"; it doesn't own the strip. Pricing section became "Getting Your Aircraft In"; the form's "Request a Quote" option became "Scheduling".
 - **Form replies: "usually within one to three business days"** (user's estimate, 2026-11-22).
+- **No AOG wording anywhere on the site** (user, 2026-11-22): "We will turn out for AOG" came off the call band on every page and off Contact. Don't bring it back in that form; if AOG returns, the user words it.
 - **Visual style is "2b"** (user, 2026-11-22, after mockups): Hyundai calm + workshop details, *"more blue… make it feel grown."* Navy `#1e3a5f` leads, deep navy `#14283f` header/footer, gunmetal only for riveted plates and the call band, orange only on the header call link and the call band's top rule. Zilla Slab headings, Inter Tight body, IBM Plex Mono for numbers. Square corners, rules not shadowed cards. Spec: `docs/superpowers/specs/2026-11-22-visual-restyle-design.md`.
 - **Fonts are self-hosted** in `fonts/` (SIL OFL, `fonts/OFL.txt`) — no font CDN; `verify.py` fails on any external font or stylesheet.
 - **Primary buttons are navy (white on dark grounds), not orange** — Claude's call from 2b, unchallenged so far; one CSS block to revert if the user wants louder call buttons.
