@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }).then(function (response) {
         if (!response.ok) { throw new Error(response.status); }
         form.reset();
-        showNote("Thanks — your message has been sent. We'll get back to you soon.", false);
+        showNote("Thanks — your message has been sent. We usually reply within one to three business days.", false);
       }).catch(function () {
         showNote("Sorry, your message didn't go through. Please call us at 281.648.5187.", true);
       }).then(function () {

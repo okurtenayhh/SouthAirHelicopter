@@ -172,6 +172,20 @@ check("no Bell-branded image assets", not unexpected, ", ".join(unexpected))
 # page, on the theory that a page with none must be invented. Placeholders are
 # now being filled with confirmed content and launch needs zero, so a minimum
 # only blocked real progress. Guarding against guesses is a review job.
+#
+# 7b. Launch bar (2026-11-22): the root pages are the launch set, so none may
+# carry a placeholder flag. New content that isn't confirmed yet belongs in
+# drafts/, not on a root page behind an amber box.
+flagged = [n for n in PAGES if re.search(r"PLACEHOLDER|class=\"placeholder", (ROOT / n).read_text())]
+check("no placeholders on launch pages", not flagged, ", ".join(flagged))
+
+# 7c. Fonts and styles are self-hosted (2026-11-22): nothing loads from a
+# font CDN or an outside stylesheet. The map iframe is the one allowed embed.
+EXTERNAL_STYLE_RE = re.compile(r'<link[^>]+rel="stylesheet"[^>]+href="https?:|fonts\.(googleapis|gstatic)\.com|@import\s+url\(["\']?https?:')
+external_style = [n for n in PAGES if EXTERNAL_STYLE_RE.search((ROOT / n).read_text())]
+if re.search(r'url\(["\']?https?:', css) or EXTERNAL_STYLE_RE.search(css):
+    external_style.append("css/style.css")
+check("no external font or stylesheet URLs", not external_style, ", ".join(external_style))
 
 # 8. quote-strip must never sit inside a .section-alt (its fill would vanish).
 misplaced = []
